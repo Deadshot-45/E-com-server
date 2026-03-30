@@ -224,6 +224,7 @@ import rateLimit from "express-rate-limit";
 import session from "express-session";
 import helmet from "helmet";
 import mongoose from "mongoose";
+import { pathToFileURL } from "node:url";
 import swaggerUi from "swagger-ui-express";
 import winston from "winston";
 
@@ -426,25 +427,28 @@ class Server {
   }
 }
 
-// Export for testing
-export default Server;
+export { Server };
 
-// Start server
-if (import.meta.url === `file://${process.argv[1]}`) {
-  const server = new Server();
+const server = new Server();
+const dbReady =
+  mongoose.connection.readyState === 1 ? Promise.resolve() : server.connectDB();
 
+export const serverHandler = async (req: Request, res: Response) => {
+  await dbReady;
+  return server.app(req, res);
+};
+
+export default serverHandler;
+
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
   process.on("SIGTERM", async () => {
     await server.close();
     process.exit(0);
   });
 
-  async function bootstrap() {
-    await server.connectDB();
-    server.listen();
-  }
-
-  bootstrap().catch((err) => {
-    console.error("Bootstrap failed:", err);
-    process.exit(1);
-  });
+  await dbReady;
+  server.listen();
 }
