@@ -1,14 +1,17 @@
 import { Router } from "express";
-import { sendOtpHandler, verifyOtpHandler } from "../controllers/otpController.js";
+import {
+  sendOtpHandler,
+  verifyOtpHandler,
+} from "../controllers/otpController.js";
 
 const router = Router({ mergeParams: true });
 
 /**
  * @swagger
- * /api/otp/send:
+ * /api/ekyc/send:
  *   post:
  *     summary: Request a verification OTP (Email/Phone)
- *     tags: [OTP]
+ *     tags: [ekycController]
  *     requestBody:
  *       required: true
  *       content:
@@ -33,10 +36,38 @@ router.post("/send", sendOtpHandler);
 
 /**
  * @swagger
- * /api/otp/verify:
+ * /api/ekyc/send-otp:
+ *   post:
+ *     summary: Request a e-mail verification OTP
+ *     tags: [ekycController]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - identifier
+ *             properties:
+ *               identifier:
+ *                 type: string
+ *                 description: Email address to receive the OTP
+ *     responses:
+ *       200:
+ *         description: OTP sent successfully
+ *       400:
+ *         description: Missing identifier
+ *       429:
+ *         description: Rate limit exceeded (wait before requesting another)
+ */
+router.post("/send-otp", sendOtpHandler);
+
+/**
+ * @swagger
+ * /api/ekyc/verify:
  *   post:
  *     summary: Verify an OTP
- *     tags: [OTP]
+ *     tags: [ekycController]
  *     requestBody:
  *       required: true
  *       content:

@@ -1,17 +1,16 @@
 import express from "express";
 import { userLogin } from "../controllers/loginController.js";
 import { userRegister } from "../controllers/registerController.js";
-import { sendOtpHandler } from "../controllers/otpController.js";
 import User from "../models/User.js";
 
 const router = (express as any).Router();
 
 /**
  * @swagger
- * /api/users/register:
+ * /api/login/register:
  *   post:
  *     summary: Register a new user
- *     tags: [Users]
+ *     tags: [loginController]
  *     requestBody:
  *       required: true
  *       content:
@@ -41,10 +40,10 @@ router.post("/register", userRegister);
 
 /**
  * @swagger
- * /api/users/login:
+ * /api/login/login:
  *   post:
  *     summary: Authenticate a user and create a session
- *     tags: [Users]
+ *     tags: [loginController]
  *     requestBody:
  *       required: true
  *       content:
@@ -69,34 +68,6 @@ router.post("/register", userRegister);
  *         description: Invalid credentials
  */
 router.post("/login", userLogin);
-
-/**
- * @swagger
- * /api/users/send-otp:
- *   post:
- *     summary: Request a verification OTP
- *     tags: [Users]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - identifier
- *             properties:
- *               identifier:
- *                 type: string
- *                 description: Email address to receive the OTP
- *     responses:
- *       200:
- *         description: OTP sent successfully
- *       400:
- *         description: Missing identifier
- *       429:
- *         description: Rate limit exceeded (wait before requesting another)
- */
-router.post("/send-otp", sendOtpHandler);
 
 /**
  * @swagger

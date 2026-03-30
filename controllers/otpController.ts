@@ -13,12 +13,14 @@ export const sendOtpHandler = async (req: Request, res: Response) => {
 
     console.log(identifier);
 
-    if (!identifier || !identifier.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "Identifier (Email/Phone) is required.",
-        code: "MISSING_IDENTIFIER",
-      });
+    if (!identifier) {
+      if (!identifier.trim()) {
+        return res.status(400).json({
+          success: false,
+          message: "Identifier (Email/Phone) is required.",
+          code: "MISSING_IDENTIFIER",
+        });
+      }
     }
 
     const normalizedIdentifier = identifier.trim().toLowerCase();
@@ -63,17 +65,7 @@ export const sendOtpHandler = async (req: Request, res: Response) => {
     if (isValidEmail(normalizedIdentifier)) {
       await sendEmail({
         to: normalizedIdentifier,
-        subject: "Your Vault Vogue Lite Security Code",
-        text: `Your security code is: ${rawOtp}. This code expires in 10 minutes. Please do not share this with anyone.`,
-        html: `
-          <div style="font-family: sans-serif; padding: 20px;">
-            <h2>Vault Vogue Lite Security Code</h2>
-            <p>Your one-time password is:</p>
-            <h1 style="color: #4CAF50; letter-spacing: 5px;">${rawOtp}</h1>
-            <p>This code expires in <strong>10 minutes</strong>.</p>
-            <p style="font-size: 12px; color: #888;">If you didn't request this code, you can safely ignore this email.</p>
-          </div>
-        `,
+        rawOtp: rawOtp,
       });
     } else {
       // Future SMS integration would go here
