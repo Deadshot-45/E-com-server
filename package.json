@@ -6,7 +6,8 @@
   "scripts": {
     "start": "tsx server.ts",
     "dev": "tsx watch server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild server.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/server.js"
   },
   "keywords": [],
   "author": "",
