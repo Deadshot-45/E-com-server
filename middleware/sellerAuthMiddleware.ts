@@ -1,14 +1,12 @@
-import express from "express";
+import { Request, Response, NextFunction } from "express-serve-static-core";
 import Seller, { ISeller } from "../models/Seller.js";
 import { verifyJWT } from "../utils/authUtils.js";
 
-const app = (express as any)();
-
-export interface SellerRequest extends app.Request {
+export interface SellerRequest extends Request {
   seller?: ISeller;
 }
 
-export const sellerAuthMiddleware = async (req: any, res: any, next: any) => {
+export const sellerAuthMiddleware = async (req: SellerRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers?.authorization;
   const token = authHeader?.split(" ")[1];
 
