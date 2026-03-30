@@ -337,7 +337,8 @@ class Server {
     // Session
     this.app.use(
       session({
-        secret: process.env.SESSION_SECRET!,
+        secret:
+          process.env.SESSION_SECRET || "your-super-secret-key-change-in-prod",
         resave: false,
         saveUninitialized: false,
         cookie: {
@@ -404,7 +405,7 @@ class Server {
       });
     } catch (error) {
       this.logger.error("MongoDB connection failed:", error);
-      process.exit(1);
+      throw error;
     }
   }
 
@@ -434,8 +435,20 @@ const dbReady =
   mongoose.connection.readyState === 1 ? Promise.resolve() : server.connectDB();
 
 export const serverHandler = async (req: Request, res: Response) => {
-  await dbReady;
-  return server.app(req, res);
+  try {
+    await dbReady;
+    return server.app(req, res);
+  } catch (error) {
+    server.getLogger().error("Request failed before app handling:", error);
+    res.statusCode = 503;
+    res.setHeader("Content-Type", "application/json");
+    res.end(
+      JSON.stringify({
+        success: false,
+        message: "Database connection unavailable",
+      }),
+    );
+  }
 };
 
 export default serverHandler;
