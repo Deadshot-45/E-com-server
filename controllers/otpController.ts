@@ -79,7 +79,7 @@ export const sendOtpHandler = async (req: Request, res: Response) => {
       message: "OTP sent successfully",
       code: "OTP_SENT",
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in sendOtpHandler:", error);
     res.status(500).json({
       success: false,
@@ -133,7 +133,7 @@ export const verifyOtpHandler = async (req: Request, res: Response) => {
       message: "OTP verified successfully.",
       code: "OTP_VERIFIED",
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in verifyOtpHandler:", error);
     res.status(500).json({
       success: false,

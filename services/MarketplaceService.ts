@@ -1,20 +1,20 @@
 const MarketplaceService = {
-  addProductForSeller: async (sellerId, productData) => {
+  addProductForSeller: async (sellerId: any, productData: any) => {
     throw new Error("addProductForSeller not implemented");
   },
-  listProductsForSeller: async (sellerId) => {
+  listProductsForSeller: async (sellerId: any) => {
     throw new Error("listProductsForSeller not implemented");
   },
-  listSellersForProduct: async (productId) => {
+  listSellersForProduct: async (productId: any) => {
     throw new Error("listSellersForProduct not implemented");
   },
-  placeOrder: async (items) => {
+  placeOrder: async (items: any) => {
     throw new Error("placeOrder not implemented");
   },
-  cancelOrder: async (items) => {
+  cancelOrder: async (items: any) => {
     throw new Error("cancelOrder not implemented");
   },
-  updateSellerRating: async (sellerId, rating) => {
+  updateSellerRating: async (sellerId: any, rating: any) => {
     throw new Error("updateSellerRating not implemented");
   }
 };

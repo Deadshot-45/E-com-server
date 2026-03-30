@@ -384,9 +384,12 @@ class Server {
 
   private errorHandlers(): void {
     // 404 handler
-    this.app.use("*", (req: Request, res: Response, next: NextFunction) => {
-      next(new AppError(`Route ${req.originalUrl} not found`, 404));
-    });
+    this.app.use(
+      "/*splat",
+      (req: Request, res: Response, next: NextFunction) => {
+        next(new AppError(`Route ${req.originalUrl} not found`, 404));
+      },
+    );
 
     // Global error handler
     this.app.use(globalErrorHandler);
@@ -403,7 +406,7 @@ class Server {
       mongoose.connection.on("error", (err) => {
         this.logger.error("MongoDB error:", err);
       });
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error("MongoDB connection failed:", error);
       throw error;
     }
@@ -438,7 +441,7 @@ export const serverHandler = async (req: Request, res: Response) => {
   try {
     await dbReady;
     return server.app(req, res);
-  } catch (error) {
+  } catch (error: any) {
     server.getLogger().error("Request failed before app handling:", error);
     res.statusCode = 503;
     res.setHeader("Content-Type", "application/json");

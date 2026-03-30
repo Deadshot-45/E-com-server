@@ -32,7 +32,7 @@ router.post("/checkout", async (req, res) => {
     });
 
     res.json({ success: true });
-  } catch (e) {
+  } catch (e: any) {
     res.status(500).json({ error: e.message });
   } finally {
     session.endSession();

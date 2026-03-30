@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
   try {
     const seller = await SellerAuthService.registerSeller(req.body);
     res.json({ success: true, sellerId: seller._id });
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
@@ -19,7 +19,7 @@ router.post("/login", async (req, res) => {
   try {
     const { seller, token } = await SellerAuthService.loginSeller(req.body.email, req.body.password);
     res.json({ success: true, token, sellerId: seller._id });
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
@@ -27,9 +27,9 @@ router.post("/login", async (req, res) => {
 // Send OTP
 router.post("/send-otp", sellerAuthMiddleware, async (req, res) => {
   try {
-    const otp = await SellerAuthService.sendOTP(req.seller._id);
+    const otp = await SellerAuthService.sendOTP((req as any).seller._id);
     res.json({ success: true, otp }); // In production, send via SMS/email
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
@@ -37,9 +37,9 @@ router.post("/send-otp", sellerAuthMiddleware, async (req, res) => {
 // Verify OTP
 router.post("/verify-otp", sellerAuthMiddleware, async (req, res) => {
   try {
-    await SellerAuthService.verifySellerOTP(req.seller._id, req.body.otp);
+    await SellerAuthService.verifySellerOTP((req as any).seller._id, req.body.otp);
     res.json({ success: true, message: "Seller verified" });
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });

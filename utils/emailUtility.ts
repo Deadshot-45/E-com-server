@@ -134,7 +134,7 @@ export const sendEmail = async (options: SendEmailOptions): Promise<void> => {
       console.log(`✉️ Mock Email sent to ${options.to}`);
       console.log(`✉️ Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error sending email:", error);
     throw new Error("Failed to send email");
   }

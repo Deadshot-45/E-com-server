@@ -1,9 +1,9 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { userLogin } from "../controllers/loginController.js";
 import { userRegister } from "../controllers/registerController.js";
 import User from "../models/User.js";
 
-const router = (express as any).Router();
+const router = express.Router();
 
 /**
  * @swagger
@@ -88,7 +88,8 @@ router.post("/login", userLogin);
  *       404:
  *         description: User not found
  */
-router.get("/:id", async (req: any, res: any) => {
+
+router.get("/:id", async (req: Request, res: Response) => {
   const user = await User.findById(req.params.id);
   res.json(user);
 });

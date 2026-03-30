@@ -7,16 +7,16 @@ const router = express.Router();
 // Add product (seller-only)
 router.post("/add-product", sellerAuthMiddleware, async (req, res) => {
   try {
-    const product = await MarketplaceService.addProductForSeller(req.seller._id, req.body);
+    const product = await MarketplaceService.addProductForSeller((req as any).seller._id, req.body);
     res.json({ success: true, product });
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
 
 // List seller's products
 router.get("/my-products", sellerAuthMiddleware, async (req, res) => {
-  const products = await MarketplaceService.listProductsForSeller(req.seller._id);
+  const products = await MarketplaceService.listProductsForSeller((req as any).seller._id);
   res.json({ success: true, products });
 });
 
@@ -31,7 +31,7 @@ router.post("/place-order", async (req, res) => {
   try {
     const result = await MarketplaceService.placeOrder(req.body.items);
     res.json(result);
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
@@ -41,7 +41,7 @@ router.post("/cancel-order", async (req, res) => {
   try {
     const result = await MarketplaceService.cancelOrder(req.body.items);
     res.json(result);
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
@@ -51,7 +51,7 @@ router.post("/update-rating/:sellerId", async (req, res) => {
   try {
     const rating = await MarketplaceService.updateSellerRating(req.params.sellerId, req.body.rating);
     res.json({ success: true, averageRating: rating });
-  } catch (err) {
+  } catch (err: any) {
     res.status(400).json({ success: false, message: err.message });
   }
 });
