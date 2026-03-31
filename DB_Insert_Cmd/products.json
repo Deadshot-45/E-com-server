@@ -1,0 +1,1714 @@
+[
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 100,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T12:32:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img1.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T12:32:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 200,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_1.png",
+        "isPrimary": true
+      },
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_2.png",
+        "isPrimary": false
+      },
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_3.png",
+        "isPrimary": false
+      },
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_4.png",
+        "isPrimary": false
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 130,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img5.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 140,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:43.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img6.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:43.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 190,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:05:42.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img7.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:05:42.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 140,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img8.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 100,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:00:35.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img9.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:00:35.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 110,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:55.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img10.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:55.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 120,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img11.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 150,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img12.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 160,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-22T12:32:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img13.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-22T12:32:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 170,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img14.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 180,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img15.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 190,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:43.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img16.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:43.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 200,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:05:42.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img17.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:05:42.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 210,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img18.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 220,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:00:35.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img19.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:00:35.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 230,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:55.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img20.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:55.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 240,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img21.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 250,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img22.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 260,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-22T12:32:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img23.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-22T12:32:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 270,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img24.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 280,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img25.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 290,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:43.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img26.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:43.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 300,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:05:42.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img27.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:05:42.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 310,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img28.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 320,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:00:35.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img29.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:00:35.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 330,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:55.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img30.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:55.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 340,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img31.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 350,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img32.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 360,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-22T12:32:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img33.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-22T12:32:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 370,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img34.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 380,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img35.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 390,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:43.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img36.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:43.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 400,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:05:42.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img37.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:05:42.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 410,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img38.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 420,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:00:35.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img39.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:00:35.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 430,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:55.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img40.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:55.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 440,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img41.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 450,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img42.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 460,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-22T12:32:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img43.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-22T12:32:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 470,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img44.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 480,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img45.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 490,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:43.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img46.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:43.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 500,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:05:42.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img47.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:05:42.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 510,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img48.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Girls Round Neck Cotton Top",
+    "price": 520,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb3"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc4"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:00:35.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img49.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:00:35.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Tapered Fit Flat-Front Trousers",
+    "price": 530,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc3"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:23:55.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img50.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:23:55.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Women Round Neck Cotton Top",
+    "price": 540,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb1"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc1"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:12:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img51.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:12:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  },
+  {
+    "sellerId": {
+      "$oid": "67dfa578452634da4759aaa1"
+    },
+    "name": "Men Round Neck Pure Cotton T-shirt",
+    "price": 550,
+    "categoryIds": [
+      {
+        "$oid": "67dfa578452634da4759bbb2"
+      }
+    ],
+    "subCategoryId": {
+      "$oid": "67dfa578452634da4759ccc2"
+    },
+    "inventory": {
+      "quantity": 100,
+      "updatedAt": {
+        "$date": "2024-05-26T09:02:25.448Z"
+      }
+    },
+    "images": [
+      {
+        "url": "https://vault-vogue-expressjs.vercel.app/p_img52.png",
+        "isPrimary": true
+      }
+    ],
+    "isActive": true,
+    "createdAt": {
+      "$date": "2024-05-26T09:02:25.448Z"
+    },
+    "bestseller": false,
+    "trending": false,
+    "details": {}
+  }
+]

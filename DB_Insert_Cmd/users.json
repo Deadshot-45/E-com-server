@@ -1,0 +1,12 @@
+[
+  {
+    "_id": { "$oid": "67dfa578452634da4759aaa0" },
+    "email": "seed.seller@vaultvogue.com",
+    "passwordHash": "seeded-password-hash",
+    "role": "admin",
+    "fullName": "Vault Vogue Seed Seller",
+    "isActive": true,
+    "createdAt": { "$date": "2024-05-26T00:00:00.000Z" },
+    "updatedAt": { "$date": "2024-05-26T00:00:00.000Z" }
+  }
+]

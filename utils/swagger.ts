@@ -16,6 +16,16 @@ const options: swaggerJsdoc.Options = {
         url: `http://localhost:${process.env.PORT || 5000}`,
         description: "Local Development Server",
       },
+      {
+        url: "https://vault-vogue-server.vercel.app/",
+        description: "Development Server",
+      },
+    ],
+    security: [
+      {
+        bearerAuth: [],
+        cookieAuth: [],
+      },
     ],
     components: {
       securitySchemes: {

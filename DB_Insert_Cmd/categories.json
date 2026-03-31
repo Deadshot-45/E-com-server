@@ -1,0 +1,17 @@
+[
+  {
+    "_id": { "$oid": "67dfa578452634da4759bbb1" },
+    "name": "Women",
+    "slug": "women"
+  },
+  {
+    "_id": { "$oid": "67dfa578452634da4759bbb2" },
+    "name": "Men",
+    "slug": "men"
+  },
+  {
+    "_id": { "$oid": "67dfa578452634da4759bbb3" },
+    "name": "Kids",
+    "slug": "kids"
+  }
+]

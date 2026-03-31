@@ -17,6 +17,9 @@ export interface IProduct extends Document {
   description?: string;
   price: number;
   sku?: string;
+  bestseller: boolean;
+  trending: boolean;
+  details?: unknown;
   categoryIds: mongoose.Types.ObjectId[];
   subCategoryId?: mongoose.Types.ObjectId;
   inventory: {
@@ -48,6 +51,9 @@ const productSchema = new Schema<IProduct>({
   description: String,
   price: { type: Number, required: true },
   sku: { type: String, unique: true, index: true },
+  bestseller: { type: Boolean, default: false },
+  trending: { type: Boolean, default: false },
+  details: { type: Schema.Types.Mixed, default: {} },
   categoryIds: [{ type: Schema.Types.ObjectId, ref: "Category", index: true }],
   subCategoryId: { type: Schema.Types.ObjectId, ref: "SubCategory", index: true },
   inventory: {
