@@ -8,7 +8,7 @@ const router = Router({ mergeParams: true });
 
 /**
  * @swagger
- * /api/ekyc/send:
+ * /api/ekycController/send:
  *   post:
  *     summary: Request a verification OTP (Email/Phone)
  *     tags: [ekycController]
@@ -36,7 +36,7 @@ router.post("/send", sendOtpHandler);
 
 /**
  * @swagger
- * /api/ekyc/send-otp:
+ * /api/ekycController/send-otp:
  *   post:
  *     summary: Request a e-mail verification OTP
  *     tags: [ekycController]
@@ -64,7 +64,7 @@ router.post("/send-otp", sendOtpHandler);
 
 /**
  * @swagger
- * /api/ekyc/verify:
+ * /api/ekycController/verify:
  *   post:
  *     summary: Verify an OTP
  *     tags: [ekycController]
