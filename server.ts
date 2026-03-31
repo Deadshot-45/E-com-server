@@ -105,6 +105,16 @@ class Server {
       }),
     );
 
+    // Static
+    this.app.use(
+  "/",
+  express.static("public", {
+    maxAge: "7d",
+    etag: true,
+    immutable: true,
+  }),
+);
+
     // Rate limiting (skip OPTIONS)
     this.app.use(
       rateLimit({
@@ -117,8 +127,11 @@ class Server {
       }),
     );
 
-    // Body parsing
-    this.app.use(express.static("public"));
+//     // Static
+// this.app.use(express.static("public"));
+
+//     // Body parsing
+//     this.app.use(express.static("public"));
     this.app.use(express.json({ limit: "10mb" }));
     this.app.use(express.urlencoded({ extended: true }));
 
