@@ -105,8 +105,8 @@ class Server {
       }),
     );
 
-    // Static
-    this.app.use(
+  // 1) Static assets सबसे पहले, बिना rate limit
+this.app.use(
   "/",
   express.static("public", {
     maxAge: "7d",
@@ -115,17 +115,21 @@ class Server {
   }),
 );
 
-    // Rate limiting (skip OPTIONS)
-    this.app.use(
-      rateLimit({
-        windowMs: 15 * 60 * 1000,
-        max: process.env.NODE_ENV === "production" ? 100 : 1000,
-        skip: (req) => req.method === "OPTIONS",
-        message: "Too many requests, please try again later.",
-        standardHeaders: true,
-        legacyHeaders: false,
-      }),
-    );
+// 2) फिर global rate limit सिर्फ API routes पर
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: process.env.NODE_ENV === "production" ? 100 : 1000,
+  skip: (req) =>
+    req.method === "OPTIONS" ||
+    req.path.startsWith("/p_img") ||      // image path जैसा है वैसा skip
+    req.path.match(/\.(png|jpg|jpeg|gif|webp|css|js|ico)$/i),
+  message: "Too many requests, please try again later.",
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// सिर्फ /api पर limiter
+this.app.use("/api", apiLimiter);
 
 //     // Static
 // this.app.use(express.static("public"));
