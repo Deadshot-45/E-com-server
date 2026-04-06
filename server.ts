@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit";
 import session from "express-session";
 import helmet from "helmet";
 import mongoose from "mongoose";
+import path from "node:path";
 import { pathToFileURL } from "node:url";
 import swaggerUi from "swagger-ui-express";
 import winston from "winston";
@@ -132,6 +133,9 @@ class Server {
       standardHeaders: true,
       legacyHeaders: false,
     });
+
+    // Static Files
+    this.app.use(express.static(path.join(process.cwd(), "public")));
 
     // सिर्फ /api पर limiter
     this.app.use("/api", apiLimiter);
