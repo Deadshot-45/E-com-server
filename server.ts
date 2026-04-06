@@ -77,6 +77,7 @@ class Server {
     const allowedOrigins = new Set([
       "https://vogue-vault-blue.vercel.app",
       "http://localhost:5173",
+      "http://localhost:3000/",
       "https://vault-vogue-expressjs.vercel.app",
       "http://localhost:3000",
       "http://192.168.6.167:3000",
@@ -119,8 +120,21 @@ class Server {
     //   }),
     // );
 
-    // Body parsing
-    this.app.use(express.static("public"));
+    // 2) फिर global rate limit सिर्फ API routes पर
+    const apiLimiter = rateLimit({
+      windowMs: 15 * 60 * 1000,
+      max: process.env.NODE_ENV === "production" ? 100 : 1000,
+      skip: (req) =>
+        req.method === "OPTIONS" ||
+        req.path.startsWith("/p_img") || // image path जैसा है वैसा skip
+        /\.(png|jpg|jpeg|gif|webp|css|js|ico)$/i.test(req.path),
+      message: "Too many requests, please try again later.",
+      standardHeaders: true,
+      legacyHeaders: false,
+    });
+
+    // सिर्फ /api पर limiter
+    this.app.use("/api", apiLimiter);
     this.app.use(express.json({ limit: "10mb" }));
     this.app.use(express.urlencoded({ extended: true }));
 
@@ -167,6 +181,11 @@ class Server {
     legacyHeaders: false,
     skip: (req) => req.method === "OPTIONS",
     skipSuccessfulRequests: true,
+    message: {
+      success: false,
+      message: "Too many requests, please try again later.",
+      code: "RATE_LIMIT_EXCEEDED",
+    },
   });
 
   private routes(): void {
