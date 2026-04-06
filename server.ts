@@ -78,6 +78,9 @@ class Server {
       "https://vogue-vault-blue.vercel.app",
       "http://localhost:5173",
       "https://vault-vogue-expressjs.vercel.app",
+      "http://localhost:3000",
+      "http://192.168.6.167:3000",
+      "https://vault-vogue-lite.vercel.app",
     ]);
 
     this.app.use(
@@ -105,16 +108,16 @@ class Server {
     );
 
     // Rate limiting (skip OPTIONS)
-    this.app.use(
-      rateLimit({
-        windowMs: 15 * 60 * 1000,
-        max: process.env.NODE_ENV === "production" ? 100 : 1000,
-        skip: (req) => req.method === "OPTIONS",
-        message: "Too many requests, please try again later.",
-        standardHeaders: true,
-        legacyHeaders: false,
-      }),
-    );
+    // this.app.use(
+    //   rateLimit({
+    //     windowMs: 15 * 60 * 1000,
+    //     max: process.env.NODE_ENV === "production" ? 100 : 1000,
+    //     skip: (req) => req.method === "OPTIONS",
+    //     message: "Too many requests, please try again later.",
+    //     standardHeaders: true,
+    //     legacyHeaders: false,
+    //   }),
+    // );
 
     // Body parsing
     this.app.use(express.static("public"));

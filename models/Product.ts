@@ -17,15 +17,13 @@ export interface IProduct extends Document {
   description?: string;
   price: number;
   sku?: string;
+  sizes: string[];
+  inventoryId?: mongoose.Types.ObjectId;
   bestseller: boolean;
   trending: boolean;
   details?: unknown;
   categoryIds: mongoose.Types.ObjectId[];
   subCategoryId?: mongoose.Types.ObjectId;
-  inventory: {
-    quantity: number;
-    updatedAt: Date;
-  };
   images: {
     url?: string;
     isPrimary: boolean;
@@ -50,16 +48,14 @@ const productSchema = new Schema<IProduct>({
   name: { type: String, required: true },
   description: String,
   price: { type: Number, required: true },
-  sku: { type: String, unique: true, index: true },
+  sku: { type: String, index: true },
+  sizes: [{ type: String, trim: true }],
+  inventoryId: { type: Schema.Types.ObjectId, ref: "Inventory", index: true },
   bestseller: { type: Boolean, default: false },
   trending: { type: Boolean, default: false },
   details: { type: Schema.Types.Mixed, default: {} },
   categoryIds: [{ type: Schema.Types.ObjectId, ref: "Category", index: true }],
   subCategoryId: { type: Schema.Types.ObjectId, ref: "SubCategory", index: true },
-  inventory: {
-    quantity: { type: Number, default: 0 },
-    updatedAt: { type: Date, default: Date.now }
-  },
   images: [{
     url: String,
     isPrimary: { type: Boolean, default: false }
@@ -70,6 +66,13 @@ const productSchema = new Schema<IProduct>({
 
 productSchema.index({ sellerId: 1, categoryIds: 1 });
 productSchema.index({ sellerId: 1, subCategoryId: 1 });
+productSchema.index(
+  { sku: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { sku: { $type: "string" } },
+  },
+);
 
 export const Category = mongoose.model<ICategory>("Category", categorySchema);
 export const SubCategory = mongoose.model<ISubCategory>("SubCategory", subCategorySchema);

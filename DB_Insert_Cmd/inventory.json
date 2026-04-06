@@ -1,0 +1,1902 @@
+[
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb01"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa01"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T12:32:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb02"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa02"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb03"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa03"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb04"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa04"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb05"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa05"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb06"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa06"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb07"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa07"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb08"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa08"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb09"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa09"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb10"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa10"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb11"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa11"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb12"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa12"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb13"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa13"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb14"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa14"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb15"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa15"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb16"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa16"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb17"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa17"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb18"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa18"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb19"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa19"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb20"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa20"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb21"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa21"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb22"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa22"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb23"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa23"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb24"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa24"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb25"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa25"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb26"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa26"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb27"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa27"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb28"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa28"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb29"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa29"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb30"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa30"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb31"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa31"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb32"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa32"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb33"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa33"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb34"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa34"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb35"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa35"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb36"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa36"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb37"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa37"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb38"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa38"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb39"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa39"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb40"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa40"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb41"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa41"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-22T12:32:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb42"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa42"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb43"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa43"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb44"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa44"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:43.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb45"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa45"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:05:42.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb46"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa46"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb47"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa47"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:00:35.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb48"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa48"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:23:55.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb49"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa49"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:12:25.448Z"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dfa578452634da4759bb50"
+    },
+    "productId": {
+      "$oid": "67dfa578452634da4759aa50"
+    },
+    "items": [
+      {
+        "size": "S",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "M",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "L",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      },
+      {
+        "size": "XL",
+        "quantity": 100,
+        "updatedAt": {
+          "$date": "2024-05-26T09:02:25.448Z"
+        }
+      }
+    ]
+  }
+]

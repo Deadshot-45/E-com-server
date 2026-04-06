@@ -35,7 +35,7 @@ const router = express.Router();
  *       400:
  *         description: Validation error or user already exists
  */
-router.post("/authController/register", userRegister);
+router.post("/register", userRegister);
 
 /**
  * @swagger
@@ -66,6 +66,6 @@ router.post("/authController/register", userRegister);
  *       401:
  *         description: Invalid credentials
  */
-router.post("/authController/login", userLogin);
+router.post("/login", userLogin);
 
 export default router;

@@ -13,15 +13,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T12:32:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img1.png",
+        "url": "http://localhost:5000/p_img1.png",
         "isPrimary": true
       }
     ],
@@ -31,7 +25,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-001",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa01"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb01"
+    }
   },
   {
     "sellerId": {
@@ -47,27 +54,21 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_1.png",
+        "url": "http://localhost:5000/p_img2_1.png",
         "isPrimary": true
       },
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_2.png",
+        "url": "http://localhost:5000/p_img2_2.png",
         "isPrimary": false
       },
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_3.png",
+        "url": "http://localhost:5000/p_img2_3.png",
         "isPrimary": false
       },
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img2_4.png",
+        "url": "http://localhost:5000/p_img2_4.png",
         "isPrimary": false
       }
     ],
@@ -77,7 +78,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-002",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa02"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb02"
+    }
   },
   {
     "sellerId": {
@@ -93,15 +107,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img5.png",
+        "url": "http://localhost:5000/p_img5.png",
         "isPrimary": true
       }
     ],
@@ -111,7 +119,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-003",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa03"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb03"
+    }
   },
   {
     "sellerId": {
@@ -127,15 +148,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:43.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img6.png",
+        "url": "http://localhost:5000/p_img6.png",
         "isPrimary": true
       }
     ],
@@ -145,7 +160,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-004",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa04"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb04"
+    }
   },
   {
     "sellerId": {
@@ -161,15 +189,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:05:42.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img7.png",
+        "url": "http://localhost:5000/p_img7.png",
         "isPrimary": true
       }
     ],
@@ -179,7 +201,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-005",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa05"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb05"
+    }
   },
   {
     "sellerId": {
@@ -195,15 +230,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img8.png",
+        "url": "http://localhost:5000/p_img8.png",
         "isPrimary": true
       }
     ],
@@ -213,7 +242,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-006",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa06"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb06"
+    }
   },
   {
     "sellerId": {
@@ -229,15 +271,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:00:35.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img9.png",
+        "url": "http://localhost:5000/p_img9.png",
         "isPrimary": true
       }
     ],
@@ -247,7 +283,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-007",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa07"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb07"
+    }
   },
   {
     "sellerId": {
@@ -263,15 +312,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:55.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img10.png",
+        "url": "http://localhost:5000/p_img10.png",
         "isPrimary": true
       }
     ],
@@ -281,7 +324,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-008",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa08"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb08"
+    }
   },
   {
     "sellerId": {
@@ -297,15 +353,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img11.png",
+        "url": "http://localhost:5000/p_img11.png",
         "isPrimary": true
       }
     ],
@@ -315,7 +365,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-009",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa09"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb09"
+    }
   },
   {
     "sellerId": {
@@ -331,15 +394,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img12.png",
+        "url": "http://localhost:5000/p_img12.png",
         "isPrimary": true
       }
     ],
@@ -349,7 +406,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-010",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa10"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb10"
+    }
   },
   {
     "sellerId": {
@@ -365,15 +435,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-22T12:32:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img13.png",
+        "url": "http://localhost:5000/p_img13.png",
         "isPrimary": true
       }
     ],
@@ -383,7 +447,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-011",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa11"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb11"
+    }
   },
   {
     "sellerId": {
@@ -399,15 +476,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img14.png",
+        "url": "http://localhost:5000/p_img14.png",
         "isPrimary": true
       }
     ],
@@ -417,7 +488,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-012",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa12"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb12"
+    }
   },
   {
     "sellerId": {
@@ -433,15 +517,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img15.png",
+        "url": "http://localhost:5000/p_img15.png",
         "isPrimary": true
       }
     ],
@@ -451,7 +529,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-013",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa13"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb13"
+    }
   },
   {
     "sellerId": {
@@ -467,15 +558,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:43.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img16.png",
+        "url": "http://localhost:5000/p_img16.png",
         "isPrimary": true
       }
     ],
@@ -485,7 +570,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-014",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa14"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb14"
+    }
   },
   {
     "sellerId": {
@@ -501,15 +599,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:05:42.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img17.png",
+        "url": "http://localhost:5000/p_img17.png",
         "isPrimary": true
       }
     ],
@@ -519,7 +611,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-015",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa15"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb15"
+    }
   },
   {
     "sellerId": {
@@ -535,15 +640,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img18.png",
+        "url": "http://localhost:5000/p_img18.png",
         "isPrimary": true
       }
     ],
@@ -553,7 +652,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-016",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa16"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb16"
+    }
   },
   {
     "sellerId": {
@@ -569,15 +681,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:00:35.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img19.png",
+        "url": "http://localhost:5000/p_img19.png",
         "isPrimary": true
       }
     ],
@@ -587,7 +693,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-017",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa17"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb17"
+    }
   },
   {
     "sellerId": {
@@ -603,15 +722,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:55.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img20.png",
+        "url": "http://localhost:5000/p_img20.png",
         "isPrimary": true
       }
     ],
@@ -621,7 +734,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-018",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa18"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb18"
+    }
   },
   {
     "sellerId": {
@@ -637,15 +763,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img21.png",
+        "url": "http://localhost:5000/p_img21.png",
         "isPrimary": true
       }
     ],
@@ -655,7 +775,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-019",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa19"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb19"
+    }
   },
   {
     "sellerId": {
@@ -671,15 +804,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img22.png",
+        "url": "http://localhost:5000/p_img22.png",
         "isPrimary": true
       }
     ],
@@ -689,7 +816,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-020",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa20"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb20"
+    }
   },
   {
     "sellerId": {
@@ -705,15 +845,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-22T12:32:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img23.png",
+        "url": "http://localhost:5000/p_img23.png",
         "isPrimary": true
       }
     ],
@@ -723,7 +857,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-021",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa21"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb21"
+    }
   },
   {
     "sellerId": {
@@ -739,15 +886,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img24.png",
+        "url": "http://localhost:5000/p_img24.png",
         "isPrimary": true
       }
     ],
@@ -757,7 +898,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-022",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa22"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb22"
+    }
   },
   {
     "sellerId": {
@@ -773,15 +927,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img25.png",
+        "url": "http://localhost:5000/p_img25.png",
         "isPrimary": true
       }
     ],
@@ -791,7 +939,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-023",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa23"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb23"
+    }
   },
   {
     "sellerId": {
@@ -807,15 +968,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:43.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img26.png",
+        "url": "http://localhost:5000/p_img26.png",
         "isPrimary": true
       }
     ],
@@ -825,7 +980,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-024",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa24"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb24"
+    }
   },
   {
     "sellerId": {
@@ -841,15 +1009,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:05:42.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img27.png",
+        "url": "http://localhost:5000/p_img27.png",
         "isPrimary": true
       }
     ],
@@ -859,7 +1021,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-025",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa25"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb25"
+    }
   },
   {
     "sellerId": {
@@ -875,15 +1050,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img28.png",
+        "url": "http://localhost:5000/p_img28.png",
         "isPrimary": true
       }
     ],
@@ -893,7 +1062,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-026",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa26"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb26"
+    }
   },
   {
     "sellerId": {
@@ -909,15 +1091,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:00:35.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img29.png",
+        "url": "http://localhost:5000/p_img29.png",
         "isPrimary": true
       }
     ],
@@ -927,7 +1103,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-027",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa27"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb27"
+    }
   },
   {
     "sellerId": {
@@ -943,15 +1132,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:55.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img30.png",
+        "url": "http://localhost:5000/p_img30.png",
         "isPrimary": true
       }
     ],
@@ -961,7 +1144,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-028",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa28"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb28"
+    }
   },
   {
     "sellerId": {
@@ -977,15 +1173,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img31.png",
+        "url": "http://localhost:5000/p_img31.png",
         "isPrimary": true
       }
     ],
@@ -995,7 +1185,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-029",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa29"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb29"
+    }
   },
   {
     "sellerId": {
@@ -1011,15 +1214,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img32.png",
+        "url": "http://localhost:5000/p_img32.png",
         "isPrimary": true
       }
     ],
@@ -1029,7 +1226,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-030",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa30"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb30"
+    }
   },
   {
     "sellerId": {
@@ -1045,15 +1255,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-22T12:32:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img33.png",
+        "url": "http://localhost:5000/p_img33.png",
         "isPrimary": true
       }
     ],
@@ -1063,7 +1267,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-031",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa31"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb31"
+    }
   },
   {
     "sellerId": {
@@ -1079,15 +1296,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img34.png",
+        "url": "http://localhost:5000/p_img34.png",
         "isPrimary": true
       }
     ],
@@ -1097,7 +1308,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-032",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa32"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb32"
+    }
   },
   {
     "sellerId": {
@@ -1113,15 +1337,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img35.png",
+        "url": "http://localhost:5000/p_img35.png",
         "isPrimary": true
       }
     ],
@@ -1131,7 +1349,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-033",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa33"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb33"
+    }
   },
   {
     "sellerId": {
@@ -1147,15 +1378,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:43.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img36.png",
+        "url": "http://localhost:5000/p_img36.png",
         "isPrimary": true
       }
     ],
@@ -1165,7 +1390,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-034",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa34"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb34"
+    }
   },
   {
     "sellerId": {
@@ -1181,15 +1419,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:05:42.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img37.png",
+        "url": "http://localhost:5000/p_img37.png",
         "isPrimary": true
       }
     ],
@@ -1199,7 +1431,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-035",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa35"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb35"
+    }
   },
   {
     "sellerId": {
@@ -1215,15 +1460,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img38.png",
+        "url": "http://localhost:5000/p_img38.png",
         "isPrimary": true
       }
     ],
@@ -1233,7 +1472,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-036",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa36"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb36"
+    }
   },
   {
     "sellerId": {
@@ -1249,15 +1501,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:00:35.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img39.png",
+        "url": "http://localhost:5000/p_img39.png",
         "isPrimary": true
       }
     ],
@@ -1267,7 +1513,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-037",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa37"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb37"
+    }
   },
   {
     "sellerId": {
@@ -1283,15 +1542,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:55.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img40.png",
+        "url": "http://localhost:5000/p_img40.png",
         "isPrimary": true
       }
     ],
@@ -1301,7 +1554,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-038",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa38"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb38"
+    }
   },
   {
     "sellerId": {
@@ -1317,15 +1583,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img41.png",
+        "url": "http://localhost:5000/p_img41.png",
         "isPrimary": true
       }
     ],
@@ -1335,7 +1595,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-039",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa39"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb39"
+    }
   },
   {
     "sellerId": {
@@ -1351,15 +1624,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img42.png",
+        "url": "http://localhost:5000/p_img42.png",
         "isPrimary": true
       }
     ],
@@ -1369,7 +1636,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-040",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa40"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb40"
+    }
   },
   {
     "sellerId": {
@@ -1385,15 +1665,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-22T12:32:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img43.png",
+        "url": "http://localhost:5000/p_img43.png",
         "isPrimary": true
       }
     ],
@@ -1403,7 +1677,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-041",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa41"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb41"
+    }
   },
   {
     "sellerId": {
@@ -1419,15 +1706,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img44.png",
+        "url": "http://localhost:5000/p_img44.png",
         "isPrimary": true
       }
     ],
@@ -1437,7 +1718,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-042",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa42"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb42"
+    }
   },
   {
     "sellerId": {
@@ -1453,15 +1747,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img45.png",
+        "url": "http://localhost:5000/p_img45.png",
         "isPrimary": true
       }
     ],
@@ -1471,7 +1759,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-043",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa43"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb43"
+    }
   },
   {
     "sellerId": {
@@ -1487,15 +1788,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:43.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img46.png",
+        "url": "http://localhost:5000/p_img46.png",
         "isPrimary": true
       }
     ],
@@ -1505,7 +1800,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-044",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa44"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb44"
+    }
   },
   {
     "sellerId": {
@@ -1521,15 +1829,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:05:42.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img47.png",
+        "url": "http://localhost:5000/p_img47.png",
         "isPrimary": true
       }
     ],
@@ -1539,7 +1841,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-045",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa45"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb45"
+    }
   },
   {
     "sellerId": {
@@ -1555,15 +1870,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img48.png",
+        "url": "http://localhost:5000/p_img48.png",
         "isPrimary": true
       }
     ],
@@ -1573,7 +1882,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-046",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa46"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb46"
+    }
   },
   {
     "sellerId": {
@@ -1589,15 +1911,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc4"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:00:35.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img49.png",
+        "url": "http://localhost:5000/p_img49.png",
         "isPrimary": true
       }
     ],
@@ -1607,7 +1923,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-047",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa47"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb47"
+    }
   },
   {
     "sellerId": {
@@ -1623,15 +1952,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc3"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:23:55.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img50.png",
+        "url": "http://localhost:5000/p_img50.png",
         "isPrimary": true
       }
     ],
@@ -1641,7 +1964,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-048",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa48"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb48"
+    }
   },
   {
     "sellerId": {
@@ -1657,15 +1993,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc1"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:12:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img51.png",
+        "url": "http://localhost:5000/p_img51.png",
         "isPrimary": true
       }
     ],
@@ -1675,7 +2005,20 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-049",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa49"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb49"
+    }
   },
   {
     "sellerId": {
@@ -1691,15 +2034,9 @@
     "subCategoryId": {
       "$oid": "67dfa578452634da4759ccc2"
     },
-    "inventory": {
-      "quantity": 100,
-      "updatedAt": {
-        "$date": "2024-05-26T09:02:25.448Z"
-      }
-    },
     "images": [
       {
-        "url": "https://vault-vogue-expressjs.vercel.app/p_img52.png",
+        "url": "http://localhost:5000/p_img52.png",
         "isPrimary": true
       }
     ],
@@ -1709,6 +2046,19 @@
     },
     "bestseller": false,
     "trending": false,
-    "details": {}
+    "details": {},
+    "sku": "seed-050",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "_id": {
+      "$oid": "67dfa578452634da4759aa50"
+    },
+    "inventoryId": {
+      "$oid": "67dfa578452634da4759bb50"
+    }
   }
 ]

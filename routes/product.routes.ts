@@ -1,14 +1,188 @@
+import mongoose from "mongoose";
 import express from "express";
+import { Inventory } from "../models/Inventory.js";
 import { Product } from "../models/Product.js";
 
 const router = express.Router();
 
-const normalizeDashboardPayload = (body: Record<string, any>) => ({
-  ...body,
-  bestseller: Boolean(body.bestseller),
-  trending: Boolean(body.trending),
-  details: body.details ?? {},
-});
+const normalizeSizes = (sizes: unknown) => {
+  if (Array.isArray(sizes)) {
+    return sizes
+      .filter((size) => typeof size === "string" && size.trim())
+      .map((size) => size.trim());
+  }
+
+  if (typeof sizes === "string" && sizes.trim()) {
+    return sizes
+      .split(",")
+      .map((size) => size.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+};
+
+const normalizeInventoryItems = (inventory: unknown, sizes: string[]) => {
+  if (Array.isArray(inventory)) {
+    const normalized: Array<{
+      size: string;
+      quantity: number;
+      updatedAt: Date;
+    }> = [];
+
+    for (const entry of inventory) {
+      if (!entry || typeof entry !== "object") {
+        continue;
+      }
+
+      const record = entry as Record<string, unknown>;
+      const size = typeof record.size === "string" ? record.size.trim() : "";
+      const quantity = Number(record.quantity);
+      const updatedAt =
+        record.updatedAt instanceof Date
+          ? record.updatedAt
+          : record.updatedAt
+            ? new Date(record.updatedAt as string)
+            : new Date();
+
+      if (!size || !Number.isFinite(quantity)) {
+        continue;
+      }
+
+      normalized.push({
+        size,
+        quantity,
+        updatedAt,
+      });
+    }
+
+    return normalized;
+  }
+
+  const legacyInventory =
+    inventory && typeof inventory === "object" && !Array.isArray(inventory)
+      ? (inventory as Record<string, unknown>)
+      : {};
+
+  const quantity =
+    Number.isFinite(Number(legacyInventory.quantity)) && legacyInventory.quantity !== undefined
+      ? Number(legacyInventory.quantity)
+      : 0;
+
+  const updatedAt =
+    legacyInventory.updatedAt instanceof Date
+      ? legacyInventory.updatedAt
+      : legacyInventory.updatedAt
+        ? new Date(legacyInventory.updatedAt as string)
+        : new Date();
+
+  return sizes.map((size) => ({
+    size,
+    quantity,
+    updatedAt,
+  }));
+};
+
+const normalizeDashboardPayload = (body: Record<string, any>) => {
+  const sizes = normalizeSizes(body.sizes);
+
+  return {
+    ...body,
+    sizes,
+    inventoryItems: normalizeInventoryItems(body.inventory, sizes),
+    bestseller: Boolean(body.bestseller),
+    trending: Boolean(body.trending),
+    details: body.details ?? {},
+  };
+};
+
+const splitInventoryPayload = (payload: Record<string, any>) => {
+  const { inventory, inventoryItems, ...product } = payload;
+  return {
+    product,
+    inventoryItems: Array.isArray(inventoryItems)
+      ? inventoryItems
+      : normalizeInventoryItems(inventory, Array.isArray(payload.sizes) ? payload.sizes : []),
+  };
+};
+
+const populateProductRelations = (query: any) =>
+  query.populate([
+    { path: "inventoryId" },
+    { path: "sellerId", select: "name" },
+  ]);
+
+const serializeProduct = (product: any) => {
+  if (!product) {
+    return product;
+  }
+
+  const plain = typeof product.toObject === "function" ? product.toObject() : product;
+  const sellerName = plain.sellerId && typeof plain.sellerId === "object"
+    ? plain.sellerId.name
+    : undefined;
+
+  return {
+    ...plain,
+    sellerName: sellerName ?? "",
+  };
+};
+
+const syncInventoryForProduct = async (
+  productId: string | mongoose.Types.ObjectId,
+  inventoryItems: Array<{
+    size: string;
+    quantity: number;
+    updatedAt: Date;
+  }>,
+  inventoryId?: mongoose.Types.ObjectId | string,
+) => {
+  const filter = inventoryId ? { _id: inventoryId } : { productId };
+
+  return Inventory.findOneAndUpdate(
+    filter,
+    {
+      productId,
+      items: inventoryItems,
+    },
+    {
+      new: true,
+      upsert: true,
+      runValidators: true,
+      setDefaultsOnInsert: true,
+    },
+  );
+};
+
+const saveProductWithInventory = async (
+  payload: Record<string, any>,
+  existingProductId?: string,
+) => {
+  const { product, inventoryItems } = splitInventoryPayload(payload);
+  const baseProduct = existingProductId
+    ? await Product.findByIdAndUpdate(existingProductId, product, {
+        new: true,
+        runValidators: true,
+      })
+    : await Product.create(product);
+
+  if (!baseProduct) {
+    return null;
+  }
+
+  const inventory = await syncInventoryForProduct(
+    baseProduct._id,
+    inventoryItems,
+    baseProduct.inventoryId,
+  );
+
+  if (!baseProduct.inventoryId || String(baseProduct.inventoryId) !== String(inventory._id)) {
+    baseProduct.inventoryId = inventory._id;
+    await baseProduct.save();
+  }
+
+  return populateProductRelations(Product.findById(baseProduct._id));
+};
 
 const getQueryString = (value: unknown) => {
   if (typeof value === "string") {
@@ -86,7 +260,6 @@ const buildSortOption = (query: Record<string, unknown>) => {
     "price",
     "name",
     "sku",
-    "inventory.quantity",
   ]);
 
   const field = sortBy && allowedSortFields.has(sortBy) ? sortBy : "createdAt";
@@ -155,7 +328,7 @@ const buildSortOption = (query: Record<string, unknown>) => {
  *         name: sortBy
  *         schema:
  *           type: string
- *           enum: [createdAt, price, name, inventory.quantity]
+ *           enum: [createdAt, price, name, sku]
  *           default: createdAt
  *         description: Field to sort by
  *       - in: query
@@ -178,7 +351,7 @@ router.get("/getAll", async (req, res) => {
   const sort = buildSortOption(req.query as Record<string, unknown>);
 
   const [products, total] = await Promise.all([
-    Product.find(filter).skip(skip).limit(limit).sort(sort),
+    populateProductRelations(Product.find(filter)).skip(skip).limit(limit).sort(sort),
     Product.countDocuments(filter),
   ]);
 
@@ -219,17 +392,28 @@ router.get("/getAll", async (req, res) => {
 
 router.get("/getbyId/:id", async (req, res) => {
   const { id } = req.params;
-  const product = await Product.findById(id);
+  const product = await Product.findById(id).populate([
+    { path: "inventoryId" },
+    {
+      path: "sellerId",
+      select:
+        "name contactEmail contactPhone ownerUserId isVerified isActive averageRating ratingCount createdAt updatedAt",
+    },
+  ]);
   if (!product) {
     return res.status(404).json({
       success: false,
       message: "Product not found",
     });
   }
+  const productData = serializeProduct(product);
   res.status(200).json({
     success: true,
     message: "Products fetched successfully",
-    data: product,
+    data: {
+      ...productData,
+      seller: productData.sellerId ?? null,
+    },
   });
 });
 
@@ -262,6 +446,10 @@ router.get("/getbyId/:id", async (req, res) => {
  *                 type: number
  *               sku:
  *                 type: string
+ *               sizes:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *               categoryIds:
  *                 type: array
  *                 items:
@@ -269,7 +457,17 @@ router.get("/getbyId/:id", async (req, res) => {
  *               subCategoryId:
  *                 type: string
  *               inventory:
- *                 type: object
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     size:
+ *                       type: string
+ *                     quantity:
+ *                       type: number
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *               images:
  *                 type: array
  *                 items:
@@ -288,7 +486,7 @@ router.get("/getbyId/:id", async (req, res) => {
  */
 
 router.post("/create", async (req, res) => {
-  const product = await Product.create(normalizeDashboardPayload(req.body));
+  const product = await saveProductWithInventory(normalizeDashboardPayload(req.body));
   if (!product) {
     return res.status(400).json({
       success: false,
@@ -298,7 +496,7 @@ router.post("/create", async (req, res) => {
   res.status(201).json({
     success: true,
     message: "Product created successfully",
-    data: product,
+    data: serializeProduct(product),
   });
 });
 
@@ -332,6 +530,10 @@ router.post("/create", async (req, res) => {
  *                 type: number
  *               sku:
  *                 type: string
+ *               sizes:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *               categoryIds:
  *                 type: array
  *                 items:
@@ -339,13 +541,17 @@ router.post("/create", async (req, res) => {
  *               subCategoryId:
  *                 type: string
  *               inventory:
- *                 type: object
- *                 properties:
- *                   quantity:
- *                     type: number
- *                   updatedAt:
- *                     type: string
- *                     format: date-time
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     size:
+ *                       type: string
+ *                     quantity:
+ *                       type: number
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *               images:
  *                 type: array
  *                 items:
@@ -367,12 +573,19 @@ router.post("/create", async (req, res) => {
  *         description: Dashboard product created successfully
  */
 router.post("/dashboard", async (req, res) => {
-  const product = await Product.create(normalizeDashboardPayload(req.body));
+  const product = await saveProductWithInventory(normalizeDashboardPayload(req.body));
+
+  if (!product) {
+    return res.status(400).json({
+      success: false,
+      message: "Dashboard product not created",
+    });
+  }
 
   res.status(201).json({
     success: true,
     message: "Dashboard product created successfully",
-    data: product,
+    data: serializeProduct(product),
   });
 });
 
@@ -452,24 +665,33 @@ router.get("/dashboard", async (req, res) => {
     Product.countDocuments({}),
     Product.countDocuments({ isActive: true }),
     Product.find({ bestseller: true })
+      .populate([{ path: "inventoryId" }, { path: "sellerId", select: "name" }])
       .sort({ createdAt: -1 })
       .skip(bestseller.skip)
       .limit(bestseller.limit),
     Product.find({ trending: true })
+      .populate([{ path: "inventoryId" }, { path: "sellerId", select: "name" }])
       .sort({ createdAt: -1 })
       .skip(trending.skip)
       .limit(trending.limit),
     Product.find({})
+      .populate([{ path: "inventoryId" }, { path: "sellerId", select: "name" }])
       .sort({ createdAt: -1 })
       .skip(recent.skip)
       .limit(recent.limit),
-    Product.find({ "inventory.quantity": { $lte: 10 } })
-      .sort({ "inventory.quantity": 1, createdAt: -1 })
-      .limit(20),
+    Inventory.find({ "items.quantity": { $lte: 10 } }).select("productId"),
     Product.countDocuments({ bestseller: true }),
     Product.countDocuments({ trending: true }),
-    Product.countDocuments({ "inventory.quantity": { $lte: 10 } }),
+    Inventory.countDocuments({ "items.quantity": { $lte: 10 } }),
   ]);
+
+  const lowStockProductIds = lowStockProducts.map((inventory) => inventory.productId);
+  const lowStockProductDocs = lowStockProductIds.length
+    ? await Product.find({ _id: { $in: lowStockProductIds } })
+        .populate([{ path: "inventoryId" }, { path: "sellerId", select: "name" }])
+        .sort({ createdAt: -1 })
+        .limit(20)
+    : [];
 
   res.status(200).json({
     success: true,
@@ -483,10 +705,10 @@ router.get("/dashboard", async (req, res) => {
         lowStockProducts: lowStockTotal,
       },
       highlights: {
-        bestsellerProducts,
-        trendingProducts,
-        recentProducts,
-        lowStockProducts,
+        bestsellerProducts: bestsellerProducts.map(serializeProduct),
+        trendingProducts: trendingProducts.map(serializeProduct),
+        recentProducts: recentProducts.map(serializeProduct),
+        lowStockProducts: lowStockProductDocs.map(serializeProduct),
         pagination: {
           recent: {
             page: recent.page,
@@ -542,6 +764,10 @@ router.get("/dashboard", async (req, res) => {
  *                 type: number
  *               sku:
  *                 type: string
+ *               sizes:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *               categoryIds:
  *                 type: array
  *                 items:
@@ -549,13 +775,17 @@ router.get("/dashboard", async (req, res) => {
  *               subCategoryId:
  *                 type: string
  *               inventory:
- *                 type: object
- *                 properties:
- *                   quantity:
- *                     type: number
- *                   updatedAt:
- *                     type: string
- *                     format: date-time
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     size:
+ *                       type: string
+ *                     quantity:
+ *                       type: number
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *               images:
  *                 type: array
  *                 items:
@@ -580,12 +810,7 @@ router.get("/dashboard", async (req, res) => {
  */
 router.patch("/dashboard/:id", async (req, res) => {
   const { id } = req.params;
-  const update = normalizeDashboardPayload(req.body);
-
-  const product = await Product.findByIdAndUpdate(id, update, {
-    new: true,
-    runValidators: true,
-  });
+  const product = await saveProductWithInventory(normalizeDashboardPayload(req.body), id);
 
   if (!product) {
     return res.status(404).json({
@@ -597,7 +822,7 @@ router.patch("/dashboard/:id", async (req, res) => {
   res.status(200).json({
     success: true,
     message: "Dashboard product updated successfully",
-    data: product,
+    data: serializeProduct(product),
   });
 });
 
