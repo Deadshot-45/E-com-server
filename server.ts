@@ -79,6 +79,7 @@ class Server {
       "http://localhost:5173",
       "http://localhost:3000/",
       "https://vault-vogue-expressjs.vercel.app",
+      "https://vault-vogue-lite.vercel.app/",
     ]);
 
     this.app.use(
