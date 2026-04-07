@@ -151,7 +151,7 @@ class Server {
         cookie: {
           secure: process.env.NODE_ENV === "production",
           httpOnly: true,
-          sameSite: "lax",
+          sameSite: "strict",
           maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         },
       }),
@@ -215,7 +215,7 @@ class Server {
     this.app.use("/api/userController", userRoutes);
     this.app.use("/api/products", productRoutes);
     this.app.use("/api/orders", orderRoutes);
-    this.app.use("/api/cart", cartRoutes);
+    this.app.use("/api/cartController", cartRoutes);
     this.app.use("/api/reviews", reviewRoutes);
     this.app.use("/api/sellers", sellerRoutes);
     this.app.use("/api/marketplace", marketplaceRoutes);

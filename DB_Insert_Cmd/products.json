@@ -15,7 +15,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img1.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img1.png",
         "isPrimary": true
       }
     ],
@@ -56,19 +56,19 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img2_1.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img2_1.png",
         "isPrimary": true
       },
       {
-        "url": "http://localhost:5000/p_img2_2.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img2_2.png",
         "isPrimary": false
       },
       {
-        "url": "http://localhost:5000/p_img2_3.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img2_3.png",
         "isPrimary": false
       },
       {
-        "url": "http://localhost:5000/p_img2_4.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img2_4.png",
         "isPrimary": false
       }
     ],
@@ -109,7 +109,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img5.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img5.png",
         "isPrimary": true
       }
     ],
@@ -150,7 +150,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img6.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img6.png",
         "isPrimary": true
       }
     ],
@@ -191,7 +191,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img7.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img7.png",
         "isPrimary": true
       }
     ],
@@ -232,7 +232,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img8.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img8.png",
         "isPrimary": true
       }
     ],
@@ -273,7 +273,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img9.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img9.png",
         "isPrimary": true
       }
     ],
@@ -314,7 +314,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img10.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img10.png",
         "isPrimary": true
       }
     ],
@@ -355,7 +355,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img11.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img11.png",
         "isPrimary": true
       }
     ],
@@ -396,7 +396,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img12.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img12.png",
         "isPrimary": true
       }
     ],
@@ -437,7 +437,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img13.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img13.png",
         "isPrimary": true
       }
     ],
@@ -478,7 +478,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img14.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img14.png",
         "isPrimary": true
       }
     ],
@@ -519,7 +519,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img15.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img15.png",
         "isPrimary": true
       }
     ],
@@ -560,7 +560,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img16.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img16.png",
         "isPrimary": true
       }
     ],
@@ -601,7 +601,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img17.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img17.png",
         "isPrimary": true
       }
     ],
@@ -642,7 +642,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img18.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img18.png",
         "isPrimary": true
       }
     ],
@@ -683,7 +683,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img19.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img19.png",
         "isPrimary": true
       }
     ],
@@ -724,7 +724,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img20.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img20.png",
         "isPrimary": true
       }
     ],
@@ -765,7 +765,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img21.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img21.png",
         "isPrimary": true
       }
     ],
@@ -806,7 +806,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img22.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img22.png",
         "isPrimary": true
       }
     ],
@@ -847,7 +847,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img23.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img23.png",
         "isPrimary": true
       }
     ],
@@ -888,7 +888,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img24.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img24.png",
         "isPrimary": true
       }
     ],
@@ -929,7 +929,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img25.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img25.png",
         "isPrimary": true
       }
     ],
@@ -970,7 +970,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img26.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img26.png",
         "isPrimary": true
       }
     ],
@@ -1011,7 +1011,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img27.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img27.png",
         "isPrimary": true
       }
     ],
@@ -1052,7 +1052,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img28.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img28.png",
         "isPrimary": true
       }
     ],
@@ -1093,7 +1093,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img29.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img29.png",
         "isPrimary": true
       }
     ],
@@ -1134,7 +1134,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img30.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img30.png",
         "isPrimary": true
       }
     ],
@@ -1175,7 +1175,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img31.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img31.png",
         "isPrimary": true
       }
     ],
@@ -1216,7 +1216,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img32.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img32.png",
         "isPrimary": true
       }
     ],
@@ -1257,7 +1257,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img33.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img33.png",
         "isPrimary": true
       }
     ],
@@ -1298,7 +1298,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img34.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img34.png",
         "isPrimary": true
       }
     ],
@@ -1339,7 +1339,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img35.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img35.png",
         "isPrimary": true
       }
     ],
@@ -1380,7 +1380,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img36.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img36.png",
         "isPrimary": true
       }
     ],
@@ -1421,7 +1421,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img37.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img37.png",
         "isPrimary": true
       }
     ],
@@ -1462,7 +1462,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img38.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img38.png",
         "isPrimary": true
       }
     ],
@@ -1503,7 +1503,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img39.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img39.png",
         "isPrimary": true
       }
     ],
@@ -1544,7 +1544,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img40.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img40.png",
         "isPrimary": true
       }
     ],
@@ -1585,7 +1585,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img41.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img41.png",
         "isPrimary": true
       }
     ],
@@ -1626,7 +1626,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img42.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img42.png",
         "isPrimary": true
       }
     ],
@@ -1667,7 +1667,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img43.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img43.png",
         "isPrimary": true
       }
     ],
@@ -1708,7 +1708,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img44.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img44.png",
         "isPrimary": true
       }
     ],
@@ -1749,7 +1749,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img45.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img45.png",
         "isPrimary": true
       }
     ],
@@ -1790,7 +1790,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img46.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img46.png",
         "isPrimary": true
       }
     ],
@@ -1831,7 +1831,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img47.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img47.png",
         "isPrimary": true
       }
     ],
@@ -1872,7 +1872,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img48.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img48.png",
         "isPrimary": true
       }
     ],
@@ -1913,7 +1913,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img49.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img49.png",
         "isPrimary": true
       }
     ],
@@ -1954,7 +1954,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img50.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img50.png",
         "isPrimary": true
       }
     ],
@@ -1995,7 +1995,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img51.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img51.png",
         "isPrimary": true
       }
     ],
@@ -2036,7 +2036,7 @@
     },
     "images": [
       {
-        "url": "http://localhost:5000/p_img52.png",
+        "url": "https://vault-vogue-server.vercel.app/p_img52.png",
         "isPrimary": true
       }
     ],

@@ -5,6 +5,7 @@ export interface ICartItem {
   sellerId: mongoose.Types.ObjectId;
   quantity: number;
   priceSnapshot: number;
+  size: string;
 }
 
 export interface ICart extends Document {
@@ -15,13 +16,16 @@ export interface ICart extends Document {
 
 const cartSchema = new Schema<ICart>({
   userId: { type: Schema.Types.ObjectId, unique: true, required: true },
-  items: [{
-    productId: { type: Schema.Types.ObjectId, required: true },
-    sellerId: { type: Schema.Types.ObjectId, required: true },
-    quantity: { type: Number, required: true },
-    priceSnapshot: { type: Number, required: true }
-  }],
-  updatedAt: { type: Date, default: Date.now }
+  items: [
+    {
+      productId: { type: Schema.Types.ObjectId, required: true },
+      sellerId: { type: Schema.Types.ObjectId, required: true },
+      quantity: { type: Number, required: true },
+      priceSnapshot: { type: Number, required: true },
+      size: { type: String, required: true },
+    },
+  ],
+  updatedAt: { type: Date, default: Date.now },
 });
 
 export default mongoose.model<ICart>("Cart", cartSchema);
