@@ -42,7 +42,6 @@ Thumbs.db
 # =========================
 # Large assets (your case)
 # =========================
-public/images/
 public/uploads/
 DB_Insert_Cmd/
 *.zip
