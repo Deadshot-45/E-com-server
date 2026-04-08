@@ -620,18 +620,37 @@ const subCategoryByCode = Object.fromEntries(
   subCategoryDocs.map((subCategory) => [subCategory.code, subCategory]),
 );
 
-const products = [
+const products = [];
+const inventories = [];
+
+[
   ...womenTopwear,
   ...menTopwear,
   ...kidsTopwear,
   ...menBottomwear,
-].map((product, index) => {
+].forEach((product, index) => {
   const categorySlug = normalizeKey(product.category);
   const subCategoryCode = `${categorySlug}-${normalizeKey(product.subCategory)}`;
   const category = categoryBySlug[categorySlug];
   const subCategory = subCategoryByCode[subCategoryCode];
 
-  return {
+  const productId = ObjectId();
+  const inventoryId = ObjectId();
+
+  inventories.push({
+    _id: inventoryId,
+    productId: productId,
+    items: product.sizes.map(size => ({
+      size,
+      quantity: 100,
+      updatedAt: new Date(product.date)
+    })),
+    createdAt: new Date(product.date),
+    updatedAt: new Date(product.date)
+  });
+
+  products.push({
+    _id: productId,
     sellerId: defaultSellerId,
     name: product.name,
     description: common.description,
@@ -639,17 +658,19 @@ const products = [
     sku: `seed-${String(index + 1).padStart(3, "0")}`,
     categoryIds: [category._id],
     subCategoryId: subCategory?._id,
-    inventory: {
-      quantity: 100,
-      updatedAt: new Date(product.date),
-    },
+    sizes: product.sizes,
+    inventoryId: inventoryId,
     images: product.image.map((url, imageIndex) => ({
       url,
       isPrimary: imageIndex === 0,
     })),
     isActive: true,
+    bestseller: !!product.bestseller,
+    trending: false,
+    details: {},
     createdAt: new Date(product.date),
-  };
+  });
 });
 
+db.inventories.insertMany(inventories);
 db.products.insertMany(products);

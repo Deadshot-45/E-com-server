@@ -83,6 +83,7 @@ class Server {
       "http://localhost:3000",
       "http://192.168.6.167:3000",
       "https://vault-vogue-lite.vercel.app",
+      "https://mayank-sahu.vercel.app",
     ]);
 
     this.app.use(

@@ -4,6 +4,7 @@
 node_modules/
 .pnpm-store/
 .yarn/
+DB_Insert_Cmd/
 
 # =========================
 # Build outputs
@@ -43,6 +44,7 @@ Thumbs.db
 # =========================
 public/images/
 public/uploads/
+DB_Insert_Cmd/
 *.zip
 *.rar
 *.tar
