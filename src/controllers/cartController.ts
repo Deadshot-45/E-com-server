@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Cart from "../models/Cart.js";
+import { Cart } from "../models/Cart";
 
 export const getCart = async (req: Request, res: Response) => {
   const userId = req.user?._id;
@@ -23,13 +23,18 @@ export const getCart = async (req: Request, res: Response) => {
     });
 
   if (!cart) {
-    return res.status(200).json({ success: true, message: "Cart not found", cart: [] });
+    return res
+      .status(200)
+      .json({ success: true, message: "Cart not found", cart: [] });
   }
 
   const formattedItems = cart.items.map((item: any) => {
     const product = item.productId;
     const seller = item.sellerId;
-    const primaryImage = product?.images?.find((img: any) => img.isPrimary)?.url || product?.images?.[0]?.url || "";
+    const primaryImage =
+      product?.images?.find((img: any) => img.isPrimary)?.url ||
+      product?.images?.[0]?.url ||
+      "";
 
     return {
       id: product?._id || item.productId,

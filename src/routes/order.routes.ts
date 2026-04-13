@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
-import Order from "../models/Order.js";
 import Payment from "../models/Payment.js";
 import { Product } from "../models/Product.js";
+import { Order } from "../models/Order.js";
 
 const router = express.Router();
 

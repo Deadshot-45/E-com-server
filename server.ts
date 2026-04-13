@@ -11,23 +11,23 @@ import swaggerUi from "swagger-ui-express";
 import winston from "winston";
 
 // Middleware & Utils
-import { globalErrorHandler } from "./middleware/errorMiddleware.js";
-import AppError from "./utils/AppError.js";
-import { swaggerSpec } from "./utils/swagger.js";
+import { globalErrorHandler } from "./src/middleware/errorMiddleware.js";
+import AppError from "./src/utils/AppError.js";
+import { swaggerSpec } from "./src/utils/swagger.js";
 
 // Routes
-import { ipBlockerMiddleware } from "./middleware/ipBlocker.js";
-import { sensitiveSecurityMiddleware } from "./middleware/sensitiveSecurityMiddleware.js";
-import authController from "./routes/auth.routes.js";
-import cartRoutes from "./routes/cart.routes.js";
-import marketplaceRoutes from "./routes/marketplaceRoutes.js";
-import orderRoutes from "./routes/order.routes.js";
-import otpRoutes from "./routes/otp.routes.js";
-import productRoutes from "./routes/product.routes.js";
-import reviewRoutes from "./routes/review.routes.js";
-import sellerRoutes from "./routes/seller.routes.js";
-import sellerAuthRoutes from "./routes/sellerRoutes.js";
-import userRoutes from "./routes/user.routes.js";
+import { ipBlockerMiddleware } from "./src/middleware/ipBlocker.js";
+import { sensitiveSecurityMiddleware } from "./src/middleware/sensitiveSecurityMiddleware.js";
+import authController from "./src/routes/auth.routes.js";
+import cartRoutes from "./src/routes/cart.routes.js";
+import marketplaceRoutes from "./src/routes/marketplaceRoutes.js";
+import orderRoutes from "./src/routes/order.routes.js";
+import otpRoutes from "./src/routes/otp.routes.js";
+import productRoutes from "./src/routes/product.routes.js";
+import reviewRoutes from "./src/routes/review.routes.js";
+import sellerRoutes from "./src/routes/seller.routes.js";
+import sellerAuthRoutes from "./src/routes/sellerRoutes.js";
+import userRoutes from "./src/routes/user.routes.js";
 
 dotenv.config();
 class Server {
@@ -84,6 +84,7 @@ class Server {
       "http://192.168.6.167:3000",
       "https://vault-vogue-lite.vercel.app",
       "https://mayank-sahu.vercel.app",
+      "https://mayank-sahu-dev.vercel.app",
     ]);
 
     this.app.use(
@@ -231,7 +232,14 @@ class Server {
     );
 
     // Swagger
-    this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    this.app.use(
+      "/api-docs",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerSpec, {
+        explorer: true,
+        customSiteTitle: "E-Commerce API Docs",
+      }),
+    );
 
     // Health
     this.app.get("/", (req, res) => {
