@@ -1,21 +1,22 @@
-class AppError extends Error {
-  public statusCode: number;
-  public status: string;
-  public isOperational: boolean;
+// utils/AppError.ts
+export default class AppError extends Error {
+  statusCode: number;
+  status: string;
+  isOperational: boolean;
+  code: string;
 
-  constructor(message: string, statusCode: number) {
+  constructor(
+    message: string,
+    statusCode: number,
+    code: string = "INTERNAL_SERVER_ERROR",
+  ) {
     super(message);
 
     this.statusCode = statusCode;
     this.status = `${statusCode}`.startsWith("4") ? "fail" : "error";
-
-    // Identifies operational errors (like simple validation mistakes)
-    // vs programmatic bugs (unhandled promise rejections, syntax errors)
     this.isOperational = true;
+    this.code = code;
 
-    // Capture the stack trace, excluding the constructor call from it
     Error.captureStackTrace(this, this.constructor);
   }
 }
-
-export default AppError;

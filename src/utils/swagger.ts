@@ -133,6 +133,79 @@ const options: swaggerJSDoc.Options = {
           },
         },
 
+        ProductImage: {
+          type: "object",
+          required: ["url"],
+          properties: {
+            url: {
+              type: "string",
+              example: "https://vault-vogue-server.vercel.app/p_img1.png",
+            },
+            isPrimary: { type: "boolean", example: true },
+          },
+        },
+
+        ProductVariantInput: {
+          type: "object",
+          required: ["sku", "price"],
+          properties: {
+            sku: { type: "string", example: "seed-001-s" },
+            attributes: {
+              type: "object",
+              additionalProperties: true,
+              example: { size: "S" },
+            },
+            price: { type: "number", example: 100 },
+            compareAtPrice: { type: "number", example: 120 },
+            images: {
+              type: "array",
+              items: { type: "string" },
+              example: ["https://vault-vogue-server.vercel.app/p_img1.png"],
+            },
+            stock: { type: "number", example: 100 },
+          },
+        },
+
+        ProductCreateInput: {
+          type: "object",
+          required: ["sellerId", "name", "categoryIds", "images", "variants"],
+          properties: {
+            sellerId: { type: "string", example: "67dfa578452634da4759aaa1" },
+            name: {
+              type: "string",
+              example: "Women Round Neck Cotton Top",
+            },
+            description: {
+              type: "string",
+              example: "A lightweight cotton top from the seeded catalog.",
+            },
+            categoryIds: {
+              type: "array",
+              items: { type: "string" },
+              example: ["67dfa578452634da4759bbb1"],
+            },
+            subCategoryId: {
+              type: "string",
+              example: "67dfa578452634da4759ccc1",
+            },
+            images: {
+              type: "array",
+              items: { $ref: "#/components/schemas/ProductImage" },
+            },
+            variants: {
+              type: "array",
+              items: { $ref: "#/components/schemas/ProductVariantInput" },
+            },
+            bestseller: { type: "boolean", example: false },
+            trending: { type: "boolean", example: false },
+            details: {
+              type: "object",
+              additionalProperties: true,
+              example: {},
+            },
+          },
+        },
+
         /**
          * 🛍 PRODUCT CORE
          */
@@ -154,20 +227,40 @@ const options: swaggerJSDoc.Options = {
             images: {
               type: "array",
               items: {
-                type: "object",
-                properties: {
-                  url: { type: "string" },
-                  isPrimary: { type: "boolean" },
-                },
+                $ref: "#/components/schemas/ProductImage",
               },
             },
 
             bestseller: { type: "boolean" },
             trending: { type: "boolean" },
             isActive: { type: "boolean" },
+            details: {
+              type: "object",
+              additionalProperties: true,
+            },
 
             createdAt: { type: "string", format: "date-time" },
             updatedAt: { type: "string", format: "date-time" },
+          },
+          example: {
+            _id: "67dfa578452634da4759aa01",
+            sellerId: "67dfa578452634da4759aaa1",
+            name: "Women Round Neck Cotton Top",
+            description: "A lightweight cotton top from the seeded catalog.",
+            categoryIds: ["67dfa578452634da4759bbb1"],
+            subCategoryId: "67dfa578452634da4759ccc1",
+            images: [
+              {
+                url: "https://vault-vogue-server.vercel.app/p_img1.png",
+                isPrimary: true,
+              },
+            ],
+            bestseller: false,
+            trending: false,
+            isActive: true,
+            details: {},
+            createdAt: "2024-05-26T12:32:25.448Z",
+            updatedAt: "2024-05-26T12:32:25.448Z",
           },
         },
 
@@ -184,8 +277,8 @@ const options: swaggerJSDoc.Options = {
 
             attributes: {
               type: "object",
-              additionalProperties: { type: "string" },
-              example: { color: "red", size: "M" },
+              additionalProperties: true,
+              example: { size: "S" },
             },
 
             price: { type: "number" },
@@ -197,6 +290,16 @@ const options: swaggerJSDoc.Options = {
             },
 
             stock: { type: "number" },
+          },
+          example: {
+            _id: "67dfa578452634da4759vv01",
+            productId: "67dfa578452634da4759aa01",
+            sku: "seed-001-s",
+            attributes: { size: "S" },
+            price: 100,
+            compareAtPrice: 120,
+            images: ["https://vault-vogue-server.vercel.app/p_img1.png"],
+            stock: 100,
           },
         },
 

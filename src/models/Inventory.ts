@@ -1,104 +1,52 @@
-// import mongoose, { Document, Schema } from "mongoose";
-
-// import mongoose, { Schema } from "mongoose";
-
-// export interface IInventoryItem {
-//   size: string;
-//   quantity: number;
-//   updatedAt: Date;
-// }
-
-// export interface IInventory extends Document {
-//   productId: mongoose.Types.ObjectId;
-//   items: IInventoryItem[];
-//   createdAt: Date;
-//   updatedAt: Date;
-// }
-
-// const inventoryItemSchema = new Schema<IInventoryItem>({
-//   size: { type: String, trim: true, required: true },
-//   quantity: { type: Number, default: 0 },
-//   updatedAt: { type: Date, default: Date.now },
-// });
-
-// const inventorySchema = new Schema<IInventory>(
-//   {
-//     productId: {
-//       type: Schema.Types.ObjectId,
-//       ref: "Product",
-//       required: true,
-//       unique: true,
-//       index: true,
-//     },
-//     items: {
-//       type: [inventoryItemSchema],
-//       default: [],
-//     },
-//   },
-//   {
-//     timestamps: true,
-//   },
-// );
-
-// inventorySchema.index({ productId: 1 }, { unique: true });
-// inventorySchema.index({ "items.size": 1 });
-// inventorySchema.index({ "items.quantity": 1 });
-
-// export const Inventory = mongoose.model<IInventory>("Inventory", inventorySchema);
-
-// export interface IInventory extends Document {
-//   variantId: mongoose.Types.ObjectId;
-
-//   quantity: number;
-//   reserved: number;
-
-//   lowStockThreshold?: number;
-
-//   updatedAt: Date;
-// }
-
-// const inventorySchema = new Schema<IInventory>(
-//   {
-//     variantId: {
-//       type: Schema.Types.ObjectId,
-//       ref: "ProductVariant",
-//       unique: true,
-//       index: true,
-//       required: true,
-//     },
-
-//     quantity: { type: Number, default: 0 },
-//     reserved: { type: Number, default: 0 },
-
-//     lowStockThreshold: Number,
-//   },
-//   { timestamps: true }
-// );
-
-// export const Inventory = mongoose.model<IInventory>(
-//   "Inventory",
-//   inventorySchema
-// );
-
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface IInventory extends Document {
   variantId: mongoose.Types.ObjectId;
-  stock: number;
+
+  stock: number; // total available stock
+  reserved: number; // locked in cart / checkout
+  sold: number; // completed orders
+
+  lowStockThreshold: number;
+
+  updatedAt: Date;
 }
 
-const inventorySchema = new Schema<IInventory>(
-  {
-    variantId: {
-      type: Schema.Types.ObjectId,
-      ref: "ProductVariant",
-      required: true,
-      unique: true,
-    },
-    stock: { type: Number, default: 0 },
+const inventorySchema = new Schema({
+  variantId: {
+    type: Schema.Types.ObjectId,
+    ref: "ProductVariant",
+    required: true,
+    unique: true, // 1:1 mapping
+    index: true,
   },
-  { timestamps: true },
-);
+
+  stock: { type: Number, required: true, min: 0 },
+  reserved: { type: Number, default: 0, min: 0 },
+});
+
+// // Optional safety
+// inventorySchema.pre("save", function (this: IInventory, next) {
+//   if (this.stock < 0 || this.reserved < 0) {
+//     return next(new Error("Stock values cannot be negative"));
+//   }
+
+//   if (this.reserved > this.stock) {
+//     return next(new Error("Reserved cannot exceed stock"));
+//   }
+
+//   next();
+// });
+ 
+// inventorySchema.index({ variantId: 1 });
+inventorySchema.index({ stock: 1 });
+inventorySchema.index({ updatedAt: -1 });
+
+// const variants = await ProductVariant.find({ productId }).lean();
+
+// const inventory = await Inventory.find({
+//   variantId: { $in: variants.map(v => v._id) }
+// }).lean();
 
 export const Inventory = mongoose.model<IInventory>(
   "Inventory",

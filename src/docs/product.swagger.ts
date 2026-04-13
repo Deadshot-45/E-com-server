@@ -9,53 +9,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - sellerId
- *               - name
- *               - categoryIds
- *             properties:
- *               sellerId:
- *                 type: string
- *                 example: 67f0ab12cd34ef56ab78cd90
- *               name:
- *                 type: string
- *                 example: Classic Hoodie
- *               description:
- *                 type: string
- *                 example: Premium cotton hoodie for everyday wear.
- *               categoryIds:
- *                 type: array
- *                 items:
- *                   type: string
- *                 example: [67f0ab12cd34ef56ab78cd91]
- *               subCategoryId:
- *                 type: string
- *                 example: 67f0ab12cd34ef56ab78cd92
- *               images:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     url:
- *                       type: string
- *                       example: https://example.com/images/hoodie-front.jpg
- *                     isPrimary:
- *                       type: boolean
- *                       example: true
- *               bestseller:
- *                 type: boolean
- *                 example: false
- *               trending:
- *                 type: boolean
- *                 example: true
- *               isActive:
- *                 type: boolean
- *                 example: true
- *               variants:
- *                 type: array
- *                 items:
- *                   $ref: '#/components/schemas/ProductVariant'
+ *             $ref: '#/components/schemas/ProductCreateInput'
  *     responses:
  *       201:
  *         description: Product created successfully
@@ -70,7 +24,22 @@
  *                       type: string
  *                       example: Product created successfully
  *                     data:
- *                       $ref: '#/components/schemas/Product'
+ *                       type: object
+ *                       example:
+ *                         _id: 67dfa578452634da4759aa01
+ *                         sellerId: 67dfa578452634da4759aaa1
+ *                         name: Women Round Neck Cotton Top
+ *                         description: A lightweight cotton top from the seeded catalog.
+ *                         categoryIds:
+ *                           - 67dfa578452634da4759bbb1
+ *                         subCategoryId: 67dfa578452634da4759ccc1
+ *                         images:
+ *                           - url: https://vault-vogue-server.vercel.app/p_img1.png
+ *                             isPrimary: true
+ *                         isActive: true
+ *                         bestseller: false
+ *                         trending: false
+ *                         details: {}
  *       400:
  *         description: Invalid product payload
  *         content:
@@ -150,7 +119,47 @@
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ProductListResponse'
+ *               allOf:
+ *                 - $ref: '#/components/schemas/ProductListResponse'
+ *                 - type: object
+ *                   example:
+ *                     success: true
+ *                     data:
+ *                       - _id: 67dfa578452634da4759aa01
+ *                         sellerId: 67dfa578452634da4759aaa1
+ *                         name: Women Round Neck Cotton Top
+ *                         categoryIds:
+ *                           - 67dfa578452634da4759bbb1
+ *                         subCategoryId: 67dfa578452634da4759ccc1
+ *                         images:
+ *                           - url: https://vault-vogue-server.vercel.app/p_img1.png
+ *                             isPrimary: true
+ *                         isActive: true
+ *                         bestseller: false
+ *                         trending: false
+ *                         createdAt: 2024-05-26T12:32:25.448Z
+ *                         updatedAt: 2024-05-26T12:32:25.448Z
+ *                       - _id: 67dfa578452634da4759aa02
+ *                         sellerId: 67dfa578452634da4759aaa1
+ *                         name: Men Round Neck Pure Cotton T-shirt
+ *                         categoryIds:
+ *                           - 67dfa578452634da4759bbb2
+ *                         subCategoryId: 67dfa578452634da4759ccc3
+ *                         images:
+ *                           - url: https://vault-vogue-server.vercel.app/p_img2_1.png
+ *                             isPrimary: true
+ *                         isActive: true
+ *                         bestseller: false
+ *                         trending: false
+ *                         createdAt: 2024-05-26T09:02:25.448Z
+ *                         updatedAt: 2024-05-26T09:02:25.448Z
+ *                     pagination:
+ *                       total: 50
+ *                       page: 1
+ *                       limit: 10
+ *                       totalPages: 5
+ *                       hasNextPage: true
+ *                       hasPrevPage: false
  *
  * /products/getById/{id}:
  *   get:
@@ -169,7 +178,37 @@
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ProductDetailResponse'
+ *               allOf:
+ *                 - $ref: '#/components/schemas/ProductDetailResponse'
+ *                 - type: object
+ *                   example:
+ *                     success: true
+ *                     data:
+ *                       _id: 67dfa578452634da4759aa01
+ *                       sellerId: 67dfa578452634da4759aaa1
+ *                       name: Women Round Neck Cotton Top
+ *                       categoryIds:
+ *                         - 67dfa578452634da4759bbb1
+ *                       subCategoryId: 67dfa578452634da4759ccc1
+ *                       images:
+ *                         - url: https://vault-vogue-server.vercel.app/p_img1.png
+ *                           isPrimary: true
+ *                       isActive: true
+ *                       bestseller: false
+ *                       trending: false
+ *                       details: {}
+ *                       variants:
+ *                         - _id: 67dfa578452634da4759vv01
+ *                           productId: 67dfa578452634da4759aa01
+ *                           sku: seed-001-s
+ *                           attributes:
+ *                             size: S
+ *                             color: Red
+ *                           price: 100
+ *                           compareAtPrice: 120
+ *                           images:
+ *                             - https://vault-vogue-server.vercel.app/p_img1.png
+ *                           stock: 100
  *       404:
  *         description: Product not found
  *         content:

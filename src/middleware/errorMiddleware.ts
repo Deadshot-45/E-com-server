@@ -1,64 +1,68 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../utils/AppError.js";
+import AppError from "../utils/AppError";
 
 // Handle matching MongoDB duplicate key errors
 const handleDuplicateFieldsDB = (err: any) => {
-  const value = err.errmsg ? err.errmsg.match(/(["'])(\\?.)*?\1/)[0] : "duplicate value";
-  const message = `Duplicate field value: ${value}. Please use another value!`;
-  return new AppError(message, 400);
+  const field = Object.keys(err.keyValue || {})[0];
+  const value = err.keyValue?.[field];
+
+  const message = `Duplicate value for ${field}: ${value}`;
+  return new AppError(message, 400, "DUPLICATE_FIELD");
 };
 
 // Handle generic mongoose validation errors
 const handleValidationErrorDB = (err: any) => {
   const errors = Object.values(err.errors).map((el: any) => el.message);
-  const message = `Invalid input data. ${errors.join(". ")}`;
-  return new AppError(message, 400);
+
+  return new AppError(
+    `Invalid input data. ${errors.join(". ")}`,
+    400,
+    "VALIDATION_ERROR",
+  );
 };
 
 // Handle invalid mongodb object ID
 const handleCastErrorDB = (err: any) => {
-  const message = `Invalid ${err.path}: ${err.value}.`;
-  return new AppError(message, 400);
+  return new AppError(`Invalid ${err.path}: ${err.value}`, 400, "INVALID_ID");
 };
 
 const sendErrorDev = (err: AppError, res: Response) => {
   res.status(err.statusCode).json({
     success: false,
     status: err.status,
-    error: err,
+    code: err.code,
     message: err.message,
+    error: err,
     stack: err.stack,
   });
 };
 
 const sendErrorProd = (err: AppError, res: Response) => {
-  // Operational, trusted error: send message to client
   if (err.isOperational) {
-    res.status(err.statusCode).json({
+    return res.status(err.statusCode).json({
       success: false,
       status: err.status,
+      code: err.code,
       message: err.message,
     });
-  } 
-  // Programming or other unknown error: don't leak error details
-  else {
-    // 1) Log error
-    console.error("ERROR 💥", err);
-
-    // 2) Send generic message
-    res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Something went very wrong!",
-    });
   }
+
+  // Log error
+  console.error("ERROR 💥", err);
+
+  return res.status(500).json({
+    success: false,
+    status: "error",
+    code: "INTERNAL_SERVER_ERROR",
+    message: "Something went wrong",
+  });
 };
 
 export const globalErrorHandler = (
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
@@ -73,7 +77,8 @@ export const globalErrorHandler = (
 
     if (error.name === "CastError") error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === "ValidationError") error = handleValidationErrorDB(error);
+    if (error.name === "ValidationError")
+      error = handleValidationErrorDB(error);
 
     sendErrorProd(error, res);
   }

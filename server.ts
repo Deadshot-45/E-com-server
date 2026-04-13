@@ -28,6 +28,7 @@ import reviewRoutes from "./src/routes/review.routes.js";
 import sellerRoutes from "./src/routes/seller.routes.js";
 import sellerAuthRoutes from "./src/routes/sellerRoutes.js";
 import userRoutes from "./src/routes/user.routes.js";
+import landingRoutes from "./src/routes/landing.routes.js";
 
 dotenv.config();
 class Server {
@@ -216,6 +217,8 @@ class Server {
     // Other routes
     this.app.use("/api/userController", userRoutes);
     this.app.use("/api/products", productRoutes);
+    this.app.use("/api/landing", landingRoutes);
+
     this.app.use("/api/orders", orderRoutes);
     this.app.use("/api/cartController", cartRoutes);
     this.app.use("/api/reviews", reviewRoutes);
@@ -240,7 +243,6 @@ class Server {
         customSiteTitle: "E-Commerce API Docs",
       }),
     );
-
     // Health
     this.app.get("/", (req, res) => {
       res.json({

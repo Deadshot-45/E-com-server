@@ -1,26 +1,30 @@
 [
   {
-    "_id": { "$oid": "67dfa578452634da4759ccc1" },
-    "categoryId": { "$oid": "67dfa578452634da4759bbb1" },
+    "_id": "67dfa578452634da4759ccc1",
+    "categoryId": "67dfa578452634da4759bbb1",
     "name": "Topwear",
-    "code": "women-topwear"
+    "code": "women-topwear",
+    "isActive": true
   },
   {
-    "_id": { "$oid": "67dfa578452634da4759ccc2" },
-    "categoryId": { "$oid": "67dfa578452634da4759bbb2" },
+    "_id": "67dfa578452634da4759ccc2",
+    "categoryId": "67dfa578452634da4759bbb2",
     "name": "Topwear",
-    "code": "men-topwear"
+    "code": "men-topwear",
+    "isActive": true
   },
   {
-    "_id": { "$oid": "67dfa578452634da4759ccc3" },
-    "categoryId": { "$oid": "67dfa578452634da4759bbb2" },
+    "_id": "67dfa578452634da4759ccc3",
+    "categoryId": "67dfa578452634da4759bbb2",
     "name": "Bottomwear",
-    "code": "men-bottomwear"
+    "code": "men-bottomwear",
+    "isActive": true
   },
   {
-    "_id": { "$oid": "67dfa578452634da4759ccc4" },
-    "categoryId": { "$oid": "67dfa578452634da4759bbb3" },
+    "_id": "67dfa578452634da4759ccc4",
+    "categoryId": "67dfa578452634da4759bbb3",
     "name": "Topwear",
-    "code": "kids-topwear"
+    "code": "kids-topwear",
+    "isActive": true
   }
 ]

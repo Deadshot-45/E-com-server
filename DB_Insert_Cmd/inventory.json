@@ -1,1902 +1,2002 @@
 [
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb01"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa01"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T12:32:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee01",
+    "variantId": "67dfa578452634da4759dd01",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T12:32:25.448Z",
+    "updatedAt": "2024-05-26T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb02"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa02"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee02",
+    "variantId": "67dfa578452634da4759dd02",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T12:32:25.448Z",
+    "updatedAt": "2024-05-26T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb03"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa03"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee03",
+    "variantId": "67dfa578452634da4759dd03",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T12:32:25.448Z",
+    "updatedAt": "2024-05-26T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb04"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa04"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee04",
+    "variantId": "67dfa578452634da4759dd04",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T12:32:25.448Z",
+    "updatedAt": "2024-05-26T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb05"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa05"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee05",
+    "variantId": "67dfa578452634da4759dd05",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb06"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa06"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee06",
+    "variantId": "67dfa578452634da4759dd06",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb07"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa07"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee07",
+    "variantId": "67dfa578452634da4759dd07",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb08"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa08"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee08",
+    "variantId": "67dfa578452634da4759dd08",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb09"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa09"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee09",
+    "variantId": "67dfa578452634da4759dd09",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb10"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa10"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee10",
+    "variantId": "67dfa578452634da4759dd10",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb11"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa11"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee11",
+    "variantId": "67dfa578452634da4759dd11",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb12"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa12"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee12",
+    "variantId": "67dfa578452634da4759dd12",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb13"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa13"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee13",
+    "variantId": "67dfa578452634da4759dd13",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb14"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa14"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee14",
+    "variantId": "67dfa578452634da4759dd14",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb15"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa15"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee15",
+    "variantId": "67dfa578452634da4759dd15",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb16"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa16"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee16",
+    "variantId": "67dfa578452634da4759dd16",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb17"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa17"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee17",
+    "variantId": "67dfa578452634da4759dd17",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb18"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa18"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee18",
+    "variantId": "67dfa578452634da4759dd18",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb19"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa19"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee19",
+    "variantId": "67dfa578452634da4759dd19",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb20"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa20"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee20",
+    "variantId": "67dfa578452634da4759dd20",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb21"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa21"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee21",
+    "variantId": "67dfa578452634da4759dd21",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb22"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa22"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee22",
+    "variantId": "67dfa578452634da4759dd22",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb23"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa23"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee23",
+    "variantId": "67dfa578452634da4759dd23",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb24"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa24"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee24",
+    "variantId": "67dfa578452634da4759dd24",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb25"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa25"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee25",
+    "variantId": "67dfa578452634da4759dd25",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb26"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa26"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee26",
+    "variantId": "67dfa578452634da4759dd26",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb27"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa27"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee27",
+    "variantId": "67dfa578452634da4759dd27",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb28"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa28"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee28",
+    "variantId": "67dfa578452634da4759dd28",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb29"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa29"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee29",
+    "variantId": "67dfa578452634da4759dd29",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb30"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa30"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee30",
+    "variantId": "67dfa578452634da4759dd30",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb31"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa31"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee31",
+    "variantId": "67dfa578452634da4759dd31",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb32"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa32"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee32",
+    "variantId": "67dfa578452634da4759dd32",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb33"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa33"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee33",
+    "variantId": "67dfa578452634da4759dd33",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb34"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa34"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee34",
+    "variantId": "67dfa578452634da4759dd34",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb35"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa35"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee35",
+    "variantId": "67dfa578452634da4759dd35",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb36"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa36"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee36",
+    "variantId": "67dfa578452634da4759dd36",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb37"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa37"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee37",
+    "variantId": "67dfa578452634da4759dd37",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb38"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa38"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee38",
+    "variantId": "67dfa578452634da4759dd38",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb39"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa39"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee39",
+    "variantId": "67dfa578452634da4759dd39",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb40"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa40"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee40",
+    "variantId": "67dfa578452634da4759dd40",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb41"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa41"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-22T12:32:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee41",
+    "variantId": "67dfa578452634da4759dd41",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb42"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa42"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee42",
+    "variantId": "67dfa578452634da4759dd42",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb43"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa43"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee43",
+    "variantId": "67dfa578452634da4759dd43",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb44"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa44"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:43.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee44",
+    "variantId": "67dfa578452634da4759dd44",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb45"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa45"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:05:42.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee45",
+    "variantId": "67dfa578452634da4759dd45",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb46"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa46"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee46",
+    "variantId": "67dfa578452634da4759dd46",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb47"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa47"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:00:35.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee47",
+    "variantId": "67dfa578452634da4759dd47",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb48"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa48"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:23:55.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee48",
+    "variantId": "67dfa578452634da4759dd48",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb49"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa49"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:12:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee49",
+    "variantId": "67dfa578452634da4759dd49",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
   },
   {
-    "_id": {
-      "$oid": "67dfa578452634da4759bb50"
-    },
-    "productId": {
-      "$oid": "67dfa578452634da4759aa50"
-    },
-    "items": [
-      {
-        "size": "S",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "M",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "L",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      },
-      {
-        "size": "XL",
-        "quantity": 100,
-        "updatedAt": {
-          "$date": "2024-05-26T09:02:25.448Z"
-        }
-      }
-    ]
+    "_id": "67dfa578452634da4759ee50",
+    "variantId": "67dfa578452634da4759dd50",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee51",
+    "variantId": "67dfa578452634da4759dd51",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee52",
+    "variantId": "67dfa578452634da4759dd52",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee53",
+    "variantId": "67dfa578452634da4759dd53",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee54",
+    "variantId": "67dfa578452634da4759dd54",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee55",
+    "variantId": "67dfa578452634da4759dd55",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee56",
+    "variantId": "67dfa578452634da4759dd56",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee57",
+    "variantId": "67dfa578452634da4759dd57",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee58",
+    "variantId": "67dfa578452634da4759dd58",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee59",
+    "variantId": "67dfa578452634da4759dd59",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee60",
+    "variantId": "67dfa578452634da4759dd60",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee61",
+    "variantId": "67dfa578452634da4759dd61",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee62",
+    "variantId": "67dfa578452634da4759dd62",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee63",
+    "variantId": "67dfa578452634da4759dd63",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee64",
+    "variantId": "67dfa578452634da4759dd64",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee65",
+    "variantId": "67dfa578452634da4759dd65",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee66",
+    "variantId": "67dfa578452634da4759dd66",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee67",
+    "variantId": "67dfa578452634da4759dd67",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee68",
+    "variantId": "67dfa578452634da4759dd68",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee69",
+    "variantId": "67dfa578452634da4759dd69",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee70",
+    "variantId": "67dfa578452634da4759dd70",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee71",
+    "variantId": "67dfa578452634da4759dd71",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee72",
+    "variantId": "67dfa578452634da4759dd72",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee73",
+    "variantId": "67dfa578452634da4759dd73",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee74",
+    "variantId": "67dfa578452634da4759dd74",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee75",
+    "variantId": "67dfa578452634da4759dd75",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee76",
+    "variantId": "67dfa578452634da4759dd76",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee77",
+    "variantId": "67dfa578452634da4759dd77",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee78",
+    "variantId": "67dfa578452634da4759dd78",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee79",
+    "variantId": "67dfa578452634da4759dd79",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee80",
+    "variantId": "67dfa578452634da4759dd80",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee81",
+    "variantId": "67dfa578452634da4759dd81",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee82",
+    "variantId": "67dfa578452634da4759dd82",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee83",
+    "variantId": "67dfa578452634da4759dd83",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee84",
+    "variantId": "67dfa578452634da4759dd84",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee85",
+    "variantId": "67dfa578452634da4759dd85",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee86",
+    "variantId": "67dfa578452634da4759dd86",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee87",
+    "variantId": "67dfa578452634da4759dd87",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee88",
+    "variantId": "67dfa578452634da4759dd88",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee89",
+    "variantId": "67dfa578452634da4759dd89",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee90",
+    "variantId": "67dfa578452634da4759dd90",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee91",
+    "variantId": "67dfa578452634da4759dd91",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee92",
+    "variantId": "67dfa578452634da4759dd92",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee93",
+    "variantId": "67dfa578452634da4759dd93",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee94",
+    "variantId": "67dfa578452634da4759dd94",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee95",
+    "variantId": "67dfa578452634da4759dd95",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee96",
+    "variantId": "67dfa578452634da4759dd96",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee97",
+    "variantId": "67dfa578452634da4759dd97",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee98",
+    "variantId": "67dfa578452634da4759dd98",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee99",
+    "variantId": "67dfa578452634da4759dd99",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee100",
+    "variantId": "67dfa578452634da4759dd100",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee101",
+    "variantId": "67dfa578452634da4759dd101",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee102",
+    "variantId": "67dfa578452634da4759dd102",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee103",
+    "variantId": "67dfa578452634da4759dd103",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee104",
+    "variantId": "67dfa578452634da4759dd104",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee105",
+    "variantId": "67dfa578452634da4759dd105",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee106",
+    "variantId": "67dfa578452634da4759dd106",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee107",
+    "variantId": "67dfa578452634da4759dd107",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee108",
+    "variantId": "67dfa578452634da4759dd108",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee109",
+    "variantId": "67dfa578452634da4759dd109",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee110",
+    "variantId": "67dfa578452634da4759dd110",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee111",
+    "variantId": "67dfa578452634da4759dd111",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee112",
+    "variantId": "67dfa578452634da4759dd112",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee113",
+    "variantId": "67dfa578452634da4759dd113",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee114",
+    "variantId": "67dfa578452634da4759dd114",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee115",
+    "variantId": "67dfa578452634da4759dd115",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee116",
+    "variantId": "67dfa578452634da4759dd116",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee117",
+    "variantId": "67dfa578452634da4759dd117",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee118",
+    "variantId": "67dfa578452634da4759dd118",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee119",
+    "variantId": "67dfa578452634da4759dd119",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee120",
+    "variantId": "67dfa578452634da4759dd120",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee121",
+    "variantId": "67dfa578452634da4759dd121",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee122",
+    "variantId": "67dfa578452634da4759dd122",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee123",
+    "variantId": "67dfa578452634da4759dd123",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee124",
+    "variantId": "67dfa578452634da4759dd124",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee125",
+    "variantId": "67dfa578452634da4759dd125",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee126",
+    "variantId": "67dfa578452634da4759dd126",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee127",
+    "variantId": "67dfa578452634da4759dd127",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee128",
+    "variantId": "67dfa578452634da4759dd128",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee129",
+    "variantId": "67dfa578452634da4759dd129",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee130",
+    "variantId": "67dfa578452634da4759dd130",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee131",
+    "variantId": "67dfa578452634da4759dd131",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee132",
+    "variantId": "67dfa578452634da4759dd132",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee133",
+    "variantId": "67dfa578452634da4759dd133",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee134",
+    "variantId": "67dfa578452634da4759dd134",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee135",
+    "variantId": "67dfa578452634da4759dd135",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee136",
+    "variantId": "67dfa578452634da4759dd136",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee137",
+    "variantId": "67dfa578452634da4759dd137",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee138",
+    "variantId": "67dfa578452634da4759dd138",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee139",
+    "variantId": "67dfa578452634da4759dd139",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee140",
+    "variantId": "67dfa578452634da4759dd140",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee141",
+    "variantId": "67dfa578452634da4759dd141",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee142",
+    "variantId": "67dfa578452634da4759dd142",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee143",
+    "variantId": "67dfa578452634da4759dd143",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee144",
+    "variantId": "67dfa578452634da4759dd144",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee145",
+    "variantId": "67dfa578452634da4759dd145",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee146",
+    "variantId": "67dfa578452634da4759dd146",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee147",
+    "variantId": "67dfa578452634da4759dd147",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee148",
+    "variantId": "67dfa578452634da4759dd148",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee149",
+    "variantId": "67dfa578452634da4759dd149",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee150",
+    "variantId": "67dfa578452634da4759dd150",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee151",
+    "variantId": "67dfa578452634da4759dd151",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee152",
+    "variantId": "67dfa578452634da4759dd152",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee153",
+    "variantId": "67dfa578452634da4759dd153",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee154",
+    "variantId": "67dfa578452634da4759dd154",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee155",
+    "variantId": "67dfa578452634da4759dd155",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee156",
+    "variantId": "67dfa578452634da4759dd156",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee157",
+    "variantId": "67dfa578452634da4759dd157",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee158",
+    "variantId": "67dfa578452634da4759dd158",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee159",
+    "variantId": "67dfa578452634da4759dd159",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee160",
+    "variantId": "67dfa578452634da4759dd160",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee161",
+    "variantId": "67dfa578452634da4759dd161",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee162",
+    "variantId": "67dfa578452634da4759dd162",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee163",
+    "variantId": "67dfa578452634da4759dd163",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee164",
+    "variantId": "67dfa578452634da4759dd164",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-22T12:32:25.448Z",
+    "updatedAt": "2024-05-22T12:32:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee165",
+    "variantId": "67dfa578452634da4759dd165",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee166",
+    "variantId": "67dfa578452634da4759dd166",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee167",
+    "variantId": "67dfa578452634da4759dd167",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee168",
+    "variantId": "67dfa578452634da4759dd168",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee169",
+    "variantId": "67dfa578452634da4759dd169",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee170",
+    "variantId": "67dfa578452634da4759dd170",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee171",
+    "variantId": "67dfa578452634da4759dd171",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee172",
+    "variantId": "67dfa578452634da4759dd172",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee173",
+    "variantId": "67dfa578452634da4759dd173",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee174",
+    "variantId": "67dfa578452634da4759dd174",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee175",
+    "variantId": "67dfa578452634da4759dd175",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee176",
+    "variantId": "67dfa578452634da4759dd176",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:43.448Z",
+    "updatedAt": "2024-05-26T09:23:43.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee177",
+    "variantId": "67dfa578452634da4759dd177",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee178",
+    "variantId": "67dfa578452634da4759dd178",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee179",
+    "variantId": "67dfa578452634da4759dd179",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee180",
+    "variantId": "67dfa578452634da4759dd180",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:05:42.448Z",
+    "updatedAt": "2024-05-26T09:05:42.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee181",
+    "variantId": "67dfa578452634da4759dd181",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee182",
+    "variantId": "67dfa578452634da4759dd182",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee183",
+    "variantId": "67dfa578452634da4759dd183",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee184",
+    "variantId": "67dfa578452634da4759dd184",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee185",
+    "variantId": "67dfa578452634da4759dd185",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee186",
+    "variantId": "67dfa578452634da4759dd186",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee187",
+    "variantId": "67dfa578452634da4759dd187",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee188",
+    "variantId": "67dfa578452634da4759dd188",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:00:35.448Z",
+    "updatedAt": "2024-05-26T09:00:35.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee189",
+    "variantId": "67dfa578452634da4759dd189",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee190",
+    "variantId": "67dfa578452634da4759dd190",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee191",
+    "variantId": "67dfa578452634da4759dd191",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee192",
+    "variantId": "67dfa578452634da4759dd192",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:23:55.448Z",
+    "updatedAt": "2024-05-26T09:23:55.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee193",
+    "variantId": "67dfa578452634da4759dd193",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee194",
+    "variantId": "67dfa578452634da4759dd194",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee195",
+    "variantId": "67dfa578452634da4759dd195",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee196",
+    "variantId": "67dfa578452634da4759dd196",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:12:25.448Z",
+    "updatedAt": "2024-05-26T09:12:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee197",
+    "variantId": "67dfa578452634da4759dd197",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee198",
+    "variantId": "67dfa578452634da4759dd198",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee199",
+    "variantId": "67dfa578452634da4759dd199",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
+  },
+  {
+    "_id": "67dfa578452634da4759ee200",
+    "variantId": "67dfa578452634da4759dd200",
+    "stock": 100,
+    "reserved": 0,
+    "sold": 0,
+    "lowStockThreshold": 5,
+    "createdAt": "2024-05-26T09:02:25.448Z",
+    "updatedAt": "2024-05-26T09:02:25.448Z"
   }
 ]

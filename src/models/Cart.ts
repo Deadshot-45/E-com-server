@@ -1,53 +1,21 @@
-// import mongoose, { Document, Schema } from "mongoose";
-
-// export interface ICartItem {
-//   productId: mongoose.Types.ObjectId;
-//   sellerId: mongoose.Types.ObjectId;
-//   quantity: number;
-//   priceSnapshot: number;
-//   size: string;
-// }
-
-// export interface ICart extends Document {
-//   userId: mongoose.Types.ObjectId;
-//   items: ICartItem[];
-//   updatedAt: Date;
-// }
-
-// const cartSchema = new Schema<ICart>({
-//   userId: { type: Schema.Types.ObjectId, unique: true, required: true },
-//   items: [
-//     {
-//       productId: { type: Schema.Types.ObjectId, required: true },
-//       sellerId: { type: Schema.Types.ObjectId, required: true },
-//       quantity: { type: Number, required: true },
-//       priceSnapshot: { type: Number, required: true },
-//       size: { type: String, required: true },
-//     },
-//   ],
-//   updatedAt: { type: Date, default: Date.now },
-// });
-
-// export default mongoose.model<ICart>("Cart", cartSchema);
-
-
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface ICartItem {
-  productId: mongoose.Types.ObjectId;
   variantId: mongoose.Types.ObjectId;
+  productId: mongoose.Types.ObjectId;
 
   quantity: number;
 
-  // Snapshot for UI (avoid joins)
-  name: string;
-  price: number;
-  image?: string;
+  priceSnapshot: number; // price at time of adding to cart
 
-  attributes?: {
-    color?: string;
-    size?: string;
-  };
+  size?: string;
+  color?: string;
+
+  sellerId: mongoose.Types.ObjectId;
+
+  isSelected: boolean;
+  appliedCouponId: mongoose.Types.ObjectId;
+  discountAmount: number;
 }
 
 export interface ICart extends Document {
@@ -59,42 +27,90 @@ export interface ICart extends Document {
   totalAmount: number;
 
   updatedAt: Date;
-  createdAt: Date;
 }
 
 const cartItemSchema = new Schema<ICartItem>(
   {
-    productId: { type: Schema.Types.ObjectId, required: true },
-    variantId: { type: Schema.Types.ObjectId, required: true },
+    variantId: {
+      type: Schema.Types.ObjectId,
+      ref: "ProductVariant",
+      required: true,
+    },
 
-    quantity: { type: Number, required: true, min: 1 },
+    productId: {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+      required: true,
+    },
 
-    // snapshot
-    name: String,
-    price: Number,
-    image: String,
+    sellerId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
 
-    attributes: {
-      color: String,
-      size: String,
+    quantity: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+
+    priceSnapshot: {
+      type: Number,
+      required: true,
+    },
+
+    size: String,
+    color: String,
+
+    // ✅ ADD THESE (IMPORTANT)
+    isSelected: {
+      type: Boolean,
+      default: true,
+    },
+
+    appliedCouponId: {
+      type: Schema.Types.ObjectId,
+      ref: "Coupon",
+      default: null,
+    },
+
+    discountAmount: {
+      type: Number,
+      default: 0,
     },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const cartSchema = new Schema<ICart>(
   {
-    userId: { type: Schema.Types.ObjectId, required: true, unique: true },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      unique: true,
+    },
 
     items: [cartItemSchema],
 
-    totalItems: { type: Number, default: 0 },
-    totalAmount: { type: Number, default: 0 },
+    totalItems: {
+      type: Number,
+      default: 0,
+    },
+
+    totalAmount: {
+      type: Number,
+      default: 0,
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-// Fast lookup
 cartSchema.index({ userId: 1 });
+cartSchema.index(
+  { userId: 1, "items.variantId": 1 },
+  { unique: true, sparse: true },
+);
 
 export const Cart = mongoose.model<ICart>("Cart", cartSchema);

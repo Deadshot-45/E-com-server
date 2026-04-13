@@ -1,17 +1,20 @@
 [
   {
-    "_id": { "$oid": "67dfa578452634da4759bbb1" },
+    "_id": "67dfa578452634da4759bbb1",
     "name": "Women",
-    "slug": "women"
+    "slug": "women",
+    "isActive": true
   },
   {
-    "_id": { "$oid": "67dfa578452634da4759bbb2" },
+    "_id": "67dfa578452634da4759bbb2",
     "name": "Men",
-    "slug": "men"
+    "slug": "men",
+    "isActive": true
   },
   {
-    "_id": { "$oid": "67dfa578452634da4759bbb3" },
+    "_id": "67dfa578452634da4759bbb3",
     "name": "Kids",
-    "slug": "kids"
+    "slug": "kids",
+    "isActive": true
   }
 ]

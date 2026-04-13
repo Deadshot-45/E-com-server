@@ -206,30 +206,55 @@
 //   variantSchema,
 // );
 
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface IProduct extends Document {
   sellerId: mongoose.Types.ObjectId;
   name: string;
   description?: string;
+
   categoryIds: mongoose.Types.ObjectId[];
   subCategoryId?: mongoose.Types.ObjectId;
+
   images: { url: string; isPrimary?: boolean }[];
+
   isActive: boolean;
   bestseller: boolean;
   trending: boolean;
-  details: Record<string, any>;
+
+  details?: {
+    brand?: string;
+    material?: string;
+    gender?: "men" | "women" | "unisex";
+  };
 }
 
-const productSchema = new Schema<IProduct>(
+export interface IInventory extends Document {
+  variantId: mongoose.Types.ObjectId;
+  stock: number;
+  reserved: number;
+}
+
+const productSchema = new Schema(
   {
-    sellerId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    sellerId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
 
     name: { type: String, required: true, index: "text" },
     description: String,
 
-    categoryIds: [{ type: Schema.Types.ObjectId, ref: "Category" }],
-    subCategoryId: { type: Schema.Types.ObjectId, ref: "SubCategory" },
+    categoryIds: [
+      { type: Schema.Types.ObjectId, ref: "Category", index: true },
+    ],
+    subCategoryId: {
+      type: Schema.Types.ObjectId,
+      ref: "SubCategory",
+      index: true,
+    },
 
     images: [
       {
@@ -238,18 +263,13 @@ const productSchema = new Schema<IProduct>(
       },
     ],
 
-    isActive: { type: Boolean, default: true },
+    isActive: { type: Boolean, default: true, index: true },
     bestseller: { type: Boolean, default: false },
     trending: { type: Boolean, default: false },
 
-    details: { type: Object, default: {} },
+    details: { type: Schema.Types.Mixed, default: {} },
   },
   { timestamps: true },
 );
-
-productSchema.index({ name: "text", description: "text" });
-productSchema.index({ categoryIds: 1 });
-productSchema.index({ sellerId: 1 });
-productSchema.index({ createdAt: -1 });
 
 export const Product = mongoose.model<IProduct>("Product", productSchema);

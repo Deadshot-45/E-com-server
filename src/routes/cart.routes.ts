@@ -1,5 +1,10 @@
 import express from "express";
-import { addToCart, getCart } from "../controllers/cartController.js";
+import {
+  addToCart,
+  decrementFromCart,
+  getCart,
+  removeFromCart,
+} from "../controllers/cartController.controller.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -135,5 +140,57 @@ router.get("/getCart", protect, getCart);
  */
 
 router.post("/addToCart", protect, addToCart);
+
+/**
+ * @swagger
+ * /api/cartController/removeFromCart:
+ *   post:
+ *     summary: Remove item completely from cart
+ *     tags: [cart]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - variantId
+ *             properties:
+ *               variantId:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Item removed successfully
+ */
+router.post("/removeFromCart", protect, removeFromCart);
+
+/**
+ * @swagger
+ * /api/cartController/decrementFromCart:
+ *   post:
+ *     summary: Decrease quantity of cart item
+ *     tags: [cart]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - variantId
+ *             properties:
+ *               variantId:
+ *                 type: string
+ *               quantity:
+ *                 type: number
+ *     responses:
+ *       200:
+ *         description: Cart updated successfully
+ */
+router.post("/decrementFromCart", protect, decrementFromCart);
 
 export default router;

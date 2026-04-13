@@ -1,15 +1,15 @@
 [
   {
-    "_id": { "$oid": "67dfa578452634da4759aaa1" },
+    "_id": "67dfa578452634da4759aaa1",
     "name": "Vault Vogue Default Seller",
-    "ownerUserId": { "$oid": "67dfa578452634da4759aaa0" },
+    "ownerUserId": "67dfa578452634da4759aaa0",
     "contactEmail": "seed.seller@vaultvogue.com",
     "passwordHash": "seeded-password-hash",
     "isVerified": true,
     "isActive": true,
     "averageRating": 0,
     "ratingCount": 0,
-    "createdAt": { "$date": "2024-05-26T00:00:00.000Z" },
-    "updatedAt": { "$date": "2024-05-26T00:00:00.000Z" }
+    "createdAt": "2024-05-26T00:00:00.000Z",
+    "updatedAt": "2024-05-26T00:00:00.000Z"
   }
 ]
