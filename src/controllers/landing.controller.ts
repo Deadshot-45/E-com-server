@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { Product } from "../models/Product";
-import { Category } from "../models/Category";
+import { Product } from "../models/Product.js";
+import { Category } from "../models/Category.js";
 
 export const getLandingPage = async (
   req: Request,

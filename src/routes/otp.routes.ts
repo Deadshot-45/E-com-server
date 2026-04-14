@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   sendOtpHandler,
   verifyOtpHandler,
-} from "../controllers/otpController.js";
+} from "../controllers/otpController.controller.js";
 
 const router = Router({ mergeParams: true });
 

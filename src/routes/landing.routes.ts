@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getLandingPage } from "../controllers/landing.controller";
+import { getLandingPage } from "../controllers/landing.controller.js";
 
 const router = Router();
 

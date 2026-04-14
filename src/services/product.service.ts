@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { Product } from "../models/Product";
-import { ProductVariant } from "../models/ProductVariant";
-import { Inventory } from "../models/Inventory";
-import { IProductInput } from "../types/product.types";
+import { Product } from "../models/Product.js";
+import { ProductVariant } from "../models/ProductVariant.js";
+import { Inventory } from "../models/Inventory.js";
+import { IProductInput } from "../types/product.types.js";
 
 export const saveProductWithVariants = async (
   payload: IProductInput,

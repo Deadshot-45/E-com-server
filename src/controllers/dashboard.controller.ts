@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
-import { Order } from "../models/Order";
-import { Product } from "../models/Product";
+import { Order } from "../models/Order.js";
+import { Product } from "../models/Product.js";
 
 /**
  * GET DASHBOARD OVERVIEW

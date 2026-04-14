@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { Product } from "../models/Product";
-import { ProductVariant } from "../models/ProductVariant";
-import { Inventory } from "../models/Inventory";
-import { saveProductWithVariants } from "../services/product.service";
 import mongoose from "mongoose";
-import { Category } from "../models/Category";
+import { Product } from "../models/Product.js";
+import { ProductVariant } from "../models/ProductVariant.js";
+import { Inventory } from "../models/Inventory.js";
+import { Category } from "../models/Category.js";
+import { saveProductWithVariants } from "../services/product.service.js";
 
 /**
  * CREATE PRODUCT
@@ -284,7 +284,6 @@ export const getProducts = async (
               createdAt: 1,
               sellerId: 1,
 
-              // ✅ CATEGORY FOR FRONTEND
               categories: {
                 $map: {
                   input: "$categories",
@@ -297,7 +296,6 @@ export const getProducts = async (
                 },
               },
 
-              // ✅ SUBCATEGORY
               subCategory: {
                 _id: "$subCategory._id",
                 name: "$subCategory.name",
@@ -374,10 +372,10 @@ export const getProducts = async (
     next(err);
   }
 };
+
 /**
  * GET PRODUCT BY ID (WITH VARIANTS + STOCK)
  */
-
 export const getProductById = async (
   req: Request,
   res: Response,
@@ -386,7 +384,6 @@ export const getProductById = async (
   try {
     const rawId = req.params.id;
 
-    // ✅ Type safety
     if (!rawId || Array.isArray(rawId)) {
       return res.status(400).json({
         success: false,
@@ -403,23 +400,20 @@ export const getProductById = async (
 
     const objectId = new mongoose.Types.ObjectId(rawId);
 
-    // const data = await Product.find();
-    // console.log(data);
     console.log("PARAM ID:", rawId);
 
     const all = await Product.find().select("_id");
     console.log(
       "ALL IDS:",
-      all.map((p) => p._id.toString()),
+      all.map((p: { _id: mongoose.Types.ObjectId }) => p._id.toString()),
     );
+
     const result = await Product.aggregate([
       {
         $match: {
           _id: objectId,
         },
       },
-
-      // 🔥 VARIANTS JOIN
       {
         $lookup: {
           from: "productvariants",
@@ -431,15 +425,11 @@ export const getProductById = async (
                 $expr: { $eq: ["$productId", "$$productId"] },
               },
             },
-
-            // ✅ ADD THIS
             {
               $addFields: {
                 variantId: { $toString: "$_id" },
               },
             },
-
-            // 🔥 INVENTORY JOIN
             {
               $lookup: {
                 from: "inventories",
@@ -448,13 +438,11 @@ export const getProductById = async (
                 as: "inventory",
               },
             },
-
             {
               $addFields: {
                 inventory: { $arrayElemAt: ["$inventory", 0] },
               },
             },
-
             {
               $addFields: {
                 stock: { $ifNull: ["$inventory.stock", 0] },
@@ -471,7 +459,6 @@ export const getProductById = async (
                 },
               },
             },
-
             {
               $project: {
                 inventory: 0,
@@ -481,8 +468,6 @@ export const getProductById = async (
           as: "variants",
         },
       },
-
-      // 🔥 Sort images (primary first)
       {
         $addFields: {
           images: {
@@ -493,16 +478,12 @@ export const getProductById = async (
           },
         },
       },
-
-      // 🔥 Price range
       {
         $addFields: {
           minPrice: { $ifNull: [{ $min: "$variants.price" }, 0] },
           maxPrice: { $ifNull: [{ $max: "$variants.price" }, 0] },
         },
       },
-
-      // 🔥 Clean response
       {
         $project: {
           __v: 0,

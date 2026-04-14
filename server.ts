@@ -1,9 +1,9 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
-import rateLimit from "express-rate-limit";
+import rateLimitModule from "express-rate-limit";
 import session from "express-session";
-import helmet from "helmet";
+import helmetModule from "helmet";
 import mongoose from "mongoose";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -29,6 +29,13 @@ import sellerRoutes from "./src/routes/seller.routes.js";
 import sellerAuthRoutes from "./src/routes/sellerRoutes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
+
+const rateLimit =
+  (rateLimitModule as unknown as { default?: typeof rateLimitModule }).default ??
+  rateLimitModule;
+const helmet =
+  (helmetModule as unknown as { default?: typeof helmetModule }).default ??
+  helmetModule;
 
 dotenv.config();
 class Server {
@@ -128,7 +135,7 @@ class Server {
     const apiLimiter = rateLimit({
       windowMs: 15 * 60 * 1000,
       max: process.env.NODE_ENV === "production" ? 100 : 1000,
-      skip: (req) =>
+      skip: (req: Request) =>
         req.method === "OPTIONS" ||
         req.path.startsWith("/p_img") || // image path जैसा है वैसा skip
         /\.(png|jpg|jpeg|gif|webp|css|js|ico)$/i.test(req.path),
@@ -186,7 +193,7 @@ class Server {
     max: 5,
     standardHeaders: true,
     legacyHeaders: false,
-    skip: (req) => req.method === "OPTIONS",
+    skip: (req: Request) => req.method === "OPTIONS",
     skipSuccessfulRequests: true,
     message: {
       success: false,

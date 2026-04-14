@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import { ProductVariant } from "../models/ProductVariant";
-import { Cart } from "../models/Cart";
+import { ProductVariant } from "../models/ProductVariant.js";
+import { Cart } from "../models/Cart.js";
 
 export const getCart = async (req: Request, res: Response) => {
   const userId = req.user?._id;
@@ -172,7 +172,9 @@ export const removeFromCart = async (req: Request, res: Response) => {
       });
     }
 
-    const item = cart.items.find((i) => i.variantId.toString() === variantId);
+    const item = cart.items.find(
+      (i: any) => i.variantId.toString() === variantId,
+    );
 
     if (!item) {
       return res.status(404).json({
@@ -186,7 +188,7 @@ export const removeFromCart = async (req: Request, res: Response) => {
     const amountReduction = item.priceSnapshot * removedQuantity;
 
     // 🔥 remove item
-    cart.items = cart.items.filter((i) => i.variantId.toString() !== variantId);
+    cart.items = cart.items.filter((i:any) => i.variantId.toString() !== variantId);
 
     // 🔥 update totals safely
     cart.totalItems -= removedQuantity;
@@ -223,7 +225,7 @@ export const decrementFromCart = async (req: Request, res: Response) => {
         .json({ success: false, message: "Cart not found" });
     }
 
-    const item = cart.items.find((i) => i.variantId.toString() === variantId);
+    const item = cart.items.find((i:any) => i.variantId.toString() === variantId);
 
     if (!item) {
       return res

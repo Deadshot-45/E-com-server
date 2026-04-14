@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import { Cart } from "../models/Cart";
-import { ProductVariant } from "../models/Product";
-import { Inventory } from "../models/Inventory";
-import { Order } from "../models/Order";
+import { Cart } from "../models/Cart.js";
+import { Inventory } from "../models/Inventory.js";
+import { Order } from "../models/Order.js";
+import { ProductVariant } from "../models/ProductVariant.js";
 
 /**
  * @swagger
@@ -121,7 +121,7 @@ export const checkout = async (req: Request, res: Response) => {
         throw new Error("Inventory not found");
       }
 
-      const available = inventory.quantity - inventory.reserved;
+      const available = inventory.stock - inventory.reserved;
 
       if (available < item.quantity) {
         throw new Error(`Insufficient stock for ${variant.sku}`);
@@ -135,7 +135,7 @@ export const checkout = async (req: Request, res: Response) => {
       orderItems.push({
         productId: item.productId,
         variantId: item.variantId,
-        name: variant.attributes?.name || item.name,
+        // name: variant.attributes?.name || item.name,
         sku: variant.sku,
         price: variant.price,
         quantity: item.quantity,
@@ -148,7 +148,7 @@ export const checkout = async (req: Request, res: Response) => {
     }
 
     // 5️⃣ Create Order
-    const order = await Order.create(
+    const order = await Order.create( 
       [
         {
           userId,
