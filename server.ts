@@ -1,8 +1,6 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
 import session from "express-session";
 import mongoose from "mongoose";
 import path from "node:path";
@@ -31,6 +29,13 @@ import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
 
 dotenv.config();
+
+import helmetImport from "helmet";
+import rateLimitImport from "express-rate-limit";
+
+const helmet = (helmetImport as any).default || helmetImport;
+const rateLimit = (rateLimitImport as any).default || rateLimitImport;
+
 class Server {
   public app: express.Application;
   private readonly port: string | number;
