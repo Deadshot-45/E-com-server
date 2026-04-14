@@ -1,13 +1,15 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
+  "functions": {
+    "dist/server.js": {
+      "maxDuration": 10
+    }
+  },
   "routes": [
     {
       "src": "/(.*)",
       "dest": "dist/server.js"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }

@@ -1,9 +1,9 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
-import rateLimitModule from "express-rate-limit";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import session from "express-session";
-import helmetModule from "helmet";
 import mongoose from "mongoose";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -29,13 +29,6 @@ import sellerRoutes from "./src/routes/seller.routes.js";
 import sellerAuthRoutes from "./src/routes/sellerRoutes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
-
-const rateLimit =
-  (rateLimitModule as unknown as { default?: typeof rateLimitModule }).default ??
-  rateLimitModule;
-const helmet =
-  (helmetModule as unknown as { default?: typeof helmetModule }).default ??
-  helmetModule;
 
 dotenv.config();
 class Server {
@@ -70,7 +63,7 @@ class Server {
 
   private middlewares(): void {
     // Trust proxy for Vercel
-    // this.app.set("trust proxy", 1);
+    this.app.set("trust proxy", 1);
 
     // Security
     this.app.use(

@@ -4,9 +4,10 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".", // ✅ CHANGE THIS
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true // ✅ ADD THIS
   },
-  "include": ["src"]
+  "include": ["src", "server.ts"] // ✅ ADD THIS
 }
