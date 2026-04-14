@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "vercel-entry.ts",
-      "use": "@vercel/node"
+  "buildCommand": "npm run build",
+  "functions": {
+    "dist/server.js": {
+      "runtime": "@vercel/node"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "vercel-entry.ts"
+      "dest": "dist/server.js"
     }
   ],
   "env": {

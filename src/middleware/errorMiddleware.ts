@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../utils/AppError";
+import AppError from "../utils/AppError.js";
 
 // Handle matching MongoDB duplicate key errors
 const handleDuplicateFieldsDB = (err: any) => {
