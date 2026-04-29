@@ -20,6 +20,7 @@ import authController from "./src/routes/auth.routes.js";
 import cartRoutes from "./src/routes/cart.routes.js";
 import marketplaceRoutes from "./src/routes/marketplaceRoutes.js";
 import orderRoutes from "./src/routes/order.routes.js";
+import paymentRoutes from "./src/routes/payment.routes.js";
 import otpRoutes from "./src/routes/otp.routes.js";
 import productRoutes from "./src/routes/product.routes.js";
 import reviewRoutes from "./src/routes/review.routes.js";
@@ -225,6 +226,7 @@ class Server {
     this.app.use("/api/landing", landingRoutes);
 
     this.app.use("/api/orders", orderRoutes);
+    this.app.use("/api/payments", paymentRoutes);
     this.app.use("/api/cartController", cartRoutes);
     this.app.use("/api/reviews", reviewRoutes);
     this.app.use("/api/sellers", sellerRoutes);

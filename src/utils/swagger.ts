@@ -74,6 +74,7 @@ const options: swaggerJSDoc.Options = {
       { name: "Cart" },
       { name: "Orders" },
       { name: "Checkout" },
+      { name: "Payments" },
     ],
 
     security: [{ bearerAuth: [] }],
