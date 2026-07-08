@@ -42,6 +42,7 @@ export const getProducts = async (
       search,
       categoryId,
       subCategoryId,
+      categoryName,
       sellerId,
       bestseller,
       trending,
@@ -81,7 +82,24 @@ export const getProducts = async (
       }
 
       if (categoryObjectId) {
-        match.categoryIds = { $in: [categoryObjectId] };
+        match.categoryIds = { $all: [categoryObjectId] };
+      }
+    }
+
+    if (categoryName && categoryName !== "All") {
+      const cat = await Category.findOne({
+        name: { $regex: new RegExp(`^${categoryName}$`, "i") },
+      }).select("_id");
+
+      if (cat) {
+        if (match.categoryIds && match.categoryIds.$all) {
+          match.categoryIds.$all.push(cat._id);
+        } else {
+          match.categoryIds = { $all: [cat._id] };
+        }
+      } else {
+        // If category is not found in database, force match to fail so 0 items are returned
+        match.categoryIds = { $all: [new mongoose.Types.ObjectId()] };
       }
     }
 
@@ -205,17 +223,7 @@ export const getProducts = async (
       },
     });
 
-    /**
-     * ✅ CATEGORY JOIN
-     */
-    pipeline.push({
-      $lookup: {
-        from: "categoryIds",
-        localField: "categoryIds",
-        foreignField: "_id",
-        as: "categories",
-      },
-    });
+
 
     /**
      * ✅ SUBCATEGORY JOIN
@@ -476,6 +484,17 @@ export const getProductById = async (
               sortBy: { isPrimary: -1 },
             },
           },
+        },
+      },
+      {
+        $lookup: {
+          from: "categories",
+          let: { catIds: "$categoryIds" },
+          pipeline: [
+            { $match: { $expr: { $in: ["$_id", "$$catIds"] } } },
+            { $project: { name: 1, slug: 1 } },
+          ],
+          as: "categories",
         },
       },
       {
