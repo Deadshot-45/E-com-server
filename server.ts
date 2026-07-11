@@ -313,11 +313,26 @@ export { Server };
 
 const server = new Server();
 const dbReady =
-  mongoose.connection.readyState === 1 ? Promise.resolve() : server.connectDB();
+  mongoose.connection.readyState === 1
+    ? Promise.resolve()
+    : server.connectDB().catch((error: unknown) => {
+        server
+          .getLogger()
+          .warn("Database unavailable; continuing for public routes", error);
+      });
 
 export const serverHandler = async (req: Request, res: Response) => {
+  const pathname = req.url?.split("?")[0] ?? "/";
+  const isPublicRoute =
+    pathname === "/" ||
+    pathname.startsWith("/api-docs") ||
+    pathname === "/health" ||
+    pathname === "/favicon.ico";
+
   try {
-    await dbReady;
+    if (!isPublicRoute) {
+      await dbReady;
+    }
     return server.app(req, res);
   } catch (error: any) {
     server.getLogger().error("Request failed before app handling:", error);

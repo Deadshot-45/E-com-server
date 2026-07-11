@@ -64,7 +64,7 @@ const options: swaggerJSDoc.Options = {
         description: "Local",
       },
       {
-        url: "https://api.yourdomain.com/api",
+        url: "https://vault-vogue-server.vercel.app/api",
         description: "Production",
       },
     ],
