@@ -525,3 +525,99 @@ export const getProductById = async (
     next(err);
   }
 };
+
+/**
+ * GET SEARCH SUGGESTIONS
+ */
+export const getSearchSuggestions = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { search } = req.query;
+
+    if (!search || typeof search !== "string" || !search.trim()) {
+      return res.json({
+        success: true,
+        data: {
+          suggestions: [],
+          products: [],
+        },
+      });
+    }
+
+    const query = search.trim();
+    const regex = new RegExp(query, "i");
+
+    // 1. Get matching categories
+    const categories = await Category.find({
+      name: { $regex: regex },
+      isActive: true,
+    })
+      .select("name _id")
+      .limit(5);
+
+    // 2. Get matching products with their base price
+    const products = await Product.aggregate([
+      {
+        $match: {
+          name: { $regex: regex },
+          isActive: true,
+        },
+      },
+      { $limit: 5 },
+      {
+        $lookup: {
+          from: "productvariants",
+          localField: "_id",
+          foreignField: "productId",
+          as: "variants",
+        },
+      },
+      {
+        $project: {
+          name: 1,
+          images: 1,
+          price: { $min: "$variants.price" },
+        },
+      },
+    ]);
+
+    // 3. Format suggestions (keywords/categories + unique matching product words)
+    const suggestionList: { type: "category" | "keyword"; text: string; id?: string }[] = [];
+
+    // Add category matches
+    categories.forEach((cat) => {
+      suggestionList.push({
+        type: "category",
+        text: cat.name,
+        id: cat._id.toString(),
+      });
+    });
+
+    // Add product name matches as keyword suggestions (avoiding duplicates)
+    products.forEach((prod) => {
+      const cleanName = prod.name.trim();
+      const alreadyExists = suggestionList.some(
+        (s) => s.text.toLowerCase() === cleanName.toLowerCase(),
+      );
+      if (!alreadyExists && suggestionList.length < 8) {
+        suggestionList.push({
+          type: "keyword",
+          text: cleanName,
+        });
+      }
+    });
+
+    return res.json({
+      success: true,
+      data: {
+        suggestions: suggestionList,
+        products,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
