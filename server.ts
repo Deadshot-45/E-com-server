@@ -242,14 +242,24 @@ class Server {
     );
 
     // Swagger
-    this.app.use(
-      "/api-docs",
-      swaggerUi.serve,
-      swaggerUi.setup(swaggerSpec, {
-        explorer: true,
-        customSiteTitle: "E-Commerce API Docs",
-      }),
-    );
+    const swaggerHandler = swaggerUi.setup(swaggerSpec, {
+      explorer: true,
+      customSiteTitle: "E-Commerce API Docs",
+    });
+
+    this.app.get(["/api-docs", "/api-docs/"], swaggerUi.serve, swaggerHandler);
+    this.app.head(["/api-docs", "/api-docs/"], (req, res) => {
+      res.status(200).end();
+    });
+    this.app.get("/api-docs/swagger.json", (req, res) => {
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.status(200).json(swaggerSpec);
+    });
+    this.app.head("/api-docs/swagger.json", (req, res) => {
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.status(200).end();
+    });
+
     // Health
     this.app.get("/", (req, res) => {
       res.json({
