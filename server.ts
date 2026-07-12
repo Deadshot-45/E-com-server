@@ -28,6 +28,7 @@ import sellerRoutes from "./src/routes/seller.routes.js";
 import sellerAuthRoutes from "./src/routes/sellerRoutes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
+import { googleLogin } from "./src/controllers/authController.controller.js";
 
 dotenv.config();
 
@@ -218,6 +219,15 @@ class Server {
       ipBlockerMiddleware,
       sensitiveSecurityMiddleware,
       sellerAuthRoutes,
+    );
+
+    // Google Auth Route
+    this.app.use(
+      "/api/auth/google",
+      this.authLimiter,
+      ipBlockerMiddleware,
+      sensitiveSecurityMiddleware,
+      googleLogin,
     );
 
     // Other routes
