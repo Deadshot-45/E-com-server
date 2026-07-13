@@ -4,11 +4,13 @@ import {
   getProducts,
   getProductById,
   getSearchSuggestions,
+  uploadImage,
 } from "../controllers/product.controller.js";
 
 const router = Router();
 
 router.post("/create", createProduct);
+router.post("/upload", uploadImage);
 router.get("/getAll", getProducts);
 router.get("/getById/:id", getProductById);
 router.get("/search-suggestions", getSearchSuggestions);

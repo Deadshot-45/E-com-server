@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
+import fs from "node:fs";
+import path from "node:path";
 import { Product } from "../models/Product.js";
 import { ProductVariant } from "../models/ProductVariant.js";
 import { Inventory } from "../models/Inventory.js";
@@ -616,6 +618,68 @@ export const getSearchSuggestions = async (
         suggestions: suggestionList,
         products,
       },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * UPLOAD IMAGE (BASE64)
+ */
+export const uploadImage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { image, fileName } = req.body;
+    if (!image) {
+      return res.status(400).json({ success: false, message: "No image content provided" });
+    }
+
+    // Expect base64 data URL: data:image/png;base64,iVBORw0KGgoAAA...
+    const matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      return res.status(400).json({ success: false, message: "Invalid base64 image format" });
+    }
+
+    const imageType = matches[1];
+    const base64Data = matches[2];
+    const buffer = Buffer.from(base64Data, "base64");
+
+    // Determine extension
+    let extension = "png";
+    if (imageType.includes("jpeg") || imageType.includes("jpg")) {
+      extension = "jpg";
+    } else if (imageType.includes("webp")) {
+      extension = "webp";
+    } else if (imageType.includes("gif")) {
+      extension = "gif";
+    }
+
+    const uploadsDir = path.join(process.cwd(), "public", "uploads");
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+
+    const cleanFileName = fileName 
+      ? fileName.replace(/[^a-z0-9.]/gi, "_").toLowerCase()
+      : "upload";
+    
+    const baseName = path.basename(cleanFileName, path.extname(cleanFileName));
+    const finalFileName = `${Date.now()}-${baseName}.${extension}`;
+    const filePath = path.join(uploadsDir, finalFileName);
+
+    fs.writeFileSync(filePath, buffer);
+
+    // Return the relative URL (e.g. /uploads/1712398412-bag.jpg)
+    const relativeUrl = `/uploads/${finalFileName}`;
+
+    res.status(200).json({
+      success: true,
+      message: "Image uploaded successfully",
+      url: relativeUrl,
     });
   } catch (err) {
     next(err);
