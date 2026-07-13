@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/User.js";
+import Customer from "../models/Customer.js";
 import { hashPassword, validatePassword } from "../utils/passwordUtils.js";
 
 const userRegister = async (req: express.Request, res: express.Response) => {
@@ -14,19 +15,21 @@ const userRegister = async (req: express.Request, res: express.Response) => {
   }
 
   try {
-    // Proactively check for existing email or phone number
-    const existingUser = await User.findOne({
-      $or: [{ email: email.trim().toLowerCase() }, { phoneNumber }],
-    });
+    const normalizedEmail = email.trim().toLowerCase();
 
+    // Check for existing email in User
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
-      if (existingUser.email === email.trim().toLowerCase()) {
-        return res.status(409).json({
-          success: false,
-          message: "An account with this email already exists.",
-        });
-      }
-      if (existingUser.phoneNumber === phoneNumber) {
+      return res.status(409).json({
+        success: false,
+        message: "An account with this email already exists.",
+      });
+    }
+
+    // Check for existing phone number in Customer
+    if (phoneNumber) {
+      const existingCustomer = await Customer.findOne({ phoneNumber: phoneNumber.trim() });
+      if (existingCustomer) {
         return res.status(409).json({
           success: false,
           message: "An account with this mobile number already exists.",
@@ -36,39 +39,39 @@ const userRegister = async (req: express.Request, res: express.Response) => {
 
     // Hash the password before saving
     const hashedPassword = await hashPassword(password);
-    console.log("Original:", password, "Hashed:", hashedPassword);
 
+    // Create authentication User
     const newUser = await User.create({
-      email: email.trim().toLowerCase(),
+      email: normalizedEmail,
       passwordHash: hashedPassword,
+      role: "customer",
+      isActive: true,
+    });
+
+    // Create shopper Customer profile
+    const newCustomer = await Customer.create({
+      userId: newUser._id,
       fullName: fullName.trim(),
       gender,
-      phoneNumber,
+      phoneNumber: phoneNumber ? phoneNumber.trim() : undefined,
     });
 
     res.status(201).json({
       message: "User registered successfully",
       success: true,
-      data: { newUser },
+      data: {
+        user: {
+          id: newUser._id,
+          email: newUser.email,
+          role: newUser.role,
+        },
+        customer: newCustomer,
+      },
     });
   } catch (error: any) {
-    // Handle Mongoose duplicate key errors (code 11000)
-    if (error.code === 11000) {
-      const duplicateField = Object.keys(error.keyPattern)[0];
-      const fieldName =
-        duplicateField === "phoneNumber" ? "mobile number" : duplicateField;
-
-      return res.status(409).json({
-        success: false,
-        message: `An account with this ${fieldName} already exists.`,
-      });
-    }
-
-    // Handle standard Validation Errors or general server errors
     res.status(500).json({
       success: false,
-      message:
-        error.message || "An unexpected error occurred during registration.",
+      message: error.message || "An unexpected error occurred during registration.",
     });
   }
 };

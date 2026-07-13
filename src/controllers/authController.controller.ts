@@ -2,6 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import User from "../models/User.js";
+import Customer from "../models/Customer.js";
 import { loginUser } from "../utils/sessionHelpers.js";
 import { hashPassword } from "../utils/passwordUtils.js";
 import crypto from "crypto";
@@ -80,6 +81,7 @@ export const googleLogin = async (
 
     // Find user by email
     let user = await User.findOne({ email });
+    let customer: any = null;
 
     if (!user) {
       // Create a new user since they signed in via Google first time
@@ -89,15 +91,27 @@ export const googleLogin = async (
       user = await User.create({
         email,
         passwordHash: hashedPassword,
-        fullName,
-        profilePicture,
         role: "customer",
         isActive: true,
       });
-    } else if (profilePicture && !user.profilePicture) {
-      // Update profile picture if missing
-      user.profilePicture = profilePicture;
-      await user.save();
+
+      customer = await Customer.create({
+        userId: user._id,
+        fullName,
+        profilePicture,
+      });
+    } else {
+      customer = await Customer.findOne({ userId: user._id });
+      if (!customer) {
+        customer = await Customer.create({
+          userId: user._id,
+          fullName,
+          profilePicture,
+        });
+      } else if (profilePicture && !customer.profilePicture) {
+        customer.profilePicture = profilePicture;
+        await customer.save();
+      }
     }
 
     // Generate JWT token matching standard login
@@ -111,7 +125,15 @@ export const googleLogin = async (
       { expiresIn: "2h" }
     );
 
-    const { passwordHash, ...safeUserData } = user.toObject();
+    const safeUserData = {
+      id: user._id,
+      email: user.email,
+      role: user.role,
+      fullName: customer?.fullName || "Google User",
+      profilePicture: customer?.profilePicture || "",
+      phoneNumber: customer?.phoneNumber || "",
+      address: customer?.address || "",
+    };
 
     // Create session
     loginUser(
@@ -148,7 +170,7 @@ export const googleLogin = async (
     res.status(401).json({
       success: false,
       message: error.message || "Google login failed.",
-      code: "INVALID_CREDENTIALS",
+      code: "AUTHENTICATION_FAILED",
     });
   }
 };

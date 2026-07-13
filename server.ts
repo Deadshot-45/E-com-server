@@ -187,7 +187,7 @@ class Server {
     legacyHeaders: false,
   });
 
-  // Only auth/login/reset पर ज़्यादा strict
+  // Only auth/login/reset strict
   private readonly authLimiter = rateLimit({
     windowMs: 10 * 60 * 1000,
     max: 5,
@@ -245,26 +245,29 @@ class Server {
     // Sensitive OTP/KYC
     this.app.use(
       "/api/ekycController",
-      this.sensitiveLimiter, // चाहो तो यहाँ भी
+      this.sensitiveLimiter, 
       ipBlockerMiddleware,
       sensitiveSecurityMiddleware,
       otpRoutes,
     );
 
-    // Swagger
-    const swaggerHandler = swaggerUi.setup(swaggerSpec, {
-      explorer: true,
-      customSiteTitle: "E-Commerce API Docs",
-    });
+    // Swagger: use `app.use` so static assets under `/api-docs/*` are served
+    this.app.use(
+      "/api-docs",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerSpec, {
+        explorer: true,
+        customSiteTitle: "E-Commerce API Docs",
+        customCss: "",
+      }),
+    );
 
-    this.app.get(["/api-docs", "/api-docs/"], swaggerUi.serve, swaggerHandler);
-    this.app.head(["/api-docs", "/api-docs/"], (req, res) => {
-      res.status(200).end();
-    });
+    // Expose the raw swagger JSON explicitly
     this.app.get("/api-docs/swagger.json", (req, res) => {
       res.setHeader("Content-Type", "application/json; charset=utf-8");
       res.status(200).json(swaggerSpec);
     });
+
     this.app.head("/api-docs/swagger.json", (req, res) => {
       res.setHeader("Content-Type", "application/json; charset=utf-8");
       res.status(200).end();

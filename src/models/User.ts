@@ -1,15 +1,9 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
-  name?: string;
   email: string;
   passwordHash: string;
-  role: "customer" | "admin";
-  gender?: "male" | "female" | "other";
-  fullName: string;
-  profilePicture?: string;
-  phoneNumber?: string;
-  address?: string;
+  role: "customer" | "admin" | "seller";
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -17,20 +11,14 @@ export interface IUser extends Document {
 
 const userSchema = new Schema<IUser>(
   {
-    name: String,
-    email: { type: String, unique: true, index: true, required: true },
+    email: { type: String, unique: true, index: true, required: true, lowercase: true, trim: true },
     passwordHash: { type: String, required: true },
     role: {
       type: String,
-      enum: ["customer", "admin"],
+      enum: ["customer", "admin", "seller"],
       index: true,
       default: "customer",
     },
-    gender: { type: String, enum: ["male", "female", "other"] },
-    fullName: { type: String, required: true },
-    profilePicture: String,
-    phoneNumber: { type: String, unique: true, index: true, sparse: true },
-    address: String,
     isActive: { type: Boolean, default: true },
   },
   { versionKey: false, timestamps: true }

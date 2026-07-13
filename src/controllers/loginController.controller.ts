@@ -1,6 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import Customer from "../models/Customer.js";
 import { comparePassword, validatePassword } from "../utils/passwordUtils.js";
 import { loginUser } from "../utils/sessionHelpers.js";
 
@@ -35,24 +36,20 @@ const userLogin = async (
   }
 
   try {
-    // Normalize identifiers
-    const normalizedEmail = identifier.trim().toLowerCase();
-    const normalizedPhone = identifier.trim();
+    const term = identifier.trim();
+    let user: any = null;
+    let customer: any = null;
 
-    // Find user by email OR phone (select only needed fields)
-    const user = await User.findOne(
-      {
-        $or: [{ email: normalizedEmail }, { phoneNumber: normalizedPhone }],
-      },
-      {
-        passwordHash: 1,
-        email: 1,
-        phoneNumber: 1,
-        fullName: 1,
-        role: 1,
-        _id: 1,
-      },
-    );
+    if (term.includes("@")) {
+      // Find user by email
+      user = await User.findOne({ email: term.toLowerCase() });
+    } else {
+      // Find customer by phone number
+      customer = await Customer.findOne({ phoneNumber: term });
+      if (customer) {
+        user = await User.findById(customer.userId);
+      }
+    }
 
     if (!user) {
       return res.status(401).json({
@@ -62,12 +59,7 @@ const userLogin = async (
       });
     }
 
-    const hashedPassword = user.passwordHash;
-
-    const isPasswordValid = await comparePassword(password, hashedPassword);
-    console.log(isPasswordValid);
-
-    // Compare password (slow hash - intentional for security)
+    const isPasswordValid = await comparePassword(password, user.passwordHash);
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
@@ -81,14 +73,27 @@ const userLogin = async (
       {
         userId: user._id,
         email: user.email,
-        role: user.role || "user",
+        role: user.role || "customer",
       },
       process.env.JWT_SECRET!,
-      { expiresIn: "2H" },
+      { expiresIn: "2h" },
     );
 
-    // Clean user data for response
-    const { passwordHash, ...safeUserData } = user.toObject();
+    // Merge User & Customer data to maintain frontend compatibility
+    if (!customer && user.role === "customer") {
+      customer = await Customer.findOne({ userId: user._id });
+    }
+
+    const safeUserData = {
+      id: user._id,
+      email: user.email,
+      role: user.role,
+      fullName: customer?.fullName || "User",
+      gender: customer?.gender,
+      phoneNumber: customer?.phoneNumber,
+      address: customer?.address,
+      profilePicture: customer?.profilePicture,
+    };
 
     // Create secure session + return both token & session
     loginUser(
@@ -109,22 +114,19 @@ const userLogin = async (
           });
         }
 
-        // Success response with BOTH session & JWT
         res.json({
           success: true,
           message: "Logged in successfully",
           data: {
-            token, // For API/mobile clients
-            user: safeUserData, // User profile
-            sessionActive: true, // Session confirmation
+            token,
+            user: safeUserData,
+            sessionActive: true,
           },
         });
       },
     );
-  } catch (error: any) {
-    console.error("Login error:", error);
-
-    // Don't leak specific errors
+  } catch (err: any) {
+    console.error("Login error:", err);
     res.status(500).json({
       success: false,
       message: "Login failed. Please try again later.",
