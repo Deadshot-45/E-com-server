@@ -3,6 +3,7 @@ import { Order } from "../models/Order.js";
 import { Inventory } from "../models/Inventory.js";
 import { Payment } from "../models/Payment.js";
 import mongoose from "mongoose";
+import { withTransaction } from "../utils/transaction.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1️⃣  GET MY ORDERS  →  Paginated list of user's orders
@@ -206,82 +207,81 @@ export const getOrderById = async (req: Request, res: Response) => {
  *         description: Order not found
  */
 export const cancelOrder = async (req: Request, res: Response) => {
-  const session = await mongoose.startSession();
-
   try {
-    session.startTransaction();
+    const result = await withTransaction(async (session) => {
+      const userId = req.user?._id;
+      const { orderId } = req.params;
 
-    const userId = req.user?._id;
-    const { orderId } = req.params;
+      if (!userId) {
+        throw new Error("User not authenticated");
+      }
 
-    if (!userId) {
-      throw new Error("User not authenticated");
-    }
-
-    const order = await Order.findOne({ _id: orderId, userId }).session(
-      session,
-    );
-
-    if (!order) {
-      throw new Error("Order not found");
-    }
-
-    // Can only cancel pending or confirmed orders
-    if (!["pending", "confirmed"].includes(order.status)) {
-      throw new Error(
-        `Cannot cancel order with status '${order.status}'. Only pending or confirmed orders can be cancelled.`,
+      const order = await Order.findOne({ _id: orderId, userId }).session(
+        session || null,
       );
-    }
 
-    // Release reserved inventory
-    for (const item of order.items) {
-      const updateOp: any = {};
-
-      if (order.status === "pending") {
-        // Online payment not yet completed → release reservation
-        updateOp.$inc = { reserved: -item.quantity };
-      } else if (order.status === "confirmed") {
-        // COD or paid order → restore stock
-        updateOp.$inc = { stock: item.quantity, sold: -item.quantity };
+      if (!order) {
+        throw new Error("Order not found");
       }
 
-      if (Object.keys(updateOp).length > 0) {
-        await Inventory.updateOne({ variantId: item.variantId }, updateOp, {
-          session,
-        });
+      // Can only cancel pending or confirmed orders
+      if (!["pending", "confirmed"].includes(order.status)) {
+        throw new Error(
+          `Cannot cancel order with status '${order.status}'. Only pending or confirmed orders can be cancelled.`,
+        );
       }
-    }
 
-    // Update order status
-    order.status = "cancelled";
-    order.paymentStatus =
-      order.paymentStatus === "paid" ? "refunded" : "failed";
-    await order.save({ session });
+      // Release reserved inventory
+      for (const item of order.items) {
+        const updateOp: any = {};
 
-    // Update payment status
-    await Payment.updateOne(
-      { orderId: order._id },
-      {
-        status: order.paymentStatus === "refunded" ? "refunded" : "failed",
-        ...(order.paymentStatus === "refunded"
-          ? { refundedAt: new Date() }
-          : { failedAt: new Date() }),
-      },
-      { session },
-    );
+        if (order.status === "pending") {
+          // Online payment not yet completed → release reservation
+          updateOp.$inc = { reserved: -item.quantity };
+        } else if (order.status === "confirmed") {
+          // COD or paid order → restore stock
+          updateOp.$inc = { stock: item.quantity, sold: -item.quantity };
+        }
 
-    await session.commitTransaction();
-    session.endSession();
+        if (Object.keys(updateOp).length > 0) {
+          await Inventory.updateOne({ variantId: item.variantId }, updateOp, {
+            session,
+          });
+        }
+      }
 
-    return res.status(200).json({
-      success: true,
-      message: "Order cancelled successfully",
-      data: order,
+      // Update order status
+      order.status = "cancelled";
+      order.paymentStatus =
+        order.paymentStatus === "paid" ? "refunded" : "failed";
+      await order.save({ session });
+
+      // Update payment status
+      await Payment.updateOne(
+        { orderId: order._id },
+        {
+          status: order.paymentStatus === "refunded" ? "refunded" : "failed",
+          ...(order.paymentStatus === "refunded"
+            ? { refundedAt: new Date() }
+            : { failedAt: new Date() }),
+        },
+        { session },
+      );
+
+      return {
+        success: true,
+        message: "Order cancelled successfully",
+        data: order,
+        statusCode: 200,
+      };
+    });
+
+    return res.status(result.statusCode || 200).json({
+      success: result.success,
+      message: result.message,
+      data: result.data,
     });
   } catch (error: any) {
-    await session.abortTransaction();
-    session.endSession();
-
     return res.status(400).json({
       success: false,
       message: error.message || "Failed to cancel order",
@@ -349,6 +349,16 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
         success: false,
         message: "Order not found",
       });
+    }
+
+    if (req.user?.role === "seller") {
+      const isSellersOrder = order.items.some((item: any) => item.sellerId?.toString() === req.user?._id.toString());
+      if (!isSellersOrder) {
+        return res.status(403).json({
+          success: false,
+          message: "You do not have permission to update this order.",
+        });
+      }
     }
 
     // Define valid transitions
@@ -468,6 +478,47 @@ export const getAllOrders = async (req: Request, res: Response) => {
     return res.status(500).json({
       success: false,
       message: error.message || "Failed to fetch orders",
+    });
+  }
+};
+
+export const getSellerOrders = async (req: Request, res: Response) => {
+  try {
+    const sellerId = req.user?._id;
+    if (!sellerId) {
+      return res.status(401).json({
+        success: false,
+        message: "Seller not authenticated",
+      });
+    }
+
+    const orders = await Order.find({ "items.sellerId": sellerId }).sort({ createdAt: -1 }).populate("userId", "email").lean();
+
+    const mappedOrders = orders.map((o: any) => {
+      const sellerItems = o.items.filter((item: any) => item.sellerId?.toString() === sellerId.toString());
+      const sellerAmount = sellerItems.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
+      const totalItems = sellerItems.reduce((sum: number, item: any) => sum + item.quantity, 0);
+
+      return {
+        id: o._id,
+        customer: o.address?.fullName || o.userId?.email || "Guest Customer",
+        email: o.userId?.email || "",
+        date: o.placedAt || o.createdAt,
+        amount: sellerAmount,
+        status: o.status,
+        items: totalItems,
+      };
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Seller orders retrieved successfully",
+      data: mappedOrders,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch seller orders",
     });
   }
 };

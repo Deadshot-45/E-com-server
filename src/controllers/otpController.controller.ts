@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 import OTP from "../models/OTP.js";
 import { sendEmail } from "../utils/emailUtility.js";
 import { generateOTP } from "../utils/otpUtility.js";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 // Validation helper (simple check for email format)
 const isValidEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
@@ -132,6 +134,87 @@ export const verifyOtpHandler = async (req: Request, res: Response) => {
       success: true,
       message: "OTP verified successfully.",
       code: "OTP_VERIFIED",
+    });
+  } catch (error: any) {
+    console.error("Error in verifyOtpHandler:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to verify OTP",
+      code: "INTERNAL_ERROR",
+    });
+  }
+};
+
+export const verifyOtpHandlerWithAuth = async (req: Request, res: Response) => {
+  try {
+    const { identifier, otp } = req.body;
+
+    if (!identifier || !otp) {
+      return res.status(400).json({
+        success: false,
+        message: "Identifier and OTP are required.",
+        code: "MISSING_FIELDS",
+      });
+    }
+
+    const normalizedIdentifier = identifier.trim().toLowerCase();
+
+    // Find the OTP document
+    const otpDoc = await OTP.findOne({ identifier: normalizedIdentifier });
+
+    if (!otpDoc) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP expired or not found.",
+        code: "OTP_NOT_FOUND",
+      });
+    }
+
+    // Verify the OTP
+    const isValid = await bcrypt.compare(otp, otpDoc.otpHash);
+
+    if (!isValid) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid OTP.",
+        code: "INVALID_OTP",
+      });
+    }
+
+    // OTP is valid - delete it so it can't be reused
+    await OTP.deleteOne({ _id: otpDoc._id });
+
+    const user = await User.findOne({
+      $or: [
+        { email: normalizedIdentifier },
+        { phoneNumber: normalizedIdentifier },
+      ],
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found with given Email/Phone.",
+        code: "USER_NOT_FOUND",
+      });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+        role: user.role || "customer",
+      },
+      process.env.JWT_SECRET!,
+      { expiresIn: "2h" },
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "OTP verified successfully.",
+      code: "OTP_VERIFIED",
+      token,
     });
   } catch (error: any) {
     console.error("Error in verifyOtpHandler:", error);

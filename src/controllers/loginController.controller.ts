@@ -88,12 +88,14 @@ const userLogin = async (
       id: user._id,
       email: user.email,
       role: user.role,
-      fullName: customer?.fullName || "User",
+      name: customer?.fullName || user?.name || "User",
       gender: customer?.gender,
       phoneNumber: customer?.phoneNumber,
       address: customer?.address,
       profilePicture: customer?.profilePicture,
     };
+
+    console.log("Login Data : ", safeUserData)
 
     // Create secure session + return both token & session
     loginUser(
@@ -135,4 +137,45 @@ const userLogin = async (
   }
 };
 
-export { userLogin };
+const forgotPassword = async (
+  req: express.Request<{}, {}, { email: string; phone: string, identifier?: string }>,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  const { email, phone } = req.body;
+
+  if (!email?.trim() && !phone?.trim()) {
+    return res.status(400).json({
+      success: false,
+      message: "Email or phone number is required.",
+      code: "MISSING_EMAIL",
+    });
+  }
+
+  try {
+    const user = await User.findOne({ email: email.toLowerCase(), phoneNumber: phone });
+    if (!user) {
+      return res.status(200).json({
+        success: false,
+        message: "User not found with given Email/Phone.",
+        code: "USER_NOT_FOUND",
+      });
+    }
+
+     ;
+
+    // Here you would typically generate a password reset token and send an email
+    // For now, we'll just return a success message
+    req.body = {email, phone, identifier : email || phone};
+    next(); // Call the next middleware (sendOtpHandler) to send the OTP
+  } catch (err: any) {
+    console.error("Forgot password error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to process forgot password request.",
+      code: "INTERNAL_ERROR",
+    });
+  }
+};
+
+export { userLogin, forgotPassword };

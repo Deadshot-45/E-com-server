@@ -28,6 +28,7 @@ import sellerRoutes from "./src/routes/seller.routes.js";
 import sellerAuthRoutes from "./src/routes/sellerRoutes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
+import dashboardRoutes from "./src/routes/dashboard.routes.js";
 import { googleLogin } from "./src/controllers/authController.controller.js";
 
 dotenv.config();
@@ -241,6 +242,7 @@ class Server {
     this.app.use("/api/reviews", reviewRoutes);
     this.app.use("/api/sellers", sellerRoutes);
     this.app.use("/api/marketplace", marketplaceRoutes);
+    this.app.use("/api/dashboard", dashboardRoutes);
 
     // Sensitive OTP/KYC
     this.app.use(
@@ -301,7 +303,9 @@ class Server {
       process.env.MONGO_URI || "mongodb://localhost:27017/vault-vogue-lite";
 
     try {
-      await mongoose.connect(MONGO_URI);
+      await mongoose.connect(MONGO_URI, {
+        retryWrites: false,
+      });
       this.logger.info("✅ MongoDB Connected");
 
       mongoose.connection.on("error", (err) => {

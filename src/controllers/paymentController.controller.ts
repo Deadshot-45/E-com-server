@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import crypto from "crypto";
 import mongoose from "mongoose";
+import { withTransaction } from "../utils/transaction.js";
 import { Payment } from "../models/Payment.js";
 import { Order } from "../models/Order.js";
 import { Inventory } from "../models/Inventory.js";
@@ -47,109 +48,106 @@ import { getRazorpay } from "../config/razorpay.js";
  *         description: Payment record not found
  */
 export const verifyPayment = async (req: Request, res: Response) => {
-  const session = await mongoose.startSession();
-
   try {
-    session.startTransaction();
+    const result = await withTransaction(async (session) => {
+      const userId = req.user?._id;
+      const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+        req.body;
 
-    const userId = req.user?._id;
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-      req.body;
+      if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+        throw new Error("Missing payment verification fields");
+      }
 
-    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-      throw new Error("Missing payment verification fields");
-    }
+      // 1️⃣ Verify signature
+      const secret = process.env.RAZORPAY_KEY_SECRET;
+      if (!secret) {
+        throw new Error("Razorpay secret not configured");
+      }
 
-    // 1️⃣ Verify signature
-    const secret = process.env.RAZORPAY_KEY_SECRET;
-    if (!secret) {
-      throw new Error("Razorpay secret not configured");
-    }
+      const generatedSignature = crypto
+        .createHmac("sha256", secret)
+        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+        .digest("hex");
 
-    const generatedSignature = crypto
-      .createHmac("sha256", secret)
-      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-      .digest("hex");
+      if (generatedSignature !== razorpay_signature) {
+        // Signature mismatch → payment tampered
+        await Payment.updateOne(
+          { razorpayOrderId: razorpay_order_id },
+          { status: "failed", failedAt: new Date() },
+          { session },
+        );
 
-    if (generatedSignature !== razorpay_signature) {
-      // Signature mismatch → payment tampered
-      await Payment.updateOne(
-        { razorpayOrderId: razorpay_order_id },
-        { status: "failed", failedAt: new Date() },
-        { session },
-      );
+        throw new Error("Payment verification failed — signature mismatch");
+      }
 
-      throw new Error("Payment verification failed — signature mismatch");
-    }
+      // 2️⃣ Find and update payment record
+      const payment = await Payment.findOne({
+        razorpayOrderId: razorpay_order_id,
+        userId,
+      }).session(session || null);
 
-    // 2️⃣ Find and update payment record
-    const payment = await Payment.findOne({
-      razorpayOrderId: razorpay_order_id,
-      userId,
-    }).session(session);
+      if (!payment) {
+        throw new Error("Payment record not found");
+      }
 
-    if (!payment) {
-      throw new Error("Payment record not found");
-    }
+      if (payment.status === "paid") {
+        return {
+          success: true,
+          message: "Payment already verified",
+          statusCode: 200,
+        };
+      }
 
-    if (payment.status === "paid") {
-      await session.commitTransaction();
-      session.endSession();
+      payment.razorpayPaymentId = razorpay_payment_id;
+      payment.razorpaySignature = razorpay_signature;
+      payment.status = "paid";
+      payment.paidAt = new Date();
+      await payment.save({ session });
 
-      return res.status(200).json({
-        success: true,
-        message: "Payment already verified",
-      });
-    }
+      // 3️⃣ Update order status
+      const order = await Order.findById(payment.orderId).session(session || null);
 
-    payment.razorpayPaymentId = razorpay_payment_id;
-    payment.razorpaySignature = razorpay_signature;
-    payment.status = "paid";
-    payment.paidAt = new Date();
-    await payment.save({ session });
+      if (!order) {
+        throw new Error("Associated order not found");
+      }
 
-    // 3️⃣ Update order status
-    const order = await Order.findById(payment.orderId).session(session);
+      order.status = "confirmed";
+      order.paymentStatus = "paid";
+      await order.save({ session });
 
-    if (!order) {
-      throw new Error("Associated order not found");
-    }
-
-    order.status = "confirmed";
-    order.paymentStatus = "paid";
-    await order.save({ session });
-
-    // 4️⃣ Finalize inventory — move from reserved to sold
-    for (const item of order.items) {
-      await Inventory.updateOne(
-        { variantId: item.variantId },
-        {
-          $inc: {
-            reserved: -item.quantity,
-            sold: item.quantity,
+      // 4️⃣ Finalize inventory — move from reserved to sold
+      for (const item of order.items) {
+        await Inventory.updateOne(
+          { variantId: item.variantId },
+          {
+            $inc: {
+              reserved: -item.quantity,
+              sold: item.quantity,
+            },
           },
+          { session },
+        );
+      }
+
+      return {
+        success: true,
+        message: "Payment verified and order confirmed",
+        data: {
+          orderId: order._id,
+          paymentId: payment._id,
+          status: order.status,
+          paymentStatus: order.paymentStatus,
         },
-        { session },
-      );
-    }
+        statusCode: 200,
+      };
+    });
 
-    await session.commitTransaction();
-    session.endSession();
-
-    return res.status(200).json({
-      success: true,
-      message: "Payment verified and order confirmed",
-      data: {
-        orderId: order._id,
-        paymentId: payment._id,
-        status: order.status,
-        paymentStatus: order.paymentStatus,
-      },
+    return res.status(result.statusCode || 200).json({
+      success: result.success,
+      message: result.message,
+      data: result.data,
     });
   } catch (error: any) {
-    await session.abortTransaction();
-    session.endSession();
-
     return res.status(400).json({
       success: false,
       message: error.message || "Payment verification failed",
@@ -216,49 +214,43 @@ export const razorpayWebhook = async (req: Request, res: Response) => {
         const razorpayOrderId = payload.payment.entity.order_id;
         const razorpayPaymentId = payload.payment.entity.id;
 
-        const session = await mongoose.startSession();
         try {
-          session.startTransaction();
+          await withTransaction(async (session) => {
+            const payment = await Payment.findOne({
+              razorpayOrderId,
+            }).session(session || null);
 
-          const payment = await Payment.findOne({
-            razorpayOrderId,
-          }).session(session);
+            if (payment && payment.status !== "paid") {
+              payment.razorpayPaymentId = razorpayPaymentId;
+              payment.status = "paid";
+              payment.paidAt = new Date();
+              await payment.save({ session });
 
-          if (payment && payment.status !== "paid") {
-            payment.razorpayPaymentId = razorpayPaymentId;
-            payment.status = "paid";
-            payment.paidAt = new Date();
-            await payment.save({ session });
+              const order = await Order.findById(payment.orderId).session(
+                session || null,
+              );
+              if (order && order.status === "pending") {
+                order.status = "confirmed";
+                order.paymentStatus = "paid";
+                await order.save({ session });
 
-            const order = await Order.findById(payment.orderId).session(
-              session,
-            );
-            if (order && order.status === "pending") {
-              order.status = "confirmed";
-              order.paymentStatus = "paid";
-              await order.save({ session });
-
-              // Finalize inventory
-              for (const item of order.items) {
-                await Inventory.updateOne(
-                  { variantId: item.variantId },
-                  {
-                    $inc: {
-                      reserved: -item.quantity,
-                      sold: item.quantity,
+                // Finalize inventory
+                for (const item of order.items) {
+                  await Inventory.updateOne(
+                    { variantId: item.variantId },
+                    {
+                      $inc: {
+                        reserved: -item.quantity,
+                        sold: item.quantity,
+                      },
                     },
-                  },
-                  { session },
-                );
+                    { session },
+                  );
+                }
               }
             }
-          }
-
-          await session.commitTransaction();
-          session.endSession();
+          });
         } catch (err) {
-          await session.abortTransaction();
-          session.endSession();
           console.error("Webhook payment.captured error:", err);
         }
         break;

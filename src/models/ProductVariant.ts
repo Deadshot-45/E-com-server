@@ -36,15 +36,18 @@ const variantSchema = new Schema(
 
     sku: { type: String, required: true, unique: true },
 
-    attributes: { type: Schema.Types.Mixed, default: {} },
+    attributes: {
+      size: String,
+      color: String,
+    },
 
     price: { type: Number, required: true },
     compareAtPrice: Number,
 
     images: [
       {
-        url: String,
-        isPrimary: Boolean,
+        url: { type: String, required: true },
+        isPrimary: { type: Boolean, default: false },
       },
     ],
 
@@ -53,10 +56,41 @@ const variantSchema = new Schema(
   { timestamps: true },
 );
 
-variantSchema.index({ productId: 1, isActive: 1 });
-variantSchema.index({ productId: 1, "attributes.size": 1 });
+variantSchema.index({
+  productId: 1,
+  "attributes.color": 1,
+});
 
-// variantSchema.index({ productId: 1, isActive: 1 });
+variantSchema.index({
+  productId: 1,
+  "attributes.size": 1,
+});
+
+variantSchema.index({
+  productId: 1,
+  "attributes.color": 1,
+  "attributes.size": 1,
+});
+
+variantSchema.index({
+  productId: 1,
+  sku: 1,
+});
+
+variantSchema.index(
+  {
+    productId: 1,
+    "attributes.color": 1,
+    "attributes.size": 1,
+  },
+  {
+    unique: true,
+    partialFilterExpression: {
+      "attributes.color": { $exists: true },
+      "attributes.size": { $exists: true },
+    },
+  }
+);
 
 export const ProductVariant = mongoose.model<IProductVariant>(
   "ProductVariant",

@@ -4,7 +4,7 @@ import axios from "axios";
 import User from "../models/User.js";
 import Customer from "../models/Customer.js";
 import { loginUser } from "../utils/sessionHelpers.js";
-import { hashPassword } from "../utils/passwordUtils.js";
+import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
 import crypto from "crypto";
 
 let googlePublicKeys: Record<string, string> = {};
@@ -91,6 +91,7 @@ export const googleLogin = async (
       user = await User.create({
         email,
         passwordHash: hashedPassword,
+        name: fullName,
         role: "customer",
         isActive: true,
       });
@@ -171,6 +172,59 @@ export const googleLogin = async (
       success: false,
       message: error.message || "Google login failed.",
       code: "AUTHENTICATION_FAILED",
+    });
+  }
+};
+
+export const changePassword = async (
+  req: express.Request<{}, {}, { password: string; confirmPassword: string }>,
+  res: express.Response
+) => {
+  const { password, confirmPassword } = req.body;
+  const userId = req.user?._id; // Assuming req.user is populated by the protect middleware
+
+  if (!userId) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized",
+      code: "UNAUTHORIZED",
+    });
+  }
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+        code: "USER_NOT_FOUND",
+      });
+    }
+
+    const isMatch = password && confirmPassword && password === confirmPassword;
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+        code: "INVALID_PASSWORD",
+      });
+    }
+
+    const hashedNewPassword = await hashPassword(confirmPassword);
+    user.passwordHash = hashedNewPassword;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: "Password changed successfully",
+      code: "PASSWORD_CHANGED",
+    });
+  } catch (error: any) {
+    console.error("Error changing password:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to change password",
+      code: "INTERNAL_ERROR",
     });
   }
 };

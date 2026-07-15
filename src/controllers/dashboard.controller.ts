@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import { Order } from "../models/Order.js";
 import { Product } from "../models/Product.js";
+import User from "../models/User.js";
+import Seller from "../models/Seller.js";
 
 /**
  * GET DASHBOARD OVERVIEW
@@ -111,19 +113,35 @@ export const getDashboardOverview = async (
       { $unwind: "$product" },
     ]);
 
-    const [stats, salesGraph, topProducts] = await Promise.all([
+    const activeProductsPromise = Product.countDocuments({ isActive: true });
+    const activeSellersPromise = Seller.countDocuments({ status: "approved" });
+    const customersPromise = User.countDocuments({ role: "customer" });
+
+    const [stats, salesGraph, topProducts, activeProducts, activeSellers, customersCount] = await Promise.all([
       statsPromise,
       salesGraphPromise,
       topProductsPromise,
+      activeProductsPromise,
+      activeSellersPromise,
+      customersPromise,
     ]);
+
+    const summaryStats = stats[0] || {
+      totalRevenue: 0,
+      totalOrders: 0,
+      avgOrderValue: 0,
+    };
 
     res.json({
       success: true,
       data: {
-        summary: stats[0] || {
-          totalRevenue: 0,
-          totalOrders: 0,
-          avgOrderValue: 0,
+        summary: {
+          totalRevenue: summaryStats.totalRevenue || 0,
+          totalOrders: summaryStats.totalOrders || 0,
+          avgOrderValue: Math.round(summaryStats.avgOrderValue || 0),
+          activeProducts,
+          activeSellers,
+          customersCount,
         },
         salesGraph,
         topProducts,

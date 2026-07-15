@@ -211,6 +211,7 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface IProduct extends Document {
   sellerId: mongoose.Types.ObjectId;
   name: string;
+  category?: string;
   description?: string;
 
   categoryIds: mongoose.Types.ObjectId[];
@@ -245,11 +246,13 @@ const productSchema = new Schema(
     },
 
     name: { type: String, required: true, index: "text" },
+    category: { type: String, trim: true },
     description: String,
 
     categoryIds: [
       { type: Schema.Types.ObjectId, ref: "Category", index: true },
     ],
+    
     subCategoryId: {
       type: Schema.Types.ObjectId,
       ref: "SubCategory",

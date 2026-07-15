@@ -3,6 +3,7 @@ import {
   getDashboardOverview,
   getSellerDashboard,
 } from "../controllers/dashboard.controller.js";
+import { protect, restrictTo } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
@@ -36,7 +37,7 @@ const router = Router();
  *         description: Seller dashboard data
  */
 
-router.get("/overview", getDashboardOverview);
-router.get("/seller", getSellerDashboard);
+router.get("/overview", protect, restrictTo("admin"), getDashboardOverview);
+router.get("/seller", protect, restrictTo("seller"), getSellerDashboard);
 
 export default router;

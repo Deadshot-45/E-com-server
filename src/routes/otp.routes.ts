@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   sendOtpHandler,
   verifyOtpHandler,
+  verifyOtpHandlerWithAuth,
 } from "../controllers/otpController.controller.js";
 
 const router = Router({ mergeParams: true });
@@ -91,5 +92,7 @@ router.post("/send-otp", sendOtpHandler);
  *         description: Invalid or expired OTP
  */
 router.post("/verify", verifyOtpHandler);
+
+router.post("/verify-otp", verifyOtpHandlerWithAuth);
 
 export default router;

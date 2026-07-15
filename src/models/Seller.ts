@@ -29,6 +29,7 @@ export interface ISeller extends Document {
   website?: string;
   category?: string;
   description?: string;
+  ownerName?: string;
   bankDetails?: IBankDetails;
 
   createdAt: Date;
@@ -70,6 +71,7 @@ const sellerSchema = new Schema<ISeller>(
     website: { type: String, trim: true },
     category: { type: String, trim: true },
     description: { type: String },
+    ownerName: { type: String, trim: true },
     bankDetails: { type: bankDetailsSchema },
   },
   { timestamps: true }

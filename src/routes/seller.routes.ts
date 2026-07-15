@@ -61,6 +61,7 @@ router.post("/onboard", async (req, res) => {
       linkedUser = await User.create({
         email: normalizedEmail,
         passwordHash: defaultHashedPassword,
+        name: businessName || "Seller",
         role: "seller",
         isActive: true,
       });

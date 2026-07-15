@@ -11,8 +11,13 @@ export interface IVariantInput {
     sellerId: string;
     name: string;
     description?: string;
+    category?: string;
     categoryIds: string[];
     subCategoryId?: string;
+    subCategory?: string;
+    subCategoryName?: string;
+    subcategory?: string;
+    subcategoryName?: string;
     images: {
       url: string;
       isPrimary?: boolean;

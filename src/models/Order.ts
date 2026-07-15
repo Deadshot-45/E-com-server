@@ -111,6 +111,7 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface IOrderItem {
   productId: mongoose.Types.ObjectId;
   variantId: mongoose.Types.ObjectId;
+  sellerId: mongoose.Types.ObjectId;
 
   name: string;
   sku: string;
@@ -158,6 +159,7 @@ const orderItemSchema = new Schema<IOrderItem>(
   {
     productId: { type: Schema.Types.ObjectId, required: true },
     variantId: { type: Schema.Types.ObjectId, required: true },
+    sellerId: { type: Schema.Types.ObjectId, required: true, ref: "User" },
 
     name: String,
     sku: String,
