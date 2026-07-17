@@ -275,6 +275,9 @@ class Server {
       res.status(200).end();
     });
 
+    // Serve uploads directory explicitly
+    this.app.use("/uploads", express.static(path.join(process.cwd(), "public/uploads")));
+
     // Health
     this.app.get("/", (req, res) => {
       res.json({
