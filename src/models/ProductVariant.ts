@@ -66,11 +66,6 @@ variantSchema.index({
   "attributes.size": 1,
 });
 
-variantSchema.index({
-  productId: 1,
-  "attributes.color": 1,
-  "attributes.size": 1,
-});
 
 variantSchema.index({
   productId: 1,

@@ -91,7 +91,8 @@ router.post("/login", userLogin);
  *             properties:
  *               email:
  *                 type: string
- *              phone:   type: string
+ *               phone:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Password reset instructions sent
@@ -106,32 +107,32 @@ router.post("/forgot-password", forgotPassword, sendOtpHandler);
  * @swagger
  * /api/authController/reset-password:
  *   post:
- *    summary: Reset user password
- *   tags: [authController]
- *  security:
- *    - bearerAuth: []
- *  requestBody:
- *    required: true
- *   content:
- *    application/json:
- *    schema:
- *    type: object
- *  required:
- *  - password
- * properties:
- *  password:
- *   type: string
- * confirmPassword:
- *  type: string
- * responses:
- * 200:
- *  description: Password reset successful
- * 400:
- * description: Validation error or passwords do not match
- * 401:
- * description: Unauthorized or invalid token
- * 404:
- * description: User not found
+ *     summary: Reset user password
+ *     tags: [authController]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - password
+ *             properties:
+ *               password:
+ *                 type: string
+ *               confirmPassword:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset successful
+ *       400:
+ *         description: Validation error or passwords do not match
+ *       401:
+ *         description: Unauthorized or invalid token
+ *       404:
+ *         description: User not found
  *
  */
 router.post("/reset-password", protect, changePassword);

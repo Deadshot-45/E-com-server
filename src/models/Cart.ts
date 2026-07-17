@@ -107,7 +107,6 @@ const cartSchema = new Schema<ICart>(
   { timestamps: true },
 );
 
-cartSchema.index({ userId: 1 });
 cartSchema.index(
   { userId: 1, "items.variantId": 1 },
   { unique: true, sparse: true },

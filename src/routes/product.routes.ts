@@ -9,12 +9,15 @@ import {
   toggleProductStatus,
 } from "../controllers/product.controller.js";
 import { sellerAuthMiddleware } from "../middleware/sellerAuthMiddleware.js";
+import uploadFile from "../utils/multer.js";
 
 const router = Router();
+let upload = uploadFile();
 
 router.post("/create", sellerAuthMiddleware, createProduct);
 router.get("/getAll", getProducts);
-router.post("/upload", sellerAuthMiddleware, uploadImage);
+
+router.post("/upload", sellerAuthMiddleware, upload.single("file"), uploadImage);
 router.get("/getById/:id", getProductById);
 router.get("/search-suggestions", getSearchSuggestions);
 

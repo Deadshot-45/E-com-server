@@ -4,6 +4,7 @@ import express, { NextFunction, Request, Response } from "express";
 import session from "express-session";
 import mongoose from "mongoose";
 import path from "node:path";
+import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import swaggerUi from "swagger-ui-express";
 import winston from "winston";
@@ -30,6 +31,7 @@ import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
 import dashboardRoutes from "./src/routes/dashboard.routes.js";
 import { googleLogin } from "./src/controllers/authController.controller.js";
+import Upload from "./src/models/Upload.js";
 
 dotenv.config();
 
@@ -275,8 +277,32 @@ class Server {
       res.status(200).end();
     });
 
-    // Serve uploads directory explicitly
-    this.app.use("/uploads", express.static(path.join(process.cwd(), "public/uploads")));
+    // Serve uploads from MongoDB with fallback to local files
+    this.app.get("/uploads/:filename", async (req: Request, res: Response) => {
+      try {
+        const filename = req.params.filename as string;
+        const upload = await Upload.findOne({ filename });
+        if (upload) {
+          res.setHeader("Content-Type", upload.contentType);
+          return res.send(upload.data);
+        }
+      } catch (error) {
+        this.logger.error("Failed to fetch upload from MongoDB:", error);
+      }
+
+      // Fallback: Check local filesystem
+      try {
+        const filename = req.params.filename as string;
+        const localPath = path.join(process.cwd(), "public/uploads", filename);
+        if (fs.existsSync(localPath)) {
+          return res.sendFile(localPath);
+        }
+      } catch (fsError) {
+        this.logger.error("Failed to check or serve local file:", fsError);
+      }
+
+      return res.status(404).json({ success: false, message: "File not found" });
+    });
 
     // Health
     this.app.get("/", (req, res) => {

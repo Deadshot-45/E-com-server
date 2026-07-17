@@ -7,6 +7,7 @@ import { ProductVariant } from "../models/ProductVariant.js";
 import { Inventory } from "../models/Inventory.js";
 import { Category } from "../models/Category.js";
 import { saveProductWithVariants } from "../services/product.service.js";
+import Upload from "../models/Upload.js";
 
 /**
  * CREATE PRODUCT
@@ -789,50 +790,62 @@ export const getSearchSuggestions = async (
  * UPLOAD IMAGE (BASE64)
  */
 export const uploadImage = async (
-  req: Request,
+  req: Request & { file?: any },
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const { image, fileName } = req.body;
-    if (!image) {
+    let buffer: Buffer;
+    let contentType: string;
+    let originalName: string;
+
+    if (req.file) {
+      // Handle file upload via Multer (multipart/form-data)
+      buffer = req.file.buffer;
+      contentType = req.file.mimetype;
+      originalName = req.file.originalname;
+    } else if (req.body && req.body.image) {
+      // Handle base64 image content
+      const { image, fileName } = req.body;
+      const matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+      if (!matches || matches.length !== 3) {
+        return res.status(400).json({ success: false, message: "Invalid base64 image format" });
+      }
+
+      contentType = matches[1];
+      const base64Data = matches[2];
+      buffer = Buffer.from(base64Data, "base64");
+      originalName = fileName || "upload";
+    } else {
       return res.status(400).json({ success: false, message: "No image content provided" });
     }
 
-    // Expect base64 data URL: data:image/png;base64,iVBORw0KGgoAAA...
-    const matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
-    if (!matches || matches.length !== 3) {
-      return res.status(400).json({ success: false, message: "Invalid base64 image format" });
-    }
-
-    const imageType = matches[1];
-    const base64Data = matches[2];
-    const buffer = Buffer.from(base64Data, "base64");
-
     // Determine extension
     let extension = "png";
-    if (imageType.includes("jpeg") || imageType.includes("jpg")) {
+    if (contentType.includes("jpeg") || contentType.includes("jpg")) {
       extension = "jpg";
-    } else if (imageType.includes("webp")) {
+    } else if (contentType.includes("webp")) {
       extension = "webp";
-    } else if (imageType.includes("gif")) {
+    } else if (contentType.includes("gif")) {
       extension = "gif";
+    } else if (contentType.includes("svg")) {
+      extension = "svg";
     }
 
-    const uploadsDir = path.join(process.cwd(), "public", "uploads");
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
-
-    const cleanFileName = fileName 
-      ? fileName.replace(/[^a-z0-9.]/gi, "_").toLowerCase()
+    const cleanFileName = originalName
+      ? originalName.replace(/[^a-z0-9.]/gi, "_").toLowerCase()
       : "upload";
     
     const baseName = path.basename(cleanFileName, path.extname(cleanFileName));
     const finalFileName = `${Date.now()}-${baseName}.${extension}`;
-    const filePath = path.join(uploadsDir, finalFileName);
 
-    fs.writeFileSync(filePath, buffer);
+    // Create the upload document in MongoDB
+    const uploadDoc = new Upload({
+      filename: finalFileName,
+      contentType: contentType,
+      data: buffer,
+    });
+    await uploadDoc.save();
 
     // Return the relative URL (e.g. /uploads/1712398412-bag.jpg)
     const relativeUrl = `/uploads/${finalFileName}`;
