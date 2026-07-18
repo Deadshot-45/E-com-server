@@ -6,6 +6,7 @@ import { Payment } from "../models/Payment.js";
 import { Order } from "../models/Order.js";
 import { Inventory } from "../models/Inventory.js";
 import { getRazorpay } from "../config/razorpay.js";
+import { getStripeClient } from "../utils/stripe.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1️⃣  VERIFY PAYMENT  →  Frontend calls after Razorpay checkout completes
@@ -84,7 +85,7 @@ export const verifyPayment = async (req: Request, res: Response) => {
       const payment = await Payment.findOne({
         razorpayOrderId: razorpay_order_id,
         userId,
-      }).session(session || null);
+      }).session(session || null);  
 
       if (!payment) {
         throw new Error("Payment record not found");
@@ -330,13 +331,55 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
       });
     }
 
-    const payment = await Payment.findOne({ orderId, userId }).lean();
+    const payment = await Payment.findOne({ orderId, userId });
 
     if (!payment) {
       return res.status(404).json({
         success: false,
         message: "Payment not found",
       });
+    }
+
+    // Check Stripe session if payment status is not paid yet
+    if (payment.status !== "paid" && payment.razorpayOrderId?.startsWith("stripe_")) {
+      const stripeSessionId = payment.razorpayOrderId.replace("stripe_", "");
+      try {
+        const stripe = getStripeClient();
+        const stripeSession = await stripe.checkout.sessions.retrieve(stripeSessionId);
+
+        if (stripeSession.payment_status === "paid") {
+          payment.status = "paid";
+          payment.paidAt = new Date();
+          payment.razorpayPaymentId = (stripeSession.payment_intent as string) || stripeSession.id;
+          await payment.save();
+
+          // Update corresponding Order
+          const order = await Order.findById(orderId);
+          if (order && order.status === "pending") {
+            order.status = "confirmed";
+            order.paymentStatus = "paid";
+            if (stripeSession.payment_intent) {
+              order.stripePaymentIntentId = stripeSession.payment_intent as string;
+            }
+            await order.save();
+
+            // Finalize inventory: move from reserved to sold
+            for (const item of order.items) {
+              await Inventory.updateOne(
+                { variantId: item.variantId },
+                {
+                  $inc: {
+                    reserved: -item.quantity,
+                    sold: item.quantity,
+                  },
+                }
+              );
+            }
+          }
+        }
+      } catch (stripeErr) {
+        console.error("Error verifying Stripe payment status:", stripeErr);
+      }
     }
 
     return res.status(200).json({
@@ -405,7 +448,7 @@ export const retryPayment = async (req: Request, res: Response) => {
       });
     }
 
-    if (order.status !== "pending" || order.paymentMethod !== "online") {
+    if (order.status !== "pending" || order.paymentMethod === "cod") {
       return res.status(400).json({
         success: false,
         message: "Only pending online orders can be retried",

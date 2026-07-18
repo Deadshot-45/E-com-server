@@ -2,12 +2,13 @@ import { Request, Response } from "express";
 import mongoose from "mongoose";
 import { Cart } from "../models/Cart.js";
 import { Inventory } from "../models/Inventory.js";
-import { Order } from "../models/Order.js";
 import { Payment } from "../models/Payment.js";
 import { Product } from "../models/Product.js";
 import { ProductVariant } from "../models/ProductVariant.js";
 import { getRazorpay } from "../config/razorpay.js";
 import { withTransaction } from "../utils/transaction.js";
+import { Order } from "../models/Order.js";
+import { createCheckoutSession } from "../utils/stripe.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1️⃣  CHECKOUT  →  Cart ➜ Order + Razorpay order (for online) or direct COD
@@ -101,14 +102,15 @@ export const checkout = async (req: Request, res: Response) => {
         throw new Error("User not authenticated");
       }
 
-      const { address, paymentMethod } = req.body;
+      const { address, paymentMethod, tax, shippingFee, subTotal } = req.body;
 
       if (!address || !paymentMethod) {
         throw new Error("Address and payment method are required");
       }
 
-      if (!["cod", "online"].includes(paymentMethod)) {
-        throw new Error("Invalid payment method. Use 'cod' or 'online'");
+      const allowedMethods = ["cod", "online", "card", "upi"];
+      if (!allowedMethods.includes(paymentMethod)) {
+        throw new Error(`Invalid payment method. Use one of: ${allowedMethods.join(", ")}`);
       }
 
       // 1️⃣ Get cart
@@ -158,116 +160,170 @@ export const checkout = async (req: Request, res: Response) => {
 
         // Snapshot checkout fields: name and sellerId
         orderItems.push({
-          productId: variant.productId,
-          variantId: item.variantId,
-          sellerId: variant.sellerId || product.sellerId,
-          name: product.name,
-          quantity: item.quantity,
-          price: variant.price,
-          attributes: variant.attributes,
+          productId: variant.productId.toString(),
+          variantId: item.variantId.toString(),
+          sellerId: (variant.sellerId || product.sellerId).toString(),
+          name: String(product.name),
+          quantity: Number(item.quantity),
+          price: Number(variant.price),
+          image: String(variant.images[0] || product.images[0] || ""), 
         });
       }
+
+      // Map paymentMethod to match Mongoose Order Schema enum ['card', 'cod', 'upi']
+      let mappedMethod: "card" | "cod" | "upi";
+      if (paymentMethod === "cod") {
+        mappedMethod = "cod";
+      } else if (paymentMethod === "upi") {
+        mappedMethod = "upi";
+      } else {
+        // "card" or "online"
+        mappedMethod = "card";
+      }
+
+      // Map shipping address fields
+      const shippingAddress = {
+        fullName: address.fullName,
+        phone: address.phone,
+        addressLine1: address.addressLine || address.addressLine1 || "",
+        addressLine2: address.addressLine2 || "",
+        city: address.city,
+        state: address.state,
+        zipCode: address.postalCode || address.zipCode || "",
+        country: address.country || "India",
+      };
 
       // 4️⃣ Create Order
       const order = new Order({
         userId,
         items: orderItems,
+        shippingAddress,
         totalAmount,
-        totalItems,
-        paymentMethod,
-        paymentStatus: "pending",
-        status: "pending",
-        address,
+        shippingFee: shippingFee || 0,
+        subtotal: subTotal || (totalAmount - (tax || 0)),
+        tax: tax || 0,
+        paymentMethod: mappedMethod,
+        paymentStatus: "unpaid",
+        status: paymentMethod === "cod" ? "confirmed" : "pending",
       });
-      await order.save(session ? { session } : undefined);
 
-      // 5️⃣ Handle Online Payment Flow
-      if (paymentMethod === "online") {
-        const razorpay = getRazorpay();
-        const rpOrder = await razorpay.orders.create({
-          amount: Math.round(totalAmount * 100),
-          currency: "INR",
-          receipt: `rcpt_${order._id}`,
-        });
+      const savedOrder = await order.save({ session });
 
-        // No need to save razorpayOrderId directly on Order doc as it's saved in Payment
-        // instead, update payment model directly below
+      // 5️⃣ Create Payment record & call Gateway
+      let responseData: any = {
+        success: true,
+        data: savedOrder,
+        statusCode: 201,
+      };
 
-        const payment = new Payment({
-          orderId: order._id,
+      if (paymentMethod === "cod") {
+        // Finalize inventory: move from reserved to sold
+        for (const item of orderItems) {
+          await Inventory.updateOne(
+            { variantId: item.variantId },
+            {
+              $inc: {
+                reserved: -item.quantity,
+                sold: item.quantity,
+              },
+            },
+            { session },
+          );
+        }
+
+        // Create Payment record
+        const paymentRecord = new Payment({
+          orderId: savedOrder._id,
           userId,
-          razorpayOrderId: rpOrder.id,
-          method: "online",
+          razorpayOrderId: `cod_${savedOrder._id}`,
+          method: "cod",
           status: "pending",
-          amount: Math.round(totalAmount * 100),
+          amount: totalAmount * 100, // in paise
           currency: "INR",
         });
-        await payment.save(session ? { session } : undefined);
+        await paymentRecord.save({ session });
 
-        // Clear Cart
-        cart.items = [];
-        cart.totalAmount = 0;
-        cart.totalItems = 0;
-        await cart.save({ session });
+        responseData.message = "Order placed successfully (COD)";
+      } else if (paymentMethod === "card") {
+        // Stripe integration
+        const stripeSession = await createCheckoutSession({
+          product: orderItems,
+          orderId: savedOrder._id.toString(),
+        });
 
-        return {
-          success: true,
-          message: "Checkout successful (online payment initialized)",
-          data: {
-            order,
-            razorpayOrder: rpOrder,
+        if (!stripeSession || !stripeSession.url) {
+          throw new Error("Failed to create Stripe checkout session");
+        }
+
+        const sessionUrl = stripeSession.url;
+        const stripeSessionId = stripeSession.id;
+
+        // Create Payment record
+        const paymentRecord = new Payment({
+          orderId: savedOrder._id,
+          userId,
+          razorpayOrderId: `stripe_${stripeSessionId}`,
+          method: "online",
+          status: "created",
+          amount: totalAmount * 100,
+          currency: "INR",
+        });
+        await paymentRecord.save({ session });
+
+        responseData.message = "Stripe checkout session created";
+        responseData.url = sessionUrl;
+      } else {
+        // Razorpay integration ("online" or "upi")
+        const razorpayOrder = await getRazorpay().orders.create({
+          amount: Math.round(totalAmount * 100),
+          currency: "INR",
+          receipt: savedOrder._id.toString(),
+          notes: {
+            orderId: savedOrder._id.toString(),
+            userId: userId.toString(),
           },
-          statusCode: 201,
+        });
+
+        if (!razorpayOrder) {
+          throw new Error("Failed to create Razorpay order");
+        }
+
+        // Create Payment record
+        const paymentRecord = new Payment({
+          orderId: savedOrder._id,
+          userId,
+          razorpayOrderId: razorpayOrder.id,
+          method: "online",
+          status: "created",
+          amount: totalAmount * 100,
+          currency: "INR",
+        });
+        await paymentRecord.save({ session });
+
+        responseData.message = "Razorpay payment order created";
+        responseData.razorpay = {
+          orderId: razorpayOrder.id,
+          amount: razorpayOrder.amount,
+          currency: razorpayOrder.currency,
+          key: process.env.RAZORPAY_KEY_ID,
         };
       }
 
-      // 6️⃣ Handle COD Flow
-      const payment = new Payment({
-        orderId: order._id,
-        userId,
-        razorpayOrderId: `cod_${order._id}`,
-        method: "cod",
-        status: "pending",
-        amount: Math.round(totalAmount * 100),
-        currency: "INR",
-      });
-      await payment.save(session ? { session } : undefined);
-
-      order.status = "confirmed";
-      await order.save({ session });
-
-      // 7️⃣ Clear Cart
+      // 6️⃣ Clear Cart
       cart.items = [];
       cart.totalAmount = 0;
       cart.totalItems = 0;
       await cart.save({ session });
 
-      // 8️⃣ Deduct reserved → update sold count for COD
-      for (const item of orderItems) {
-        await Inventory.updateOne(
-          { variantId: item.variantId },
-          {
-            $inc: {
-              reserved: -item.quantity,
-              sold: item.quantity,
-            },
-          },
-          { session },
-        );
-      }
-
-      return {
-        success: true,
-        message: "Order placed successfully (COD)",
-        data: order,
-        statusCode: 201,
-      };
+      return responseData;
     });
 
     return res.status(result.statusCode || 200).json({
       success: result.success,
       message: result.message,
       data: result.data,
+      url: result.url || undefined,
+      razorpay: result.razorpay || undefined,
     });
   } catch (error: any) {
     return res.status(400).json({

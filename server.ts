@@ -37,6 +37,8 @@ dotenv.config();
 
 import helmetImport from "helmet";
 import rateLimitImport from "express-rate-limit";
+import { createCheckoutSession } from "./src/utils/stripe.js";
+import { checkout } from "./src/controllers/checkoutController.controller.js";
 
 const helmet = (helmetImport as any).default || helmetImport;
 const rateLimit = (rateLimitImport as any).default || rateLimitImport;
@@ -96,6 +98,7 @@ class Server {
       "https://vault-vogue-lite.vercel.app",
       "https://mayank-sahu.vercel.app",
       "https://mayank-sahu-dev.vercel.app",
+       "https://checkout.stripe.com/" 
     ]);
 
     this.app.use(
@@ -232,6 +235,9 @@ class Server {
       sensitiveSecurityMiddleware,
       googleLogin,
     );
+
+    //checkout session route
+    // this.app.use("/api/orders/checkout-session",protect, checkout);
 
     // Other routes
     this.app.use("/api/userController", userRoutes);

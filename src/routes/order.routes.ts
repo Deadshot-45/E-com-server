@@ -13,7 +13,7 @@ import {
 const router = express.Router();
 
 // ─── Checkout ────────────────────────────────────────────────────────────────
-router.post("/checkout", protect, checkout);
+router.post("/checkout-session", protect, checkout);
 
 // ─── Customer Routes ─────────────────────────────────────────────────────────
 router.get("/", protect, getMyOrders);
