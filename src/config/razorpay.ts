@@ -1,37 +1,29 @@
 import Razorpay from "razorpay";
 
-let razorpayInstance: Razorpay | null = null;
+export function getRazorpayKeys() {
+  const keyId = process.env.RAZORPAY_KEY_ID || "rzp_test_TFnjdkFu74wVJr";
+  const keySecret = process.env.RAZORPAY_KEY_SECRET || "iG11tM788qm0aDFuQn3jEVYF";
+  return { keyId, keySecret };
+}
 
-const keyId = process.env.RAZORPAY_KEY_ID;
-const keySecret = process.env.RAZORPAY_KEY_SECRET;
-
-if (
-  keyId &&
-  keySecret &&
-  keyId !== "your_razorpay_key_id" &&
-  keySecret !== "your_razorpay_key_secret"
-) {
-  razorpayInstance = new Razorpay({
-    key_id: keyId,
-    key_secret: keySecret,
-  });
-  console.log("✅ Razorpay initialized");
-} else {
-  console.warn(
-    "⚠️  RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET not set. Online payments will not work.",
+export function isRazorpayConfigured(): boolean {
+  const { keyId, keySecret } = getRazorpayKeys();
+  return Boolean(
+    keyId &&
+      keySecret &&
+      keyId !== "your_razorpay_key_id" &&
+      keySecret !== "your_razorpay_key_secret" &&
+      keyId.trim().length > 0 &&
+      keySecret.trim().length > 0
   );
 }
 
-/**
- * Get the Razorpay instance. Throws if not configured.
- */
 export function getRazorpay(): Razorpay {
-  if (!razorpayInstance) {
-    throw new Error(
-      "Razorpay is not configured. Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in your .env file.",
-    );
-  }
-  return razorpayInstance;
+  const { keyId, keySecret } = getRazorpayKeys();
+  return new Razorpay({
+    key_id: keyId,
+    key_secret: keySecret,
+  });
 }
 
-export default razorpayInstance;
+export default getRazorpay;

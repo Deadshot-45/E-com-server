@@ -7,14 +7,27 @@ export const getStripeClient = (): Stripe => {
     return stripeClient;
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY;
-  if (!secretKey) {
-    throw new Error('Missing STRIPE_SECRET_KEY environment variable');
-  }
-
+  const secretKey = process.env.STRIPE_SECRET_KEY || 'sk_test_mock_secret_key';
   stripeClient = new Stripe(secretKey);
 
   return stripeClient;
+};
+
+/**
+ * Verify and construct a Stripe event from raw body Buffer and signature header.
+ */
+export const constructStripeEvent = (
+  rawBody: Buffer | string,
+  signature: string
+): Stripe.Event => {
+  const stripe = getStripeClient();
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  if (!webhookSecret) {
+    throw new Error('STRIPE_WEBHOOK_SECRET environment variable is missing');
+  }
+
+  return stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
 };
 
 // Api to create a checkout session
@@ -37,13 +50,13 @@ export const createCheckoutSession = async (data: {
           name: item.name,
           images: item.image && (item.image.startsWith('http://') || item.image.startsWith('https://')) ? [item.image] : undefined,
         },
-        unit_amount: Math.round(item.price * 100), // Stripe expects the amount in cents
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity,
       adjustable_quantity: {
         enabled: true,
         minimum: 1,
-        maximum: item.quantity,
+        maximum: Math.max(Number(item.quantity) || 1, 2),
       },
     }));
 
@@ -92,11 +105,20 @@ export const createCheckoutSession = async (data: {
       line_items: lineItems,
       discounts,
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
-      cancel_url: `${process.env.CLIENT_URL}/checkout?order_id=${orderId}&cancelled=true`,
+      metadata: {
+        orderId: orderId,
+      },
+      payment_intent_data: {
+        metadata: {
+          orderId: orderId,
+        },
+      },
+      client_reference_id: orderId,
+      success_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
+      cancel_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/checkout?order_id=${orderId}&cancelled=true`,
     });
 
-    console.log("Session Received", session);
+    console.log("Stripe Checkout Session Created:", session.id);
 
     return session;
   } catch (error) {

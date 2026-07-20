@@ -334,7 +334,7 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
 
     if (
       !status ||
-      !["confirmed", "shipped", "delivered", "cancelled"].includes(status)
+      !['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'].includes(status)
     ) {
       return res.status(400).json({
         success: false,

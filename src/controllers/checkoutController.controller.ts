@@ -5,10 +5,11 @@ import { Inventory } from "../models/Inventory.js";
 import { Payment } from "../models/Payment.js";
 import { Product } from "../models/Product.js";
 import { ProductVariant } from "../models/ProductVariant.js";
-import { getRazorpay } from "../config/razorpay.js";
+import { getRazorpay, getRazorpayKeys } from "../config/razorpay.js";
 import { withTransaction } from "../utils/transaction.js";
 import { Order } from "../models/Order.js";
 import { createCheckoutSession } from "../utils/stripe.js";
+import { trackingStore } from "../store/tracking-store.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1️⃣  CHECKOUT  →  Cart ➜ Order + Razorpay order (for online) or direct COD
@@ -105,10 +106,6 @@ export const checkout = async (req: Request, res: Response) => {
       const {
         address,
         paymentMethod,
-        tax,
-        shippingFee,
-        subTotal,
-        subtotal,
         shippingMethod,
         promoCode,
       } = req.body;
@@ -254,6 +251,14 @@ export const checkout = async (req: Request, res: Response) => {
 
       const savedOrder = await order.save({ session });
 
+      // Automatically initialize real Order Tracking record
+      try {
+        await trackingStore.getOrder(savedOrder._id.toString());
+      } catch (err) {
+        // Non-blocking tracking initialization
+
+      }
+
       // 5️⃣ Create Payment record & call Gateway
       let responseData: any = {
         success: true,
@@ -322,38 +327,53 @@ export const checkout = async (req: Request, res: Response) => {
         responseData.url = sessionUrl;
       } else {
         // Razorpay integration ("online" or "upi")
-        const razorpayOrder = await getRazorpay().orders.create({
-          amount: Math.round(computedTotalAmount * 100),
-          currency: "INR",
-          receipt: savedOrder._id.toString(),
-          notes: {
-            orderId: savedOrder._id.toString(),
-            userId: userId.toString(),
-          },
-        });
+        let razorpayOrderId: string;
+        let razorpayAmount: number = Math.round(computedTotalAmount * 100);
+        let razorpayCurrency: string = "INR";
+        const { keyId } = getRazorpayKeys();
 
-        if (!razorpayOrder) {
-          throw new Error("Failed to create Razorpay order");
+        try {
+          const razorpayInstance = getRazorpay();
+          const razorpayOrder = await razorpayInstance.orders.create({
+            amount: razorpayAmount,
+            currency: razorpayCurrency,
+            receipt: savedOrder._id.toString(),
+            notes: {
+              orderId: savedOrder._id.toString(),
+              userId: userId.toString(),
+            },
+          });
+
+          if (!razorpayOrder || !razorpayOrder.id) {
+            throw new Error("Razorpay API returned empty order ID");
+          }
+
+          razorpayOrderId = razorpayOrder.id;
+          razorpayAmount = Number(razorpayOrder.amount);
+          razorpayCurrency = razorpayOrder.currency;
+        } catch (rzpErr: any) {
+          console.error("Razorpay order creation error:", rzpErr);
+          throw new Error(`Razorpay Order Creation Failed: ${rzpErr?.message || rzpErr?.error?.description || "Invalid credentials"}`);
         }
 
         // Create Payment record
         const paymentRecord = new Payment({
           orderId: savedOrder._id,
           userId,
-          razorpayOrderId: razorpayOrder.id,
+          razorpayOrderId: razorpayOrderId,
           method: "online",
           status: "created",
-          amount: Math.round(computedTotalAmount * 100),
-          currency: "INR",
+          amount: razorpayAmount,
+          currency: razorpayCurrency,
         });
         await paymentRecord.save({ session });
 
         responseData.message = "Razorpay payment order created";
         responseData.razorpay = {
-          orderId: razorpayOrder.id,
-          amount: razorpayOrder.amount,
-          currency: razorpayOrder.currency,
-          key: process.env.RAZORPAY_KEY_ID,
+          orderId: razorpayOrderId,
+          amount: razorpayAmount,
+          currency: razorpayCurrency,
+          key: keyId,
         };
       }
 

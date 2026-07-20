@@ -30,6 +30,9 @@ import sellerAuthRoutes from "./src/routes/seller-auth.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
 import dashboardRoutes from "./src/routes/dashboard.routes.js";
+import orderTrackingRoutes from "./src/routes/orderRoutes.js";
+import paymentTrackingRoutes from "./src/routes/paymentRoutes.js";
+import webhookRoutes from "./src/routes/webhookRoutes.js";
 import { googleLogin } from "./src/controllers/authController.controller.js";
 import Upload from "./src/models/Upload.js";
 
@@ -41,6 +44,8 @@ import rateLimitImport from "express-rate-limit";
 const helmet = (helmetImport as any).default || helmetImport;
 const rateLimit = (rateLimitImport as any).default || rateLimitImport;
 
+const PORT = process.env.PORT || 5000;
+
 class Server {
   public app: express.Application;
   private readonly port: string | number;
@@ -48,7 +53,7 @@ class Server {
 
   constructor() {
     this.app = express();
-    this.port = process.env.PORT || 3000;
+    this.port = PORT;
     this.logger = this.initLogger();
     this.middlewares();
     this.routes();
@@ -78,10 +83,10 @@ class Server {
     // Security
     this.app.use(
       helmet({
-        contentSecurityPolicy: false, // API के लिए ठीक
+        contentSecurityPolicy: false,
         crossOriginResourcePolicy: { policy: "cross-origin" },
         crossOriginEmbedderPolicy: false,
-        hidePoweredBy: true, // X-Powered-By हटाओ
+        hidePoweredBy: true,
       }),
     );
 
@@ -96,7 +101,7 @@ class Server {
       "https://vault-vogue-lite.vercel.app",
       "https://mayank-sahu.vercel.app",
       "https://mayank-sahu-dev.vercel.app",
-       "https://checkout.stripe.com/" 
+      "https://checkout.stripe.com/",
     ]);
 
     this.app.use(
@@ -117,31 +122,21 @@ class Server {
           "X-Requested-With",
           "Accept",
           "Origin",
+          "Idempotency-Key",
+          "idempotency-key",
+          "stripe-signature",
         ],
         exposedHeaders: ["Content-Range"],
         maxAge: 86400,
       }),
     );
 
-    // Rate limiting (skip OPTIONS)
-    // this.app.use(
-    //   rateLimit({
-    //     windowMs: 15 * 60 * 1000,
-    //     max: process.env.NODE_ENV === "production" ? 100 : 1000,
-    //     skip: (req) => req.method === "OPTIONS",
-    //     message: "Too many requests, please try again later.",
-    //     standardHeaders: true,
-    //     legacyHeaders: false,
-    //   }),
-    // );
-
-    // 2) फिर global rate limit सिर्फ API routes पर
     const apiLimiter = rateLimit({
       windowMs: 15 * 60 * 1000,
       max: process.env.NODE_ENV === "production" ? 100 : 1000,
       skip: (req: Request) =>
         req.method === "OPTIONS" ||
-        req.path.startsWith("/p_img") || // image path जैसा है वैसा skip
+        req.path.startsWith("/p_img") ||
         /\.(png|jpg|jpeg|gif|webp|css|js|ico)$/i.test(req.path),
       message: "Too many requests, please try again later.",
       standardHeaders: true,
@@ -151,22 +146,23 @@ class Server {
     // Static Files
     this.app.use(express.static(path.join(process.cwd(), "public")));
 
-    // सिर्फ /api पर limiter
     this.app.use("/api", apiLimiter);
+    // Stripe Webhook requires raw body Buffer for cryptographic signature verification
+    this.app.use("/api/webhooks/stripe", express.raw({ type: "application/json" }));
     this.app.use(express.json({ limit: "10mb" }));
     this.app.use(express.urlencoded({ extended: true }));
 
     // Session
     this.app.use(
       session({
-        secret: process.env.SESSION_SECRET!,
+        secret: process.env.SESSION_SECRET || "default_session_secret",
         resave: false,
         saveUninitialized: false,
         cookie: {
           secure: process.env.NODE_ENV === "production",
           httpOnly: true,
           sameSite: "strict",
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          maxAge: 7 * 24 * 60 * 60 * 1000,
         },
       }),
     );
@@ -180,8 +176,8 @@ class Server {
   }
 
   private readonly sensitiveLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 min window
-    max: 10, // 10 requests per IP
+    windowMs: 15 * 60 * 1000,
+    max: 10,
     message: {
       success: false,
       message: "Too many requests, please try again later.",
@@ -191,7 +187,6 @@ class Server {
     legacyHeaders: false,
   });
 
-  // Only auth/login/reset strict
   private readonly authLimiter = rateLimit({
     windowMs: 10 * 60 * 1000,
     max: 5,
@@ -234,10 +229,7 @@ class Server {
       googleLogin,
     );
 
-    //checkout session route
-    // this.app.use("/api/orders/checkout-session",protect, checkout);
-
-    //User routes with strict security
+    // User routes with strict security
     this.app.use(
       "/api/userController",
       this.authLimiter,
@@ -250,8 +242,24 @@ class Server {
     this.app.use("/api/products", productRoutes);
     this.app.use("/api/landing", landingRoutes);
 
+     // Health check endpoint
+    this.app.get("/api/health", (_req, res) => {
+      res
+        .status(200)
+        .json({
+          status: "ok",
+          service: "vault-vogue-lite-server",
+          timestamp: new Date().toISOString(),
+        });
+    });
+
+    // Order & Payment Tracking System routes
+    this.app.use("/api/orders", orderTrackingRoutes);
     this.app.use("/api/orders", orderRoutes);
+    this.app.use("/api/payments", paymentTrackingRoutes);
     this.app.use("/api/payments", paymentRoutes);
+    this.app.use("/api/webhooks", webhookRoutes);
+
     this.app.use("/api/cartController", cartRoutes);
     this.app.use("/api/reviews", reviewRoutes);
     this.app.use("/api/sellers", sellerRoutes);
@@ -261,13 +269,13 @@ class Server {
     // Sensitive OTP/KYC
     this.app.use(
       "/api/ekycController",
-      this.sensitiveLimiter, 
+      this.sensitiveLimiter,
       ipBlockerMiddleware,
       sensitiveSecurityMiddleware,
       otpRoutes,
     );
 
-    // Swagger: use `app.use` so static assets under `/api-docs/*` are served
+    // Swagger
     this.app.use(
       "/api-docs",
       swaggerUi.serve,
@@ -278,7 +286,7 @@ class Server {
       }),
     );
 
-    // Expose the raw swagger JSON explicitly
+    // Raw swagger JSON
     this.app.get("/api-docs/swagger.json", (req, res) => {
       res.setHeader("Content-Type", "application/json; charset=utf-8");
       res.status(200).json(swaggerSpec);
@@ -302,7 +310,6 @@ class Server {
         this.logger.error("Failed to fetch upload from MongoDB:", error);
       }
 
-      // Fallback: Check local filesystem
       try {
         const filename = req.params.filename as string;
         const localPath = path.join(process.cwd(), "public/uploads", filename);
@@ -313,7 +320,9 @@ class Server {
         this.logger.error("Failed to check or serve local file:", fsError);
       }
 
-      return res.status(404).json({ success: false, message: "File not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "File not found" });
     });
 
     // Health
@@ -323,6 +332,12 @@ class Server {
         version: "1.0.0",
         env: process.env.NODE_ENV,
       });
+    });
+
+    // Error fallback handler
+    this.app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+      console.error('Unhandled Server Error:', err);
+      res.status(500).json({ success: false, error: 'Internal Server Error' });
     });
   }
 
@@ -370,7 +385,6 @@ class Server {
     return this.logger;
   }
 
-  // Graceful shutdown
   public async close(): Promise<void> {
     await mongoose.connection.close();
     this.logger.info("Server closed gracefully");
@@ -428,4 +442,14 @@ if (
 
   await dbReady;
   server.listen();
+  console.log(`🚀 Vault Vogue Server running on http://localhost:${PORT}`);
+  console.log(
+    `📦 Order Tracking API: http://localhost:${PORT}/api/orders/:id/track`,
+  );
+  console.log(
+    `💳 Payment Tracking API: http://localhost:${PORT}/api/payments/:id/status`,
+  );
+  console.log(
+    `🔔 Webhooks Ingestion API: http://localhost:${PORT}/api/webhooks/payment`,
+  );
 }

@@ -1,7 +1,7 @@
 import express from "express";
 import { protect } from "../middleware/authMiddleware.js";
 import {
-  verifyPayment,
+  // verifyPayment,
   razorpayWebhook,
   getPaymentStatus,
   retryPayment,
@@ -19,7 +19,7 @@ const router = express.Router();
  *     security:
  *       - bearerAuth: []
  */
-router.post("/verify", protect, verifyPayment);
+// router.post("/verify", protect, verifyPayment);
 
 // ─── Razorpay Webhook (Server-to-server, no auth) ───────────────────────────
 /**

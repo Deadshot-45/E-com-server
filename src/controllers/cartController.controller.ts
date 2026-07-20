@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import mongoose from "mongoose";
 import { ProductVariant } from "../models/ProductVariant.js";
 import { Cart } from "../models/Cart.js";
+import { Inventory } from "../models/Inventory.js";
 
 export const getCart = async (req: Request, res: Response) => {
   const userId = req.user?._id;
@@ -90,6 +91,18 @@ export const addToCart = async (req: Request, res: Response) => {
         success: false,
         message: "Product variant not found",
         code: "VARIANT_NOT_FOUND",
+      });
+    }
+
+    const stock = await Inventory.findOne({ variantId: new mongoose.Types.ObjectId(variantId) }).lean().then((inventory) => inventory?.stock || 0);
+
+    console.log("Stock available : ", stock);
+    
+    if (quantity > stock) {
+      return res.status(400).json({
+        success: false,
+        message: `Requested quantity exceeds available stock. Available stock: ${stock}`,
+        code: "INSUFFICIENT_STOCK",
       });
     }
 

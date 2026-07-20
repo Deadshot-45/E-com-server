@@ -5,6 +5,7 @@ import { withTransaction } from "../utils/transaction.js";
 import { Payment } from "../models/Payment.js";
 import { Order } from "../models/Order.js";
 import { Inventory } from "../models/Inventory.js";
+import { OrderTrackingModel } from "../models/OrderTracking.js";
 import { getRazorpay } from "../config/razorpay.js";
 import { getStripeClient } from "../utils/stripe.js";
 
@@ -128,6 +129,32 @@ export const verifyPayment = async (req: Request, res: Response) => {
           },
           { session },
         );
+      }
+
+      // 5️⃣ Update OrderTracking timeline & status
+      try {
+        await OrderTrackingModel.updateOne(
+          { orderId: order._id.toString() },
+          {
+            $set: {
+              currentStatus: "PAYMENT_AUTHORIZED",
+              totalAmount: order.totalAmount,
+            },
+            $push: {
+              checkpoints: {
+                checkpointId: `chk_${Date.now()}`,
+                orderId: order._id.toString(),
+                status: "PAYMENT_AUTHORIZED",
+                location: "Razorpay Gateway",
+                description: "Payment captured and order status confirmed",
+                timestamp: new Date().toISOString(),
+              },
+            },
+          },
+          { upsert: true, session }
+        );
+      } catch (trackErr) {
+        console.warn("OrderTracking sync non-fatal error:", trackErr);
       }
 
       return {

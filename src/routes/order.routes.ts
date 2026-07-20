@@ -10,17 +10,20 @@ import {
   getSellerOrders,
   getUserOrders,
 } from "../controllers/orderController.controller.js";
+import { verifyPayment } from "../controllers/paymentController.controller.js";
 
 const router = express.Router();
 
 // ─── Checkout ────────────────────────────────────────────────────────────────
 router.post("/checkout-session", protect, checkout);
+router.post("/confirm", protect, verifyPayment);
 
 // ─── Customer Routes ─────────────────────────────────────────────────────────
 router.get("/", protect, getMyOrders);
 router.get("/:orderId", protect, getOrderById);
 router.post("/:orderId/cancel", protect, cancelOrder);
 router.get("/my-orders", protect, getUserOrders);
+
 
 // ─── Seller Routes ───────────────────────────────────────────────────────────
 router.get("/seller/all", protect, restrictTo("seller"), getSellerOrders);
