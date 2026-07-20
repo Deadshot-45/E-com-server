@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import User from "../models/User.js";
 import { protect, restrictTo } from "../middleware/authMiddleware.js";
+import { createUser, getUserDetails } from "../controllers/userController.controller.js";
 
 const router = express.Router();
 
@@ -94,9 +95,6 @@ router.get("/admin/all", protect, restrictTo("admin"), async (req: Request, res:
  *         description: User not found
  */
 
-router.get("/:id", async (req: Request, res: Response) => {
-  const user = await User.findById(req.params.id);
-  res.json(user);
-});
-
+router.post("/", protect, restrictTo("admin"), createUser);
+router.get("/:id", protect, getUserDetails);
 export default router;

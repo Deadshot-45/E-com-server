@@ -522,3 +522,30 @@ export const getSellerOrders = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getUserOrders = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user?._id;
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "User not authenticated",
+      });
+    }
+
+    console.log("order fetched")
+
+    const orders = await Order.find({ userId }).sort({ createdAt: -1 }).lean();
+
+    return res.status(200).json({
+      success: true,
+      message: "User orders retrieved successfully",
+      data: orders,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch user orders",
+    });
+  }
+};

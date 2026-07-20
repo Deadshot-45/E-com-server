@@ -102,7 +102,16 @@ export const checkout = async (req: Request, res: Response) => {
         throw new Error("User not authenticated");
       }
 
-      const { address, paymentMethod, tax, shippingFee, subTotal } = req.body;
+      const {
+        address,
+        paymentMethod,
+        tax,
+        shippingFee,
+        subTotal,
+        subtotal,
+        shippingMethod,
+        promoCode,
+      } = req.body;
 
       if (!address || !paymentMethod) {
         throw new Error("Address and payment method are required");
@@ -120,7 +129,8 @@ export const checkout = async (req: Request, res: Response) => {
         throw new Error("Cart is empty");
       }
 
-      let totalAmount = 0;
+      // Compute backend subtotal from variant prices
+      let dbSubtotal = 0;
       let totalItems = 0;
       const orderItems: any[] = [];
 
@@ -155,7 +165,7 @@ export const checkout = async (req: Request, res: Response) => {
         inv.reserved += item.quantity;
         await inv.save({ session });
 
-        totalAmount += variant.price * item.quantity;
+        dbSubtotal += variant.price * item.quantity;
         totalItems += item.quantity;
 
         // Snapshot checkout fields: name and sellerId
@@ -193,15 +203,50 @@ export const checkout = async (req: Request, res: Response) => {
         country: address.country || "India",
       };
 
+      // Calculate discount based on promoCode
+      let discount = 0;
+      if (promoCode) {
+        const code = String(promoCode).trim().toUpperCase();
+        if (code.startsWith("WELCOME10")) {
+          discount = dbSubtotal * 0.1;
+        } else if (code.startsWith("ATELIER5")) {
+          discount = Math.min(500, dbSubtotal);
+        } else if (code.startsWith("VIPCOMP")) {
+          discount = dbSubtotal * 0.15;
+        }
+      }
+
+      // Calculate shippingFee dynamically based on shippingMethod
+      let calculatedShippingFee = 0;
+      if (shippingMethod === "vip") {
+        calculatedShippingFee = 500;
+      } else if (shippingMethod === "express") {
+        calculatedShippingFee = 250;
+      } else {
+        // standard method or fallback
+        calculatedShippingFee = dbSubtotal > 999 ? 0 : 99;
+      }
+
+      // Calculate tax (8% of subtotal)
+      const calculatedTax = dbSubtotal * 0.08;
+
+      // Compute final totalAmount
+      const computedTotalAmount = Math.max(
+        0,
+        dbSubtotal + calculatedShippingFee + calculatedTax - discount,
+      );
+
       // 4️⃣ Create Order
       const order = new Order({
         userId,
         items: orderItems,
         shippingAddress,
-        totalAmount,
-        shippingFee: shippingFee || 0,
-        subtotal: subTotal || (totalAmount - (tax || 0)),
-        tax: tax || 0,
+        shippingMethod: shippingMethod || "standard",
+        shippingFee: calculatedShippingFee,
+        subtotal: dbSubtotal,
+        tax: calculatedTax,
+        discount: discount,
+        totalAmount: computedTotalAmount,
         paymentMethod: mappedMethod,
         paymentStatus: "unpaid",
         status: paymentMethod === "cod" ? "confirmed" : "pending",
@@ -238,7 +283,7 @@ export const checkout = async (req: Request, res: Response) => {
           razorpayOrderId: `cod_${savedOrder._id}`,
           method: "cod",
           status: "pending",
-          amount: totalAmount * 100, // in paise
+          amount: Math.round(computedTotalAmount * 100), // in paise
           currency: "INR",
         });
         await paymentRecord.save({ session });
@@ -249,6 +294,9 @@ export const checkout = async (req: Request, res: Response) => {
         const stripeSession = await createCheckoutSession({
           product: orderItems,
           orderId: savedOrder._id.toString(),
+          shippingFee: calculatedShippingFee,
+          tax: calculatedTax,
+          discount: discount,
         });
 
         if (!stripeSession || !stripeSession.url) {
@@ -265,7 +313,7 @@ export const checkout = async (req: Request, res: Response) => {
           razorpayOrderId: `stripe_${stripeSessionId}`,
           method: "online",
           status: "created",
-          amount: totalAmount * 100,
+          amount: Math.round(computedTotalAmount * 100),
           currency: "INR",
         });
         await paymentRecord.save({ session });
@@ -275,7 +323,7 @@ export const checkout = async (req: Request, res: Response) => {
       } else {
         // Razorpay integration ("online" or "upi")
         const razorpayOrder = await getRazorpay().orders.create({
-          amount: Math.round(totalAmount * 100),
+          amount: Math.round(computedTotalAmount * 100),
           currency: "INR",
           receipt: savedOrder._id.toString(),
           notes: {
@@ -295,7 +343,7 @@ export const checkout = async (req: Request, res: Response) => {
           razorpayOrderId: razorpayOrder.id,
           method: "online",
           status: "created",
-          amount: totalAmount * 100,
+          amount: Math.round(computedTotalAmount * 100),
           currency: "INR",
         });
         await paymentRecord.save({ session });

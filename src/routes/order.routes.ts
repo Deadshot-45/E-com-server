@@ -8,6 +8,7 @@ import {
   updateOrderStatus,
   getAllOrders,
   getSellerOrders,
+  getUserOrders,
 } from "../controllers/orderController.controller.js";
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.post("/checkout-session", protect, checkout);
 router.get("/", protect, getMyOrders);
 router.get("/:orderId", protect, getOrderById);
 router.post("/:orderId/cancel", protect, cancelOrder);
+router.get("/my-orders", protect, getUserOrders);
 
 // ─── Seller Routes ───────────────────────────────────────────────────────────
 router.get("/seller/all", protect, restrictTo("seller"), getSellerOrders);

@@ -93,46 +93,40 @@ export const addToCart = async (req: Request, res: Response) => {
       });
     }
 
-    // 🔥 Atomic update
-    const result = await Cart.updateOne(
-      {
-        userId,
-        "items.variantId": variantId,
-      },
-      {
-        $inc: {
-          "items.$.quantity": quantity,
-          totalItems: quantity,
-          totalAmount: quantity * variant.price,
-        },
-      },
+    let cart = await Cart.findOne({ userId });
+    if (!cart) {
+      cart = new Cart({ userId, items: [], totalItems: 0, totalAmount: 0 });
+    }
+
+    const itemIndex = cart.items.findIndex(
+      (item) => item.variantId.toString() === variantId,
     );
 
-    // If item doesn't exist → push
-    if (result.matchedCount === 0) {
-      await Cart.updateOne(
-        { userId },
-        {
-          $push: {
-            items: {
-              variantId,
-              productId: variant.productId,
-              sellerId: variant.sellerId,
-              quantity,
-              priceSnapshot: variant.price,
-              size: variant.attributes?.size,
-              color: variant.attributes?.color,
-              isSelected: true,
-            },
-          },
-          $inc: {
-            totalItems: quantity,
-            totalAmount: quantity * variant.price,
-          },
-        },
-        { upsert: true },
-      );
+    if (itemIndex > -1) {
+      cart.items[itemIndex].quantity += quantity;
+    } else {
+      cart.items.push({
+        variantId: new mongoose.Types.ObjectId(variantId),
+        productId: new mongoose.Types.ObjectId(variant.productId.toString()),
+        sellerId: new mongoose.Types.ObjectId(variant.sellerId.toString()),
+        quantity,
+        priceSnapshot: variant.price,
+        size: variant.attributes?.size,
+        color: variant.attributes?.color,
+        isSelected: true,
+        appliedCouponId: null as any,
+        discountAmount: 0,
+      });
     }
+
+    // Recalculate totals directly
+    cart.totalItems = cart.items.reduce((acc, item) => acc + item.quantity, 0);
+    cart.totalAmount = cart.items.reduce(
+      (acc, item) => acc + item.priceSnapshot * item.quantity,
+      0,
+    );
+
+    await cart.save();
 
     return res.status(200).json({
       success: true,
@@ -140,6 +134,7 @@ export const addToCart = async (req: Request, res: Response) => {
       code: "CART_ITEM_ADDED",
     });
   } catch (err) {
+    console.error("Add to cart error:", err);
     return res.status(500).json({ success: false });
   }
 };
@@ -184,15 +179,15 @@ export const removeFromCart = async (req: Request, res: Response) => {
       });
     }
 
-    const removedQuantity = item.quantity;
-    const amountReduction = item.priceSnapshot * removedQuantity;
-
     // 🔥 remove item
-    cart.items = cart.items.filter((i:any) => i.variantId.toString() !== variantId);
+    cart.items = cart.items.filter((i: any) => i.variantId.toString() !== variantId);
 
-    // 🔥 update totals safely
-    cart.totalItems -= removedQuantity;
-    cart.totalAmount -= amountReduction;
+    // Recalculate totals directly
+    cart.totalItems = cart.items.reduce((acc, i) => acc + i.quantity, 0);
+    cart.totalAmount = cart.items.reduce(
+      (acc, i) => acc + i.priceSnapshot * i.quantity,
+      0,
+    );
 
     if (cart.totalItems < 0) cart.totalItems = 0;
     if (cart.totalAmount < 0) cart.totalAmount = 0;
@@ -225,7 +220,7 @@ export const decrementFromCart = async (req: Request, res: Response) => {
         .json({ success: false, message: "Cart not found" });
     }
 
-    const item = cart.items.find((i:any) => i.variantId.toString() === variantId);
+    const item = cart.items.find((i: any) => i.variantId.toString() === variantId);
 
     if (!item) {
       return res
@@ -237,14 +232,18 @@ export const decrementFromCart = async (req: Request, res: Response) => {
 
     item.quantity -= reduceQty;
 
-    cart.totalItems -= reduceQty;
-    cart.totalAmount -= item.priceSnapshot * reduceQty;
-
     if (item.quantity <= 0) {
       cart.items = cart.items.filter(
         (i) => i.variantId.toString() !== variantId,
       );
     }
+
+    // Recalculate totals directly
+    cart.totalItems = cart.items.reduce((acc, i) => acc + i.quantity, 0);
+    cart.totalAmount = cart.items.reduce(
+      (acc, i) => acc + i.priceSnapshot * i.quantity,
+      0,
+    );
 
     if (cart.totalItems < 0) cart.totalItems = 0;
     if (cart.totalAmount < 0) cart.totalAmount = 0;

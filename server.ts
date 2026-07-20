@@ -19,14 +19,14 @@ import { ipBlockerMiddleware } from "./src/middleware/ipBlocker.js";
 import { sensitiveSecurityMiddleware } from "./src/middleware/sensitiveSecurityMiddleware.js";
 import authController from "./src/routes/auth.routes.js";
 import cartRoutes from "./src/routes/cart.routes.js";
-import marketplaceRoutes from "./src/routes/marketplaceRoutes.js";
+import marketplaceRoutes from "./src/routes/marketplace.routes.js";
 import orderRoutes from "./src/routes/order.routes.js";
 import paymentRoutes from "./src/routes/payment.routes.js";
 import otpRoutes from "./src/routes/otp.routes.js";
 import productRoutes from "./src/routes/product.routes.js";
 import reviewRoutes from "./src/routes/review.routes.js";
 import sellerRoutes from "./src/routes/seller.routes.js";
-import sellerAuthRoutes from "./src/routes/sellerRoutes.js";
+import sellerAuthRoutes from "./src/routes/seller-auth.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
 import dashboardRoutes from "./src/routes/dashboard.routes.js";
@@ -37,8 +37,6 @@ dotenv.config();
 
 import helmetImport from "helmet";
 import rateLimitImport from "express-rate-limit";
-import { createCheckoutSession } from "./src/utils/stripe.js";
-import { checkout } from "./src/controllers/checkoutController.controller.js";
 
 const helmet = (helmetImport as any).default || helmetImport;
 const rateLimit = (rateLimitImport as any).default || rateLimitImport;
@@ -239,8 +237,16 @@ class Server {
     //checkout session route
     // this.app.use("/api/orders/checkout-session",protect, checkout);
 
+    //User routes with strict security
+    this.app.use(
+      "/api/userController",
+      this.authLimiter,
+      ipBlockerMiddleware,
+      sensitiveSecurityMiddleware,
+      userRoutes,
+    );
+
     // Other routes
-    this.app.use("/api/userController", userRoutes);
     this.app.use("/api/products", productRoutes);
     this.app.use("/api/landing", landingRoutes);
 

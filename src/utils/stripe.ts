@@ -18,25 +18,79 @@ export const getStripeClient = (): Stripe => {
 };
 
 // Api to create a checkout session
-export const createCheckoutSession = async (data: { product: any[]; orderId: string }) => {
+export const createCheckoutSession = async (data: {
+  product: any[];
+  orderId: string;
+  shippingFee: number;
+  tax?: number;
+  discount?: number;
+}) => {
   try {
-    const { product, orderId } = data;
+    const { product, orderId, shippingFee, tax, discount } = data;
 
     const stripe = getStripeClient();
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: product.map((item: any) => ({
+    const lineItems: any[] = product.map((item: any) => ({
+      price_data: {
+        currency: 'inr',
+        product_data: {
+          name: item.name,
+          images: item.image && (item.image.startsWith('http://') || item.image.startsWith('https://')) ? [item.image] : undefined,
+        },
+        unit_amount: Math.round(item.price * 100), // Stripe expects the amount in cents
+      },
+      quantity: item.quantity,
+      adjustable_quantity: {
+        enabled: true,
+        minimum: 1,
+        maximum: item.quantity,
+      },
+    }));
+
+    if (shippingFee > 0) {
+      lineItems.push({
         price_data: {
           currency: 'inr',
           product_data: {
-            name: item.name,
-            images: item.image && (item.image.startsWith('http://') || item.image.startsWith('https://')) ? [item.image] : undefined,
+            name: 'Shipping Fee',
           },
-          unit_amount: Math.round(item.price * 100), // Stripe expects the amount in cents
+          unit_amount: Math.round(shippingFee * 100),
         },
-        quantity: item.quantity,
-      })),
+        quantity: 1,
+      });
+    }
+
+    if (tax && tax > 0) {
+      lineItems.push({
+        price_data: {
+          currency: 'inr',
+          product_data: {
+            name: 'Tax (8%)',
+          },
+          unit_amount: Math.round(tax * 100),
+        },
+        quantity: 1,
+      });
+    }
+
+    let discounts: any[] | undefined = undefined;
+    if (discount && discount > 0) {
+      try {
+        const coupon = await stripe.coupons.create({
+          amount_off: Math.round(discount * 100),
+          currency: 'inr',
+          duration: 'once',
+        });
+        discounts = [{ coupon: coupon.id }];
+      } catch (couponError) {
+        console.error('Error creating Stripe coupon:', couponError);
+      }
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: lineItems,
+      discounts,
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
       cancel_url: `${process.env.CLIENT_URL}/checkout?order_id=${orderId}&cancelled=true`,
