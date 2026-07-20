@@ -10,6 +10,9 @@ import { withTransaction } from "../utils/transaction.js";
 import { Order } from "../models/Order.js";
 import { createCheckoutSession } from "../utils/stripe.js";
 import { trackingStore } from "../store/tracking-store.js";
+import { asyncHandler } from "../middleware/asyncHandler.js";
+import { BadRequestError, BadGatewayError, UnauthorizedError } from "../utils/AppError.js";
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1️⃣  CHECKOUT  →  Cart ➜ Order + Razorpay order (for online) or direct COD
@@ -94,14 +97,13 @@ import { trackingStore } from "../store/tracking-store.js";
  *       401:
  *         description: Unauthorized
  */
-export const checkout = async (req: Request, res: Response) => {
-  try {
-    const result = await withTransaction(async (session) => {
-      const userId = req.user?._id;
+export const checkout = asyncHandler(async (req: Request, res: Response) => {
+  const result = await withTransaction(async (session) => {
+    const userId = req.user?._id;
 
-      if (!userId) {
-        throw new Error("User not authenticated");
-      }
+    if (!userId) {
+      throw new UnauthorizedError("User not authenticated");
+    }
 
       const {
         address,
@@ -110,21 +112,20 @@ export const checkout = async (req: Request, res: Response) => {
         promoCode,
       } = req.body;
 
-      if (!address || !paymentMethod) {
-        throw new Error("Address and payment method are required");
-      }
+    const allowedMethods = ["cod", "online", "card", "upi"];
+    if (!address || !paymentMethod) {
+      throw new BadRequestError("Address and payment method are required");
+    }
+    if (!allowedMethods.includes(paymentMethod)) {
+      throw new BadRequestError(`Invalid payment method. Use one of: ${allowedMethods.join(", ")}`);
+    }
 
-      const allowedMethods = ["cod", "online", "card", "upi"];
-      if (!allowedMethods.includes(paymentMethod)) {
-        throw new Error(`Invalid payment method. Use one of: ${allowedMethods.join(", ")}`);
-      }
+    // 1️⃣ Get cart
+    const cart = await Cart.findOne({ userId }).session(session || null);
 
-      // 1️⃣ Get cart
-      const cart = await Cart.findOne({ userId }).session(session || null);
-
-      if (!cart || cart.items.length === 0) {
-        throw new Error("Cart is empty");
-      }
+    if (!cart || cart.items.length === 0) {
+      throw new BadRequestError("Cart is empty");
+    }
 
       // Compute backend subtotal from variant prices
       let dbSubtotal = 0;
@@ -138,7 +139,7 @@ export const checkout = async (req: Request, res: Response) => {
         );
 
         if (!variant) {
-          throw new Error(`Variant not found: ${item.variantId}`);
+          throw new BadRequestError(`Variant not found: ${item.variantId}`);
         }
 
         const product = await Product.findById(variant.productId).session(
@@ -146,7 +147,7 @@ export const checkout = async (req: Request, res: Response) => {
         );
 
         if (!product || !product.isActive) {
-          throw new Error(`Product not active: ${product?.name}`);
+          throw new BadRequestError(`Product not active: ${product?.name}`);
         }
 
         const inv = await Inventory.findOne({
@@ -154,7 +155,7 @@ export const checkout = async (req: Request, res: Response) => {
         }).session(session || null);
 
         if (!inv || inv.stock < item.quantity) {
-          throw new Error(`Insufficient stock for item: ${product.name}`);
+          throw new BadRequestError(`Insufficient stock for item: ${product.name}`);
         }
 
         // 3️⃣ Reserve stock
@@ -305,7 +306,7 @@ export const checkout = async (req: Request, res: Response) => {
         });
 
         if (!stripeSession || !stripeSession.url) {
-          throw new Error("Failed to create Stripe checkout session");
+          throw new BadGatewayError("Failed to create Stripe checkout session");
         }
 
         const sessionUrl = stripeSession.url;
@@ -345,15 +346,17 @@ export const checkout = async (req: Request, res: Response) => {
           });
 
           if (!razorpayOrder || !razorpayOrder.id) {
-            throw new Error("Razorpay API returned empty order ID");
+            throw new BadGatewayError("Razorpay API returned empty order ID");
           }
 
           razorpayOrderId = razorpayOrder.id;
           razorpayAmount = Number(razorpayOrder.amount);
           razorpayCurrency = razorpayOrder.currency;
         } catch (rzpErr: any) {
-          console.error("Razorpay order creation error:", rzpErr);
-          throw new Error(`Razorpay Order Creation Failed: ${rzpErr?.message || rzpErr?.error?.description || "Invalid credentials"}`);
+          if (rzpErr?.statusCode) throw rzpErr; // already an AppError — re-throw
+          throw new BadGatewayError(
+            `Razorpay order creation failed: ${rzpErr?.message || rzpErr?.error?.description || "Invalid credentials"}`,
+          );
         }
 
         // Create Payment record
@@ -384,19 +387,13 @@ export const checkout = async (req: Request, res: Response) => {
       await cart.save({ session });
 
       return responseData;
-    });
+  });
 
-    return res.status(result.statusCode || 200).json({
-      success: result.success,
-      message: result.message,
-      data: result.data,
-      url: result.url || undefined,
-      razorpay: result.razorpay || undefined,
-    });
-  } catch (error: any) {
-    return res.status(400).json({
-      success: false,
-      message: error.message || "Checkout failed",
-    });
-  }
-};
+  return res.status(result.statusCode || 200).json({
+    success: result.success,
+    message: result.message,
+    data: result.data,
+    url: result.url || undefined,
+    razorpay: result.razorpay || undefined,
+  });
+});

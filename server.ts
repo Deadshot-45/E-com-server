@@ -7,7 +7,9 @@ import path from "node:path";
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import swaggerUi from "swagger-ui-express";
-import winston from "winston";
+import { logger as sharedLogger } from "./src/utils/logger.js";
+import type { Logger } from "winston";
+
 
 // Middleware & Utils
 import { globalErrorHandler } from "./src/middleware/errorMiddleware.js";
@@ -49,7 +51,7 @@ const PORT = process.env.PORT || 5000;
 class Server {
   public app: express.Application;
   private readonly port: string | number;
-  private readonly logger: winston.Logger;
+  private readonly logger: Logger;
 
   constructor() {
     this.app = express();
@@ -60,20 +62,8 @@ class Server {
     this.errorHandlers();
   }
 
-  private initLogger(): winston.Logger {
-    return winston.createLogger({
-      level: process.env.NODE_ENV === "production" ? "info" : "debug",
-      format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.errors({ stack: true }),
-        winston.format.json(),
-      ),
-      transports: [
-        new winston.transports.Console({
-          format: winston.format.simple(),
-        }),
-      ],
-    });
+  private initLogger() {
+    return sharedLogger;
   }
 
   private middlewares(): void {
@@ -334,11 +324,9 @@ class Server {
       });
     });
 
-    // Error fallback handler
-    this.app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-      console.error('Unhandled Server Error:', err);
-      res.status(500).json({ success: false, error: 'Internal Server Error' });
-    });
+    // NOTE: Error handling is delegated entirely to globalErrorHandler
+    // (registered in errorHandlers()). Do NOT add a second error-handler here
+    // as it would intercept errors before globalErrorHandler can normalise them.
   }
 
   private errorHandlers(): void {
@@ -381,7 +369,7 @@ class Server {
     });
   }
 
-  public getLogger(): winston.Logger {
+  public getLogger(): Logger {
     return this.logger;
   }
 
@@ -435,21 +423,35 @@ if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(process.argv[1]).href
 ) {
+  // ─── Process-level safety nets ─────────────────────────────────────────────
+  // Catch any synchronous exception that escapes all try/catch blocks.
+  process.on("uncaughtException", (err: Error) => {
+    server.getLogger().error("UNCAUGHT EXCEPTION 💥 — shutting down", {
+      name: err.name,
+      message: err.message,
+      stack: err.stack,
+    });
+    process.exit(1);
+  });
+
+  // Catch any unhandled promise rejection.
+  process.on("unhandledRejection", (reason: unknown) => {
+    server.getLogger().error("UNHANDLED REJECTION 💥 — shutting down", {
+      reason: String(reason),
+    });
+    server.close().finally(() => process.exit(1));
+  });
+
   process.on("SIGTERM", async () => {
+    server.getLogger().info("SIGTERM received — closing server gracefully");
     await server.close();
     process.exit(0);
   });
 
   await dbReady;
   server.listen();
-  console.log(`🚀 Vault Vogue Server running on http://localhost:${PORT}`);
-  console.log(
-    `📦 Order Tracking API: http://localhost:${PORT}/api/orders/:id/track`,
-  );
-  console.log(
-    `💳 Payment Tracking API: http://localhost:${PORT}/api/payments/:id/status`,
-  );
-  console.log(
-    `🔔 Webhooks Ingestion API: http://localhost:${PORT}/api/webhooks/payment`,
-  );
+  server.getLogger().info(`🚀 Vault Vogue Server running on http://localhost:${PORT}`);
+  server.getLogger().info(`📦 Order Tracking: http://localhost:${PORT}/api/orders/:id/track`);
+  server.getLogger().info(`💳 Payment Tracking: http://localhost:${PORT}/api/payments/:id/status`);
+  server.getLogger().info(`🔔 Webhooks: http://localhost:${PORT}/api/webhooks/payment`);
 }
