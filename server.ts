@@ -265,27 +265,83 @@ class Server {
       otpRoutes,
     );
 
-    // Swagger
+    const SWAGGER_CSS_URL =
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui.min.css";
+    const SWAGGER_JS_URLS = [
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-bundle.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-standalone-preset.min.js",
+    ];
+
+    // Raw swagger JSON
+    this.app.get("/api-docs/swagger.json", (_req, res) => {
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.status(200).json(swaggerSpec);
+    });
+
+    this.app.head("/api-docs/swagger.json", (_req, res) => {
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.status(200).end();
+    });
+
+    // Standalone HTML Swagger UI route for 100% Vercel compatibility
+    const renderSwaggerHtml = (_req: Request, res: Response) => {
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vault Vogue API Documentation</title>
+  <link rel="stylesheet" href="${SWAGGER_CSS_URL}" />
+  <style>
+    html { box-sizing: border-box; overflow-y: scroll; }
+    *, *:before, *:after { box-sizing: inherit; }
+    body { margin:0; background: #fafafa; }
+    .swagger-ui .topbar { display: none; }
+  </style>
+</head>
+<body>
+  <div id="swagger-ui"></div>
+  <script src="${SWAGGER_JS_URLS[0]}"></script>
+  <script src="${SWAGGER_JS_URLS[1]}"></script>
+  <script>
+    window.onload = function() {
+      window.ui = SwaggerUIBundle({
+        url: "/api-docs/swagger.json",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout"
+      });
+    };
+  </script>
+</body>
+</html>`);
+    };
+
+    this.app.get("/docs", renderSwaggerHtml);
+    this.app.get("/api-docs-html", renderSwaggerHtml);
+
+    // Swagger UI with CDN asset fallback for Vercel Serverless
     this.app.use(
       "/api-docs",
       swaggerUi.serve,
       swaggerUi.setup(swaggerSpec, {
         explorer: true,
-        customSiteTitle: "E-Commerce API Docs",
-        customCss: "",
+        customSiteTitle: "Vault Vogue API Documentation",
+        customCssUrl: SWAGGER_CSS_URL,
+        customJs: SWAGGER_JS_URLS,
+        customCss: `
+          .swagger-ui .topbar { display: none }
+          .swagger-ui .info { margin: 20px 0 }
+        `,
       }),
     );
-
-    // Raw swagger JSON
-    this.app.get("/api-docs/swagger.json", (req, res) => {
-      res.setHeader("Content-Type", "application/json; charset=utf-8");
-      res.status(200).json(swaggerSpec);
-    });
-
-    this.app.head("/api-docs/swagger.json", (req, res) => {
-      res.setHeader("Content-Type", "application/json; charset=utf-8");
-      res.status(200).end();
-    });
 
     // Serve uploads from MongoDB with fallback to local files
     this.app.get("/uploads/:filename", async (req: Request, res: Response) => {
