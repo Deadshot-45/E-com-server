@@ -10,7 +10,10 @@ import {
   BadRequestError,
   NotFoundError,
   ForbiddenError,
+  BadGatewayError,
 } from "../utils/AppError.js";
+import { createCheckoutSession } from "../utils/stripe.js";
+import { getRazorpay, getRazorpayKeys } from "../config/razorpay.js";
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -417,4 +420,206 @@ export const getUserOrders = asyncHandler(async (req: Request, res: Response) =>
     data: orders,
   });
 });
+
+/**
+ * @swagger
+ * /api/orders/retry-payment:
+ *   post:
+ *     summary: Retry payment for an existing unpaid or failed order
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               orderId:
+ *                 type: string
+ *               paymentMethod:
+ *                 type: string
+ *                 enum: [card, upi, cod, online]
+ *     responses:
+ *       200:
+ *         description: Payment gateway session re-created or status updated to COD
+ *       400:
+ *         description: Order already paid or invalid request
+ *       404:
+ *         description: Order not found
+ */
+export const retryPayment = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id;
+  if (!userId) throw new UnauthorizedError("User not authenticated");
+
+  const orderId = req.body?.orderId || req.params?.orderId;
+  if (!orderId) {
+    throw new BadRequestError("orderId is required");
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(orderId)) {
+    throw new BadRequestError("Invalid orderId format");
+  }
+
+  const order = await Order.findById(orderId);
+  if (!order) {
+    throw new NotFoundError("Order not found");
+  }
+
+  // Security check: order must belong to user unless admin
+  if (order.userId.toString() !== userId.toString() && req.user?.role !== "admin") {
+    throw new ForbiddenError("You do not have permission to retry payment for this order");
+  }
+
+  // Check if order is already paid
+  if (order.paymentStatus === "paid") {
+    throw new BadRequestError("This order is already paid");
+  }
+
+  const selectedPaymentMethod = req.body?.paymentMethod || order.paymentMethod || "card";
+  order.paymentMethod = selectedPaymentMethod;
+
+  // If order was cancelled due to payment failure, reset status to pending or confirmed
+  if (order.status === "cancelled" || order.paymentStatus === "failed") {
+    order.status = selectedPaymentMethod === "cod" ? "confirmed" : "pending";
+    order.paymentStatus = "unpaid";
+  }
+
+  await order.save();
+
+  const responseData: {
+    success: boolean;
+    message: string;
+    data: any;
+    url?: string;
+    razorpay?: {
+      orderId: string;
+      amount: number;
+      currency: string;
+      key: string;
+    };
+  } = {
+    success: true,
+    message: "Payment retry initialized",
+    data: order,
+  };
+
+  const calculatedShippingFee = order.shippingFee || 0;
+  const calculatedTax = order.tax || 0;
+  const discount = order.discount || 0;
+
+  if (selectedPaymentMethod === "cod") {
+    order.status = "confirmed";
+    order.paymentStatus = "unpaid";
+    await order.save();
+
+    // Create or update Payment record
+    await Payment.findOneAndUpdate(
+      { orderId: order._id },
+      {
+        $set: {
+          userId,
+          razorpayOrderId: `cod_${order._id}`,
+          method: "cod",
+          status: "pending",
+          amount: Math.round(order.totalAmount * 100),
+          currency: "INR",
+        },
+      },
+      { upsert: true, new: true }
+    );
+
+    responseData.message = "Order payment method changed to COD successfully";
+  } else if (selectedPaymentMethod === "card") {
+    // Re-create Stripe checkout session
+    const stripeSession = await createCheckoutSession({
+      product: order.items,
+      orderId: order._id.toString(),
+      shippingFee: calculatedShippingFee,
+      tax: calculatedTax,
+      discount: discount,
+    });
+
+    if (!stripeSession || !stripeSession.url) {
+      throw new BadGatewayError("Failed to create Stripe checkout session");
+    }
+
+    await Payment.findOneAndUpdate(
+      { orderId: order._id },
+      {
+        $set: {
+          userId,
+          razorpayOrderId: `stripe_${stripeSession.id}`,
+          method: "online",
+          status: "created",
+          amount: Math.round(order.totalAmount * 100),
+          currency: "INR",
+        },
+      },
+      { upsert: true, new: true }
+    );
+
+    responseData.message = "Stripe checkout session created";
+    responseData.url = stripeSession.url;
+  } else {
+    // Razorpay integration ("upi" or "online")
+    let razorpayOrderId: string;
+    let razorpayAmount: number = Math.round(order.totalAmount * 100);
+    let razorpayCurrency: string = "INR";
+    const { keyId } = getRazorpayKeys();
+
+    try {
+      const razorpayInstance = getRazorpay();
+      const razorpayOrder = await razorpayInstance.orders.create({
+        amount: razorpayAmount,
+        currency: razorpayCurrency,
+        receipt: order._id.toString(),
+        notes: {
+          orderId: order._id.toString(),
+          userId: userId.toString(),
+        },
+      });
+
+      if (!razorpayOrder || !razorpayOrder.id) {
+        throw new BadGatewayError("Razorpay API returned empty order ID");
+      }
+
+      razorpayOrderId = razorpayOrder.id;
+      razorpayAmount = Number(razorpayOrder.amount);
+      razorpayCurrency = razorpayOrder.currency;
+    } catch (rzpErr: any) {
+      if (rzpErr?.statusCode) throw rzpErr;
+      throw new BadGatewayError(
+        `Razorpay order creation failed: ${rzpErr?.message || rzpErr?.error?.description || "Invalid credentials"}`
+      );
+    }
+
+    await Payment.findOneAndUpdate(
+      { orderId: order._id },
+      {
+        $set: {
+          userId,
+          razorpayOrderId: razorpayOrderId,
+          method: "online",
+          status: "created",
+          amount: razorpayAmount,
+          currency: razorpayCurrency,
+        },
+      },
+      { upsert: true, new: true }
+    );
+
+    responseData.message = "Razorpay payment order created";
+    responseData.razorpay = {
+      orderId: razorpayOrderId,
+      amount: razorpayAmount,
+      currency: razorpayCurrency,
+      key: keyId,
+    };
+  }
+
+  return res.status(200).json(responseData);
+});
+
 

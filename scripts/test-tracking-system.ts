@@ -5,7 +5,7 @@ import { OrderStatus, PaymentStatus } from "../src/types/order-tracking.js";
 
 async function runVerificationTests() {
   console.log("==================================================");
-  console.log("🧪 STARTING VERIFICATION TESTS: RAZORPAY & STRIPE MULTI-GATEWAY DB SYNC");
+  console.log("🧪 STARTING VERIFICATION TESTS: RAZORPAY, STRIPE & RETRY PAYMENT DB SYNC");
   console.log("==================================================\n");
 
   let passedTests = 0;
