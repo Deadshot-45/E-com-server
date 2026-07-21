@@ -402,10 +402,96 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
                 }
               );
             }
+
+            try {
+              await OrderTrackingModel.updateOne(
+                { orderId: order._id.toString() },
+                {
+                  $set: {
+                    currentStatus: "PAYMENT_AUTHORIZED",
+                    totalAmount: order.totalAmount,
+                  },
+                  $push: {
+                    checkpoints: {
+                      checkpointId: `chk_${Date.now()}`,
+                      orderId: order._id.toString(),
+                      status: "PAYMENT_AUTHORIZED",
+                      location: "Stripe Gateway Check",
+                      description: "Payment confirmed via manual status check",
+                      timestamp: new Date().toISOString(),
+                    },
+                  },
+                },
+                { upsert: true }
+              );
+            } catch (tErr) {}
           }
         }
       } catch (stripeErr) {
         console.error("Error verifying Stripe payment status:", stripeErr);
+      }
+    }
+
+    // Check Razorpay API if payment status is not paid yet
+    if (
+      payment.status !== "paid" &&
+      payment.razorpayOrderId &&
+      !payment.razorpayOrderId.startsWith("stripe_") &&
+      !payment.razorpayOrderId.startsWith("cod_") &&
+      !payment.razorpayOrderId.startsWith("order_mock_")
+    ) {
+      try {
+        const razorpayInstance = getRazorpay();
+        const rzpOrder: any = await razorpayInstance.orders.fetch(payment.razorpayOrderId);
+        if (rzpOrder && (rzpOrder.status === "paid" || rzpOrder.amount_paid > 0)) {
+          payment.status = "paid";
+          payment.paidAt = new Date();
+          await payment.save();
+
+          const order = await Order.findById(orderId);
+          if (order && order.status === "pending") {
+            order.status = "confirmed";
+            order.paymentStatus = "paid";
+            await order.save();
+
+            for (const item of order.items) {
+              await Inventory.updateOne(
+                { variantId: item.variantId },
+                {
+                  $inc: {
+                    reserved: -item.quantity,
+                    sold: item.quantity,
+                  },
+                }
+              );
+            }
+
+            try {
+              await OrderTrackingModel.updateOne(
+                { orderId: order._id.toString() },
+                {
+                  $set: {
+                    currentStatus: "PAYMENT_AUTHORIZED",
+                    totalAmount: order.totalAmount,
+                  },
+                  $push: {
+                    checkpoints: {
+                      checkpointId: `chk_${Date.now()}`,
+                      orderId: order._id.toString(),
+                      status: "PAYMENT_AUTHORIZED",
+                      location: "Razorpay Gateway Check",
+                      description: "Payment confirmed via manual status check",
+                      timestamp: new Date().toISOString(),
+                    },
+                  },
+                },
+                { upsert: true }
+              );
+            } catch (tErr) {}
+          }
+        }
+      } catch (rzpErr) {
+        console.error("Error verifying Razorpay payment status:", rzpErr);
       }
     }
 
