@@ -283,7 +283,7 @@ export const updateOrderStatus = asyncHandler(async (req: Request, res: Response
 
   const validTransitions: Record<string, string[]> = {
     pending: ["confirmed", "cancelled"],
-    confirmed: ["shipped", "cancelled"],
+    confirmed: ["shipped", "cancelled", "processing"],
     shipped: ["delivered"],
     delivered: [],
     cancelled: [],
@@ -347,34 +347,6 @@ export const updateOrderStatus = asyncHandler(async (req: Request, res: Response
  *       200:
  *         description: All orders retrieved
  */
-export const getAllOrders = asyncHandler(async (req: Request, res: Response) => {
-  const page = Math.max(1, parseInt(req.query.page as string) || 1);
-  const limit = Math.min(50, Math.max(1, parseInt(req.query.limit as string) || 20));
-  const skip = (page - 1) * limit;
-
-  const filter: any = {};
-  if (req.query.status) filter.status = req.query.status;
-  if (req.query.paymentStatus) filter.paymentStatus = req.query.paymentStatus;
-
-  const [orders, total] = await Promise.all([
-    Order.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
-    Order.countDocuments(filter),
-  ]);
-
-  const totalPages = Math.ceil(total / limit);
-
-  return res.status(200).json({
-    success: true,
-    message: "Orders retrieved successfully",
-    data: orders,
-    pagination: {
-      total, page, limit, totalPages,
-      hasNextPage: page < totalPages,
-      hasPrevPage: page > 1,
-    },
-  });
-});
-
 
 export const getSellerOrders = asyncHandler(async (req: Request, res: Response) => {
   const sellerId = req.user?._id;

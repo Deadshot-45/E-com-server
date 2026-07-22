@@ -3,44 +3,9 @@ import mongoose from "mongoose";
 import Seller from "../models/Seller.js";
 import User from "../models/User.js";
 import { hashPassword } from "../utils/passwordUtils.js";
+import { protect, restrictTo } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
-
-// GET all sellers
-router.get("/", async (req, res) => {
-  try {
-    const sellers = await Seller.find().sort({ createdAt: -1 });
-    res.json({ success: true, data: sellers });
-  } catch (err: any) {
-    res.status(400).json({ success: false, message: err.message });
-  }
-});
-
-// GET seller by email
-router.get("/by-email/:email", async (req, res) => {
-  try {
-    const seller = await Seller.findOne({ contactEmail: req.params.email.toLowerCase() });
-    if (!seller) {
-      return res.status(404).json({ success: false, message: "Seller not found" });
-    }
-    res.json({ success: true, data: seller });
-  } catch (err: any) {
-    res.status(400).json({ success: false, message: err.message });
-  }
-});
-
-// GET seller by ID
-router.get("/:id", async (req, res) => {
-  try {
-    const seller = await Seller.findById(req.params.id);
-    if (!seller) {
-      return res.status(404).json({ success: false, message: "Seller not found" });
-    }
-    res.json({ success: true, data: seller });
-  } catch (err: any) {
-    res.status(400).json({ success: false, message: err.message });
-  }
-});
 
 // POST onboard seller
 router.post("/onboard", async (req, res) => {
@@ -85,6 +50,49 @@ router.post("/onboard", async (req, res) => {
     res.status(400).json({ success: false, message: err.message });
   }
 });
+
+
+
+router.use(protect, restrictTo("seller", "admin")); 
+
+// GET all sellers
+router.get("/", async (req, res) => {
+  try {
+    const sellers = await Seller.find().sort({ createdAt: -1 });
+    res.json({ success: true, data: sellers });
+  } catch (err: any) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+
+
+// GET seller by email
+router.get("/by-email/:email", async (req, res) => {
+  try {
+    const seller = await Seller.findOne({ contactEmail: req.params.email.toLowerCase() });
+    if (!seller) {
+      return res.status(404).json({ success: false, message: "Seller not found" });
+    }
+    res.json({ success: true, data: seller });
+  } catch (err: any) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+
+// GET seller by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const seller = await Seller.findById(req.params.id);
+    if (!seller) {
+      return res.status(404).json({ success: false, message: "Seller not found" });
+    }
+    res.json({ success: true, data: seller });
+  } catch (err: any) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+
+
 
 // PATCH Approve seller
 router.patch("/:id/approve", async (req, res) => {

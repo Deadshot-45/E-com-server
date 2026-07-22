@@ -1,79 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
 import User from "../models/User.js";
 import { protect, restrictTo } from "../middleware/authMiddleware.js";
-import { createUser, getUserDetails } from "../controllers/userController.controller.js";
+import { getUserDetails } from "../controllers/userController.controller.js";
 
 const router = express.Router();
 
-/**
- * @swagger
- * /api/userController/admin/all:
- *   get:
- *     summary: Get all users with profiles and order counts (Admin only)
- *     tags: [userController]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Users retrieved successfully
- */
-router.get("/admin/all", protect, restrictTo("admin"), async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const pipeline = [
-      {
-        $lookup: {
-          from: "customers",
-          localField: "_id",
-          foreignField: "userId",
-          as: "customerProfile",
-        },
-      },
-      {
-        $lookup: {
-          from: "sellers",
-          localField: "_id",
-          foreignField: "ownerUserId",
-          as: "sellerProfile",
-        },
-      },
-      {
-        $lookup: {
-          from: "orders",
-          localField: "_id",
-          foreignField: "userId",
-          as: "userOrders",
-        },
-      },
-      {
-        $project: {
-          _id: 1,
-          email: 1,
-          role: 1,
-          isActive: 1,
-          createdAt: 1,
-          fullName: {
-            $ifNull: [
-              { $arrayElemAt: ["$customerProfile.fullName", 0] },
-              { $ifNull: [
-                { $arrayElemAt: ["$sellerProfile.name", 0] },
-                "$email"
-              ]}
-            ]
-          },
-          ordersCount: { $size: "$userOrders" },
-        },
-      },
-      {
-        $sort: { createdAt: -1 }
-      }
-    ];
 
-    const users = await User.aggregate(pipeline as any);
-    res.json({ success: true, data: users });
-  } catch (error) {
-    next(error);
-  }
-});
 
 /**
  * @swagger
@@ -95,6 +27,5 @@ router.get("/admin/all", protect, restrictTo("admin"), async (req: Request, res:
  *         description: User not found
  */
 
-router.post("/", protect, restrictTo("admin"), createUser);
 router.get("/:id", protect, getUserDetails);
 export default router;

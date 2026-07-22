@@ -32,11 +32,13 @@ import sellerAuthRoutes from "./src/routes/seller-auth.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import landingRoutes from "./src/routes/landing.routes.js";
 import dashboardRoutes from "./src/routes/dashboard.routes.js";
+import adminRoutes from "./src/routes/admin.routes.js";
 import orderTrackingRoutes from "./src/routes/orderRoutes.js";
 import paymentTrackingRoutes from "./src/routes/paymentRoutes.js";
 import webhookRoutes from "./src/routes/webhookRoutes.js";
 import { googleLogin } from "./src/controllers/authController.controller.js";
 import Upload from "./src/models/Upload.js";
+import { seedAdminUser } from "./src/utils/seedAdmin.js";
 
 dotenv.config();
 
@@ -228,6 +230,15 @@ class Server {
       userRoutes,
     );
 
+    // Admin routes with strict security
+    this.app.use(
+      "/api/admin",
+      this.authLimiter,
+      ipBlockerMiddleware,
+      sensitiveSecurityMiddleware,
+      adminRoutes,
+    );
+
     // Other routes
     this.app.use("/api/products", productRoutes);
     this.app.use("/api/landing", landingRoutes);
@@ -407,6 +418,7 @@ class Server {
         retryWrites: false,
       });
       this.logger.info("✅ MongoDB Connected");
+      await seedAdminUser();
 
       mongoose.connection.on("error", (err) => {
         this.logger.error("MongoDB error:", err);

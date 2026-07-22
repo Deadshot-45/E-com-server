@@ -5,8 +5,6 @@ import {
   getMyOrders,
   getOrderById,
   cancelOrder,
-  updateOrderStatus,
-  getAllOrders,
   getSellerOrders,
   getUserOrders,
   retryPayment,
@@ -29,14 +27,5 @@ router.get("/my-orders", protect, getUserOrders);
 
 // ─── Seller Routes ───────────────────────────────────────────────────────────
 router.get("/seller/all", protect, restrictTo("seller"), getSellerOrders);
-
-// ─── Admin Routes ────────────────────────────────────────────────────────────
-router.get("/admin/all", protect, restrictTo("admin"), getAllOrders);
-router.patch(
-  "/:orderId/status",
-  protect,
-  restrictTo("admin", "seller"),
-  updateOrderStatus,
-);
 
 export default router;
