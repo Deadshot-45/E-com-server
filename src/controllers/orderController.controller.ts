@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Order } from "../models/Order.js";
 import { Inventory } from "../models/Inventory.js";
-import { Payment } from "../models/Payment.js";
+import { Payment } from "../models/Payments.js";
 import mongoose from "mongoose";
 import { withTransaction } from "../utils/transaction.js";
 import { asyncHandler } from "../middleware/asyncHandler.js";

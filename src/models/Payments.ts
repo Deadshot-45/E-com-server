@@ -9,6 +9,8 @@ export interface IPayment extends Document {
   razorpayPaymentId?: string;
   razorpaySignature?: string;
 
+  transactionId?: string;
+
   method: "cod" | "online";
   status: "created" | "pending" | "paid" | "failed" | "refunded";
 

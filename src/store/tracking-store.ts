@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 import { Order } from "../models/Order.js";
 import { OrderTrackingModel } from "../models/OrderTracking.js";
-import { PaymentTransactionModel } from "../models/PaymentTransaction.js";
 import { WebhookLogModel } from "../models/WebhookLog.js";
 import {
   OrderStatus,
   OrderTrackingDetails,
+  PaymentGateway,
   PaymentStatus,
   PaymentTransaction,
   TrackingCheckpoint,
   WebhookLog,
 } from "../types/order-tracking.js";
+import { PaymentTransactionModel } from "../models/PaymentTransaction.js";
 
 export function mapDbStatusToOrderStatus(dbStatus: string): OrderStatus {
   switch (dbStatus?.toLowerCase()) {
@@ -192,8 +193,8 @@ export class TrackingStore {
             orderId: dbPayment.orderId,
             amount: dbPayment.amount,
             currency: dbPayment.currency,
-            gateway: dbPayment.gateway,
-            status: dbPayment.status,
+            gateway: dbPayment.gateway as PaymentGateway,
+            status: dbPayment.status as PaymentStatus,
             idempotencyKey: dbPayment.idempotencyKey,
             gatewayTransactionId: dbPayment.gatewayTransactionId,
             errorMessage: dbPayment.errorMessage,
@@ -216,8 +217,8 @@ export class TrackingStore {
             orderId: dbPayment.orderId,
             amount: dbPayment.amount,
             currency: dbPayment.currency,
-            gateway: dbPayment.gateway,
-            status: dbPayment.status,
+            gateway: dbPayment.gateway as PaymentGateway,
+            status: dbPayment.status as PaymentStatus,
             idempotencyKey: dbPayment.idempotencyKey,
             gatewayTransactionId: dbPayment.gatewayTransactionId,
             errorMessage: dbPayment.errorMessage,
@@ -242,7 +243,19 @@ export class TrackingStore {
       try {
         await PaymentTransactionModel.findOneAndUpdate(
           { paymentId: payment.paymentId },
-          { $set: payment },
+          {
+            $set: {
+              paymentId: payment.paymentId,
+              orderId: payment.orderId,
+              amount: payment.amount,
+              currency: payment.currency,
+              gateway: payment.gateway,
+              status: payment.status,
+              idempotencyKey: payment.idempotencyKey,
+              gatewayTransactionId: payment.gatewayTransactionId,
+              errorMessage: payment.errorMessage,
+            }
+          },
           { upsert: true, new: true }
         );
       } catch (err) {}

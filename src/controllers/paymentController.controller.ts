@@ -2,12 +2,14 @@ import { Request, Response } from "express";
 import crypto from "crypto";
 import mongoose from "mongoose";
 import { withTransaction } from "../utils/transaction.js";
-import { Payment } from "../models/Payment.js";
 import { Order } from "../models/Order.js";
 import { Inventory } from "../models/Inventory.js";
 import { OrderTrackingModel } from "../models/OrderTracking.js";
 import { getRazorpay } from "../config/razorpay.js";
 import { getStripeClient } from "../utils/stripe.js";
+import { Payment } from "../models/Payments.js";
+import { PaymentTransactionModel } from "../models/PaymentTransaction.js";
+import { PaymentStatus } from "../types/order-tracking.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1️⃣  VERIFY PAYMENT  →  Frontend calls after Razorpay checkout completes
@@ -51,131 +53,358 @@ import { getStripeClient } from "../utils/stripe.js";
  */
 export const verifyPayment = async (req: Request, res: Response) => {
   try {
-    const result = await withTransaction(async (session) => {
-      const userId = req.user?._id;
-      const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-        req.body;
+    const userId = req.user?._id;
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "User not authenticated",
+      });
+    }
 
-      if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-        throw new Error("Missing payment verification fields");
-      }
+    const {
+      orderId,
+      order_id,
+      session_id,
+      paymentIntentId,
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    } = req.body;
 
-      // 1️⃣ Verify signature
-      const secret = process.env.RAZORPAY_KEY_SECRET;
-      if (!secret) {
-        throw new Error("Razorpay secret not configured");
-      }
+    const targetOrderId = orderId || order_id;
 
-      const generatedSignature = crypto
-        .createHmac("sha256", secret)
-        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-        .digest("hex");
+    // ─────────────────────────────────────────────────────────────────────────
+    // Scenario A: Razorpay Signature Verification
+    // ─────────────────────────────────────────────────────────────────────────
+    if (razorpay_order_id && razorpay_payment_id && razorpay_signature) {
+      const result = await withTransaction(async (session) => {
+        // 1️⃣ Verify signature
+        const secret = process.env.RAZORPAY_KEY_SECRET;
+        if (!secret) {
+          throw new Error("Razorpay secret not configured");
+        }
 
-      if (generatedSignature !== razorpay_signature) {
-        // Signature mismatch → payment tampered
-        await Payment.updateOne(
-          { razorpayOrderId: razorpay_order_id },
-          { status: "failed", failedAt: new Date() },
-          { session },
-        );
+        const generatedSignature = crypto
+          .createHmac("sha256", secret)
+          .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+          .digest("hex");
 
-        throw new Error("Payment verification failed — signature mismatch");
-      }
+        if (generatedSignature !== razorpay_signature) {
+          await Payment.updateOne(
+            { razorpayOrderId: razorpay_order_id },
+            { status: "failed", failedAt: new Date() },
+            { session },
+          );
+          throw new Error("Payment verification failed — signature mismatch");
+        }
 
-      // 2️⃣ Find and update payment record
-      const payment = await Payment.findOne({
-        razorpayOrderId: razorpay_order_id,
-        userId,
-      }).session(session || null);  
+        // 2️⃣ Find and update payment record
+        const payment = await Payment.findOne({
+          razorpayOrderId: razorpay_order_id,
+          userId,
+        }).session(session || null);
 
-      if (!payment) {
-        throw new Error("Payment record not found");
-      }
+        if (!payment) {
+          throw new Error("Payment record not found");
+        }
 
-      if (payment.status === "paid") {
-        return {
-          success: true,
-          message: "Payment already verified",
-          statusCode: 200,
-        };
-      }
-
-      payment.razorpayPaymentId = razorpay_payment_id;
-      payment.razorpaySignature = razorpay_signature;
-      payment.status = "paid";
-      payment.paidAt = new Date();
-      await payment.save({ session });
-
-      // 3️⃣ Update order status
-      const order = await Order.findById(payment.orderId).session(session || null);
-
-      if (!order) {
-        throw new Error("Associated order not found");
-      }
-
-      order.status = "confirmed";
-      order.paymentStatus = "paid";
-      await order.save({ session });
-
-      // 4️⃣ Finalize inventory — move from reserved to sold
-      for (const item of order.items) {
-        await Inventory.updateOne(
-          { variantId: item.variantId },
-          {
-            $inc: {
-              reserved: -item.quantity,
-              sold: item.quantity,
+        if (payment.status === "paid") {
+          const order = await Order.findById(payment.orderId).session(
+            session || null,
+          );
+          return {
+            success: true,
+            message: "Payment already verified",
+            data: {
+              orderId: payment.orderId,
+              paymentId: payment._id,
+              status: order?.status || "confirmed",
+              paymentStatus: order?.paymentStatus || "paid",
             },
-          },
-          { session },
-        );
-      }
+            statusCode: 200,
+          };
+        }
 
-      // 5️⃣ Update OrderTracking timeline & status
-      try {
-        await OrderTrackingModel.updateOne(
-          { orderId: order._id.toString() },
-          {
-            $set: {
-              currentStatus: "PAYMENT_AUTHORIZED",
-              totalAmount: order.totalAmount,
-            },
-            $push: {
-              checkpoints: {
-                checkpointId: `chk_${Date.now()}`,
-                orderId: order._id.toString(),
-                status: "PAYMENT_AUTHORIZED",
-                location: "Razorpay Gateway",
-                description: "Payment captured and order status confirmed",
-                timestamp: new Date().toISOString(),
+        payment.razorpayPaymentId = razorpay_payment_id;
+        payment.razorpaySignature = razorpay_signature;
+        payment.status = "paid";
+        payment.paidAt = new Date();
+        await payment.save({ session });
+
+        // 3️⃣ Update order status
+        const order = await Order.findById(payment.orderId).session(
+          session || null,
+        );
+        if (!order) {
+          throw new Error("Associated order not found");
+        }
+
+        order.status = "confirmed";
+        order.paymentStatus = "paid";
+        await order.save({ session });
+
+        // 4️⃣ Finalize inventory — move from reserved to sold
+        for (const item of order.items) {
+          await Inventory.updateOne(
+            { variantId: item.variantId },
+            {
+              $inc: {
+                reserved: -item.quantity,
+                sold: item.quantity,
               },
             },
+            { session },
+          );
+        }
+
+        // 5️⃣ Update OrderTracking timeline & status
+        try {
+          await OrderTrackingModel.updateOne(
+            { orderId: order._id.toString() },
+            {
+              $set: {
+                currentStatus: "PAYMENT_AUTHORIZED",
+                totalAmount: order.totalAmount,
+              },
+              $push: {
+                checkpoints: {
+                  checkpointId: `chk_${Date.now()}`,
+                  orderId: order._id.toString(),
+                  status: "PAYMENT_AUTHORIZED",
+                  location: "Razorpay Gateway",
+                  description: "Payment captured and order status confirmed",
+                  timestamp: new Date().toISOString(),
+                },
+              },
+            },
+            { upsert: true, session },
+          );
+        } catch (trackErr) {
+          console.warn("OrderTracking sync non-fatal error:", trackErr);
+        }
+
+        // 6 update Payment transaction record if exists
+        try {
+          await PaymentTransactionModel.findOneAndUpdate(
+            {
+              idempotencyKey: razorpay_order_id,
+              userId,
+            },
+            {
+              $set: {
+                status: "AUTHORIZED" as PaymentStatus,
+              },
+            },
+            { new: true, session },
+          ).session(session || null);
+        } catch (error) {
+          console.error("Error updating PaymentTransaction:", error);
+        }
+
+        return {
+          success: true,
+          message: "Payment verified and order confirmed",
+          data: {
+            orderId: order._id,
+            paymentId: payment._id,
+            status: order.status,
+            paymentStatus: order.paymentStatus,
           },
-          { upsert: true, session }
+          statusCode: 200,
+        };
+      });
+
+      return res.status(result.statusCode || 200).json({
+        success: result.success,
+        message: result.message,
+        data: result.data,
+      });
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Scenario B: Stripe Checkout Session or Generic Order confirmation
+    // ─────────────────────────────────────────────────────────────────────────
+    if (targetOrderId || session_id) {
+      const result = await withTransaction(async (session) => {
+        // Resolve payment record by targetOrderId or session_id
+        let payment = null;
+        if (targetOrderId) {
+          payment = await Payment.findOne({
+            orderId: targetOrderId,
+            userId,
+          }).session(session || null);
+        }
+        if (!payment && session_id) {
+          payment = await Payment.findOne({
+            razorpayOrderId: `stripe_${session_id}`,
+            userId,
+          }).session(session || null);
+        }
+
+        if (!payment) {
+          throw new Error(
+            "Payment record not found for the given order or session",
+          );
+        }
+
+        const order = await Order.findById(payment.orderId).session(
+          session || null,
         );
-      } catch (trackErr) {
-        console.warn("OrderTracking sync non-fatal error:", trackErr);
-      }
+        if (!order) {
+          throw new Error("Associated order not found");
+        }
 
-      return {
-        success: true,
-        message: "Payment verified and order confirmed",
-        data: {
-          orderId: order._id,
-          paymentId: payment._id,
-          status: order.status,
-          paymentStatus: order.paymentStatus,
-        },
-        statusCode: 200,
-      };
-    });
+        // If payment is already completed (e.g. Stripe webhook already executed)
+        if (payment.status === "paid") {
+          return {
+            success: true,
+            message: "Payment already verified",
+            data: {
+              orderId: order._id,
+              paymentId: payment._id,
+              status: order.status,
+              paymentStatus: order.paymentStatus,
+            },
+            statusCode: 200,
+          };
+        }
 
-    return res.status(result.statusCode || 200).json({
-      success: result.success,
-      message: result.message,
-      data: result.data,
+        // Check Stripe if it's a stripe checkout session
+        if (payment.razorpayOrderId?.startsWith("stripe_")) {
+          const stripeSessionId = payment.razorpayOrderId.replace(
+            "stripe_",
+            "",
+          );
+          const stripe = getStripeClient();
+          const stripeSession =
+            await stripe.checkout.sessions.retrieve(stripeSessionId);
+
+          if (stripeSession.payment_status === "paid") {
+            payment.status = "paid";
+            payment.paidAt = new Date();
+            payment.razorpayPaymentId =
+              (stripeSession.payment_intent as string) || stripeSession.id;
+            await payment.save({ session });
+
+            order.status = "confirmed";
+            order.paymentStatus = "paid";
+            if (stripeSession.payment_intent) {
+              order.stripePaymentIntentId =
+                stripeSession.payment_intent as string;
+            }
+            await order.save({ session });
+
+            // Finalize inventory
+            for (const item of order.items) {
+              await Inventory.updateOne(
+                { variantId: item.variantId },
+                {
+                  $inc: {
+                    reserved: -item.quantity,
+                    sold: item.quantity,
+                  },
+                },
+                { session },
+              );
+            }
+
+            // Sync with OrderTrackingModel
+            try {
+              await OrderTrackingModel.updateOne(
+                { orderId: order._id.toString() },
+                {
+                  $set: {
+                    currentStatus: "PAYMENT_AUTHORIZED",
+                    totalAmount: order.totalAmount,
+                  },
+                  $push: {
+                    checkpoints: {
+                      checkpointId: `chk_${Date.now()}`,
+                      orderId: order._id.toString(),
+                      status: "PAYMENT_AUTHORIZED",
+                      location: "Stripe Gateway Check",
+                      description:
+                        "Payment confirmed via success redirect check",
+                      timestamp: new Date().toISOString(),
+                    },
+                  },
+                },
+                { upsert: true, session },
+              );
+
+              await PaymentTransactionModel.findOneAndUpdate(
+                {
+                  idempotencyKey: `stripe_${stripeSessionId}`,
+                  userId,
+                },
+                {
+                  $set: {
+                    status: "AUTHORIZED" as PaymentStatus,
+                  },
+                },
+                { new: true, session },
+              ).session(session || null);
+            } catch (trackErr) {
+              console.warn("OrderTracking sync error:", trackErr);
+            }
+
+
+            return {
+              success: true,
+              message: "Payment verified and order confirmed",
+              data: {
+                orderId: order._id,
+                paymentId: payment._id,
+                status: order.status,
+                paymentStatus: order.paymentStatus,
+              },
+              statusCode: 200,
+            };
+          } else {
+            throw new Error("Stripe checkout session has not been paid yet");
+          }
+        }
+
+        // If it's COD, confirm immediately (or fallback confirmation)
+        if (
+          payment.razorpayOrderId?.startsWith("cod_") ||
+          payment.method === "cod"
+        ) {
+          payment.status = "pending";
+          await payment.save({ session });
+          order.status = "confirmed";
+          await order.save({ session });
+
+          return {
+            success: true,
+            message: "COD Order Confirmed Awaiting Delivery",
+            data: {
+              orderId: order._id,
+              paymentId: payment._id,
+              status: order.status,
+              paymentStatus: order.paymentStatus,
+            },
+            statusCode: 200,
+          };
+        }
+
+        throw new Error("Generic payment method confirmation not completed");
+      });
+
+      return res.status(result.statusCode || 200).json({
+        success: result.success,
+        message: result.message,
+        data: result.data,
+      });
+    }
+
+    return res.status(400).json({
+      success: false,
+      message:
+        "Invalid verification request payload. Provide orderId or Razorpay signature fields.",
     });
   } catch (error: any) {
+    console.error("Payment confirmation failed:", error);
     return res.status(400).json({
       success: false,
       message: error.message || "Payment verification failed",
@@ -368,16 +597,21 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
     }
 
     // Check Stripe session if payment status is not paid yet
-    if (payment.status !== "paid" && payment.razorpayOrderId?.startsWith("stripe_")) {
+    if (
+      payment.status !== "paid" &&
+      payment.razorpayOrderId?.startsWith("stripe_")
+    ) {
       const stripeSessionId = payment.razorpayOrderId.replace("stripe_", "");
       try {
         const stripe = getStripeClient();
-        const stripeSession = await stripe.checkout.sessions.retrieve(stripeSessionId);
+        const stripeSession =
+          await stripe.checkout.sessions.retrieve(stripeSessionId);
 
         if (stripeSession.payment_status === "paid") {
           payment.status = "paid";
           payment.paidAt = new Date();
-          payment.razorpayPaymentId = (stripeSession.payment_intent as string) || stripeSession.id;
+          payment.razorpayPaymentId =
+            (stripeSession.payment_intent as string) || stripeSession.id;
           await payment.save();
 
           // Update corresponding Order
@@ -386,7 +620,8 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
             order.status = "confirmed";
             order.paymentStatus = "paid";
             if (stripeSession.payment_intent) {
-              order.stripePaymentIntentId = stripeSession.payment_intent as string;
+              order.stripePaymentIntentId =
+                stripeSession.payment_intent as string;
             }
             await order.save();
 
@@ -399,7 +634,7 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
                     reserved: -item.quantity,
                     sold: item.quantity,
                   },
-                }
+                },
               );
             }
 
@@ -422,7 +657,7 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
                     },
                   },
                 },
-                { upsert: true }
+                { upsert: true },
               );
             } catch (tErr) {}
           }
@@ -442,8 +677,13 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
     ) {
       try {
         const razorpayInstance = getRazorpay();
-        const rzpOrder: any = await razorpayInstance.orders.fetch(payment.razorpayOrderId);
-        if (rzpOrder && (rzpOrder.status === "paid" || rzpOrder.amount_paid > 0)) {
+        const rzpOrder: any = await razorpayInstance.orders.fetch(
+          payment.razorpayOrderId,
+        );
+        if (
+          rzpOrder &&
+          (rzpOrder.status === "paid" || rzpOrder.amount_paid > 0)
+        ) {
           payment.status = "paid";
           payment.paidAt = new Date();
           await payment.save();
@@ -462,7 +702,7 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
                     reserved: -item.quantity,
                     sold: item.quantity,
                   },
-                }
+                },
               );
             }
 
@@ -485,7 +725,7 @@ export const getPaymentStatus = async (req: Request, res: Response) => {
                     },
                   },
                 },
-                { upsert: true }
+                { upsert: true },
               );
             } catch (tErr) {}
           }

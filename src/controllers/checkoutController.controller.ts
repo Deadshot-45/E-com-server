@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import mongoose from "mongoose";
 import { Cart } from "../models/Cart.js";
 import { Inventory } from "../models/Inventory.js";
-import { Payment } from "../models/Payment.js";
 import { Product } from "../models/Product.js";
 import { ProductVariant } from "../models/ProductVariant.js";
 import { getRazorpay, getRazorpayKeys } from "../config/razorpay.js";
@@ -11,7 +10,9 @@ import { Order } from "../models/Order.js";
 import { createCheckoutSession } from "../utils/stripe.js";
 import { trackingStore } from "../store/tracking-store.js";
 import { asyncHandler } from "../middleware/asyncHandler.js";
+import { paymentService } from "../services/payment-service.js";
 import { BadRequestError, BadGatewayError, UnauthorizedError } from "../utils/AppError.js";
+import { Payment } from "../models/Payments.js";
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -324,6 +325,19 @@ export const checkout = asyncHandler(async (req: Request, res: Response) => {
         });
         await paymentRecord.save({ session });
 
+        // Initialize transaction in PaymentTransaction DB
+        try {
+          await paymentService.initializePayment({
+            orderId: savedOrder._id.toString(),
+            amount: computedTotalAmount,
+            currency: "INR",
+            gateway: "STRIPE",
+            idempotencyKey: `stripe_${stripeSessionId}`,
+          });
+        } catch (initErr) {
+          console.warn("PaymentTransaction initialization warning:", initErr);
+        }
+
         responseData.message = "Stripe checkout session created";
         responseData.url = sessionUrl;
       } else {
@@ -370,6 +384,19 @@ export const checkout = asyncHandler(async (req: Request, res: Response) => {
           currency: razorpayCurrency,
         });
         await paymentRecord.save({ session });
+
+        // Initialize transaction in PaymentTransaction DB
+        try {
+          await paymentService.initializePayment({
+            orderId: savedOrder._id.toString(),
+            amount: computedTotalAmount,
+            currency: "INR",
+            gateway: "RAZORPAY",
+            idempotencyKey: `rzp_${razorpayOrderId}`,
+          });
+        } catch (initErr) {
+          console.warn("PaymentTransaction initialization warning:", initErr);
+        }
 
         responseData.message = "Razorpay payment order created";
         responseData.razorpay = {

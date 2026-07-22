@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 import { orderService } from "./order-service.js";
 import { trackingStore } from "../store/tracking-store.js";
 import { Order } from "../models/Order.js";
-import { Payment } from "../models/Payment.js";
 import { Inventory } from "../models/Inventory.js";
 import { Cart } from "../models/Cart.js";
+import { Payment } from "../models/Payments.js";
 import {
   InitializePaymentInput,
   InitializePaymentResult,
