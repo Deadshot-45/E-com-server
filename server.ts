@@ -245,13 +245,9 @@ class Server {
 
      // Health check endpoint
     this.app.get("/api/health", (_req, res) => {
-      res
-        .status(200)
-        .json({
-          status: "ok",
-          service: "vault-vogue-lite-server",
-          timestamp: new Date().toISOString(),
-        });
+      const templatePath = path.join(process.cwd(), "src", "views", "health.html");
+      const html = fs.readFileSync(templatePath, "utf8").replace("{{TIMESTAMP}}", new Date().toISOString());
+      res.status(200).type("html").send(html);
     });
 
     // Order & Payment Tracking System routes

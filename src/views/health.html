@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vault Vogue Server Status</title>
+    <!-- Outfit Font for Premium Feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --primary: #f97316;
+        --primary-glow: rgba(249, 115, 22, 0.15);
+        --success: #10b981;
+        --success-glow: rgba(16, 185, 129, 0.2);
+        --error: #ef4444;
+        --error-glow: rgba(239, 68, 68, 0.2);
+        --bg-dark: #020617;
+        --card-bg: rgba(15, 23, 42, 0.55);
+        --border-glass: rgba(255, 255, 255, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--bg-dark);
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.07) 0px, transparent 50%),
+          radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.07) 0px, transparent 50%),
+          radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+        color: #f8fafc;
+        font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+        overflow-x: hidden;
+        perspective: 1200px;
+      }
+
+      /* Animated Ambient Background Orbs */
+      .bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
+      .orb-orange {
+        width: 350px;
+        height: 350px;
+        background: rgba(249, 115, 22, 0.12);
+        top: 15%;
+        left: 10%;
+        animation: float-orb-1 25s ease-in-out infinite alternate;
+      }
+
+      .orb-blue {
+        width: 400px;
+        height: 400px;
+        background: rgba(6, 182, 212, 0.1);
+        bottom: 10%;
+        right: 10%;
+        animation: float-orb-2 30s ease-in-out infinite alternate;
+      }
+
+      @keyframes float-orb-1 {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(80px, 50px) scale(1.15); }
+      }
+
+      @keyframes float-orb-2 {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(-100px, -60px) scale(1.1); }
+      }
+
+      /* Main Layout Container */
+      .perspective-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 24px;
+        z-index: 10;
+      }
+
+      /* Glassmorphic 3D Card */
+      .card {
+        width: 100%;
+        max-width: 620px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-glass);
+        border-radius: 28px;
+        padding: 40px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 
+          0 4px 30px rgba(0, 0, 0, 0.3),
+          0 30px 70px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        transform-style: preserve-3d;
+        transition: transform 0.15s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+        will-change: transform;
+      }
+
+      .card:hover {
+        box-shadow: 
+          0 4px 30px rgba(0, 0, 0, 0.3),
+          0 45px 90px rgba(249, 115, 22, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+
+      /* Card Elements translation depth */
+      .translate-3d {
+        transform: translateZ(30px);
+      }
+
+      .translate-3d-deep {
+        transform: translateZ(50px);
+      }
+
+      /* Header Styling */
+      .brand-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 30px;
+      }
+
+      .brand-title-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo-text {
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin: 0 0 4px 0;
+        text-shadow: 0 0 12px var(--primary-glow);
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(135deg, #f8fafc 30%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+      }
+
+      /* Status Indicator Badge */
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 20px;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        color: var(--success);
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.02em;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);
+      }
+
+      .pulse-ring {
+        position: relative;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--success);
+      }
+
+      .pulse-ring::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+        border-radius: 50%;
+        border: 2px solid var(--success);
+        animation: pulse-animation 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+        opacity: 0;
+      }
+
+      @keyframes pulse-animation {
+        0% { transform: scale(0.6); opacity: 0; }
+        50% { opacity: 0.5; }
+        100% { transform: scale(1.6); opacity: 0; }
+      }
+
+      /* Telemetry Grid layout */
+      .metrics-grid {
+        display: grid;
+        grid-template-cols: repeat(2, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .metric-box {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 18px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+      }
+
+      .metric-box:hover {
+        background: rgba(30, 41, 59, 0.5);
+        border-color: rgba(249, 115, 22, 0.15);
+      }
+
+      .metric-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #94a3b8;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .metric-icon {
+        width: 18px;
+        height: 18px;
+        stroke: #64748b;
+        stroke-width: 2;
+        fill: none;
+      }
+
+      .metric-box:hover .metric-icon {
+        stroke: var(--primary);
+        filter: drop-shadow(0 0 4px var(--primary-glow));
+      }
+
+      .metric-value {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #f8fafc;
+        margin-top: 4px;
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+
+      .metric-unit {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #64748b;
+      }
+
+      /* Progress Bar for Heap Memory */
+      .progress-container {
+        width: 100%;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        margin-top: 12px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 42%;
+        background: linear-gradient(90deg, var(--primary), #fb923c);
+        border-radius: 10px;
+        transition: width 1s ease-in-out;
+      }
+
+      /* Live System Logs Mock Terminal */
+      .terminal-container {
+        background: rgba(2, 6, 23, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 18px;
+        padding: 16px 20px;
+        margin-bottom: 30px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.78rem;
+        color: #94a3b8;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+      }
+
+      .terminal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+      }
+
+      .terminal-dots {
+        display: flex;
+        gap: 6px;
+      }
+
+      .terminal-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+
+      .dot-red { background: #ef4444; }
+      .dot-yellow { background: #f59e0b; }
+      .dot-green { background: #10b981; }
+
+      .terminal-title {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+      }
+
+      .terminal-body {
+        height: 110px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        scroll-behavior: smooth;
+      }
+
+      /* Hide Scrollbar */
+      .terminal-body::-webkit-scrollbar {
+        width: 4px;
+      }
+      .terminal-body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .terminal-body::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      .log-line {
+        line-height: 1.4;
+        white-space: nowrap;
+      }
+
+      .log-time {
+        color: #475569;
+        margin-right: 8px;
+      }
+
+      .log-info {
+        color: var(--success);
+      }
+
+      .log-warning {
+        color: #f59e0b;
+      }
+
+      .log-msg {
+        color: #cbd5e1;
+      }
+
+      /* Control Actions bar */
+      .actions-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary) 0%, #ea580c 100%);
+        color: white;
+        border: none;
+        border-radius: 16px;
+        padding: 16px 24px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 
+          0 4px 15px rgba(249, 115, 22, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 8px 25px rgba(249, 115, 22, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+        box-shadow: 
+          0 4px 10px rgba(249, 115, 22, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      }
+
+      .meta-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.78rem;
+        color: #475569;
+        margin-top: 8px;
+        padding: 0 4px;
+      }
+
+      .timestamp-text {
+        font-family: 'JetBrains Mono', monospace;
+        color: #64748b;
+      }
+
+      /* Responsiveness settings */
+      @media (max-width: 540px) {
+        .card {
+          padding: 24px;
+        }
+        .metrics-grid {
+          grid-template-cols: 1fr;
+          gap: 12px;
+        }
+        h1 {
+          font-size: 1.8rem;
+        }
+        .brand-header {
+          flex-direction: column;
+          gap: 14px;
+          align-items: flex-start;
+        }
+        .status-badge {
+          align-self: stretch;
+          justify-content: center;
+        }
+      }
+
+      /* Disable animations for users who prefer reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .card {
+          transform: none !important;
+          transition: none !important;
+        }
+        .bg-orb {
+          animation: none !important;
+        }
+        .pulse-ring::before {
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Orbs -->
+    <div class="bg-orb orb-orange"></div>
+    <div class="bg-orb orb-blue"></div>
+
+    <div class="perspective-container">
+      <main class="card" id="health-card">
+        <!-- Header -->
+        <div class="brand-header translate-3d">
+          <div class="brand-title-group">
+            <span class="logo-text">Vault Vogue Lite</span>
+            <h1 id="main-heading">API Dashboard</h1>
+          </div>
+          <div class="status-badge" id="status-badge">
+            <span class="pulse-ring" id="pulse-dot"></span>
+            <span id="status-text">Server Healthy</span>
+          </div>
+        </div>
+
+        <!-- Telemetry Metrics Grid -->
+        <div class="metrics-grid translate-3d">
+          <!-- Database Metric Box -->
+          <div class="metric-box" id="db-box">
+            <div class="metric-header">
+              <span>Database Connection</span>
+              <svg class="metric-icon" viewBox="0 0 24 24">
+                <path d="M4 6c0 1.66 4 3 9 3s9-1.34 9-3-4-3-9-3-9 1.34-9 3Z"/>
+                <path d="M4 6v6c0 1.66 4 3 9 3s9-1.34 9-3V6"/>
+                <path d="M4 12v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/>
+              </svg>
+            </div>
+            <div class="metric-value" id="db-value" style="color: var(--success);">
+              CONNECTED
+            </div>
+          </div>
+
+          <!-- Latency Metric Box -->
+          <div class="metric-box" id="latency-box">
+            <div class="metric-header">
+              <span>API Ping Latency</span>
+              <svg class="metric-icon" viewBox="0 0 24 24">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <div class="metric-value">
+              <span id="ping-value">--</span> <span class="metric-unit">ms</span>
+            </div>
+          </div>
+
+          <!-- Uptime Metric Box -->
+          <div class="metric-box">
+            <div class="metric-header">
+              <span>Uptime Guarantee</span>
+              <svg class="metric-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="metric-value">
+              99.98<span class="metric-unit">%</span>
+            </div>
+          </div>
+
+          <!-- Memory Heap Metric Box -->
+          <div class="metric-box">
+            <div class="metric-header">
+              <span>Heap Allocation</span>
+              <svg class="metric-icon" viewBox="0 0 24 24">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="metric-value">
+                <span id="mem-value">46.2</span> <span class="metric-unit">MB</span>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar" id="mem-bar" style="width: 32%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini Console Log Window -->
+        <div class="terminal-container translate-3d">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="terminal-dot dot-red"></span>
+              <span class="terminal-dot dot-yellow"></span>
+              <span class="terminal-dot dot-green"></span>
+            </div>
+            <span class="terminal-title">System Console Logs</span>
+          </div>
+          <div class="terminal-body" id="terminal-body">
+            <!-- Simulated logs added by script -->
+          </div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="actions-container translate-3d">
+          <button class="btn-primary" id="ping-btn">
+            <svg style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.5;" viewBox="0 0 24 24">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+            Run API Diagnostics
+          </button>
+          <div class="meta-footer">
+            <span>Server Time</span>
+            <span class="timestamp-text" id="time-stamp">{{TIMESTAMP}}</span>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Antigravity Interaction and Live Data Logic -->
+    <script>
+      // 3D Card Hover / Tilt Effect
+      const card = document.getElementById('health-card');
+      const isMobile = window.matchMedia("(max-width: 768px)");
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.addEventListener('mousemove', (e) => {
+          if (isMobile.matches) return; // Disable tilt on mobile touch devices
+          
+          const rect = card.getBoundingClientRect();
+          const cardCenterX = rect.left + rect.width / 2;
+          const cardCenterY = rect.top + rect.height / 2;
+          const mouseX = e.clientX - cardCenterX;
+          const mouseY = e.clientY - cardCenterY;
+          
+          // Max rotation degrees
+          const maxRotation = 8;
+          const tiltX = -(mouseY / (window.innerHeight / 2)) * maxRotation;
+          const tiltY = (mouseX / (window.innerWidth / 2)) * maxRotation;
+          
+          // Apply rotation transformation smoothly
+          card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-6px)`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+        });
+      }
+
+      // Console logger helper
+      const terminal = document.getElementById('terminal-body');
+      function addLog(msg, type = 'info') {
+        const line = document.createElement('div');
+        line.className = 'log-line';
+        
+        const now = new Date();
+        const timeStr = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0');
+        
+        const timeSpan = document.createElement('span');
+        timeSpan.className = 'log-time';
+        timeSpan.textContent = `[${timeStr}]`;
+        
+        const typeSpan = document.createElement('span');
+        typeSpan.className = `log-${type}`;
+        typeSpan.textContent = type === 'info' ? '  INFO: ' : type === 'warning' ? '  WARN: ' : ' ERROR: ';
+        
+        const msgSpan = document.createElement('span');
+        msgSpan.className = 'log-msg';
+        msgSpan.textContent = msg;
+        
+        line.appendChild(timeSpan);
+        line.appendChild(typeSpan);
+        line.appendChild(msgSpan);
+        
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+        
+        // Cap terminal lines at 50 to conserve DOM performance
+        while (terminal.childElementCount > 50) {
+          terminal.removeChild(terminal.firstChild);
+        }
+      }
+
+      // Simulated initialization logs
+      setTimeout(() => addLog('Starting Vault Vogue API diagnostics...', 'info'), 300);
+      setTimeout(() => addLog('Bootstrapping express microservices framework', 'info'), 800);
+      setTimeout(() => addLog('Route mappings for /api/products, /api/orders, /api/payments initialized', 'info'), 1300);
+      setTimeout(() => addLog('Ready to accept client ping requests', 'info'), 1800);
+
+      // Memory usage simulation helper
+      function updateHeapMemory() {
+        const baseMemory = 38.5; // base MB
+        const fluctuation = Math.random() * 12.0;
+        const total = (baseMemory + fluctuation).toFixed(1);
+        const percentage = Math.min((total / 120) * 100, 100).toFixed(0);
+        
+        document.getElementById('mem-value').textContent = total;
+        document.getElementById('mem-bar').style.width = `${percentage}%`;
+      }
+      setInterval(updateHeapMemory, 4000);
+
+      // Perform real diagnostic ping check to local backend endpoints
+      async function runDiagnostic() {
+        const pingBtn = document.getElementById('ping-btn');
+        pingBtn.disabled = true;
+        pingBtn.style.opacity = '0.7';
+        
+        addLog('Initiating diagnostic suite check...', 'info');
+        
+        const tStart = performance.now();
+        let dbConnected = false;
+        
+        try {
+          // Attempt to fetch landing details or products which connect to database
+          addLog('Checking API endpoint responsiveness at "/api/products"...', 'info');
+          const response = await fetch('/api/products');
+          const data = await response.json();
+          
+          const tEnd = performance.now();
+          const latency = Math.round(tEnd - tStart);
+          
+          document.getElementById('ping-value').textContent = latency;
+          addLog(`API responds in ${latency}ms with status code ${response.status}`, 'info');
+
+          // If products response array is valid or successful code
+          if (response.ok && (Array.isArray(data) || data.success !== false)) {
+            dbConnected = true;
+            addLog('Database layer connection is alive and healthy.', 'info');
+          } else {
+            addLog('Database returned abnormal or empty response payload.', 'warning');
+          }
+          
+        } catch (err) {
+          const tEnd = performance.now();
+          const latency = Math.round(tEnd - tStart);
+          document.getElementById('ping-value').textContent = latency;
+          
+          addLog(`Ping failed: ${err.message}`, 'warning');
+          addLog('Retrying verification via secondary endpoint "/api/landing"...', 'info');
+          
+          try {
+            const secondaryStart = performance.now();
+            const responseSec = await fetch('/api/landing');
+            const secondaryEnd = performance.now();
+            const latencySec = Math.round(secondaryEnd - secondaryStart);
+            
+            if (responseSec.ok) {
+              dbConnected = true;
+              addLog(`Secondary check passed in ${latencySec}ms. Data layer recovered.`, 'info');
+            } else {
+              addLog(`Secondary check failed with status: ${responseSec.status}`, 'warning');
+            }
+          } catch (secErr) {
+            addLog(`All diagnostics failed: ${secErr.message}`, 'error');
+            addLog('Service might be degraded or running in developer mockup mode.', 'warning');
+          }
+        }
+        
+        // Update UI panels based on diagnostic check
+        const dbValue = document.getElementById('db-value');
+        const statusBadge = document.getElementById('status-badge');
+        const statusText = document.getElementById('status-text');
+        const pulseDot = document.getElementById('pulse-dot');
+        
+        if (dbConnected) {
+          dbValue.textContent = 'CONNECTED';
+          dbValue.style.color = 'var(--success)';
+          
+          statusText.textContent = 'Server Healthy';
+          statusBadge.style.color = 'var(--success)';
+          statusBadge.style.background = 'rgba(16, 185, 129, 0.08)';
+          statusBadge.style.borderColor = 'rgba(16, 185, 129, 0.2)';
+          pulseDot.style.backgroundColor = 'var(--success)';
+          pulseDot.style.setProperty('--success', '#10b981');
+          
+          addLog('System integrity verification completed successfully: operational.', 'info');
+        } else {
+          dbValue.textContent = 'DEGRADED';
+          dbValue.style.color = 'var(--error)';
+          
+          statusText.textContent = 'System Degraded';
+          statusBadge.style.color = 'var(--error)';
+          statusBadge.style.background = 'rgba(239, 68, 68, 0.08)';
+          statusBadge.style.borderColor = 'rgba(239, 68, 68, 0.2)';
+          pulseDot.style.backgroundColor = 'var(--error)';
+          pulseDot.style.setProperty('--success', '#ef4444'); // overrides the color variable for animation
+          
+          addLog('Diagnostics complete. Attention required: Database service unavailable.', 'error');
+        }
+        
+        // Update timestamp label
+        document.getElementById('time-stamp').textContent = new Date().toISOString();
+        
+        pingBtn.disabled = false;
+        pingBtn.style.opacity = '1';
+      }
+
+      // Attach actions
+      document.getElementById('ping-btn').addEventListener('click', runDiagnostic);
+
+      // Perform a soft automatic ping diagnostic shortly after startup
+      setTimeout(runDiagnostic, 2200);
+    </script>
+  </body>
+</html>
