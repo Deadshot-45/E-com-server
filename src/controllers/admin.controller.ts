@@ -246,21 +246,75 @@ export const getDashboardOverview = asyncHandler(async (req: Request, res: Respo
 });
 
 /**
+   * GET /api/admin/dashboard/overview
+   * Get admin products overview (with pagination & filters)
+ */
+export const getAllProducts = asyncHandler(async (req: Request, res: Response) => {
+  const page = Math.max(1, parseInt(req.query.page as string) || 1);
+  const limit = Math.min(50, Math.max(1, parseInt(req.query.limit as string) || 20));
+  const query = req.query.query ? String(req.query.query).trim() : "";
+  const skip = (page - 1) * limit;
+
+  const searchFilter = query
+    ? {
+        $or: [
+          { name: { $regex: query, $options: "i" } },
+          { description: { $regex: query, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const filter: any = {};
+  if (req.query.isActive) filter.isActive = req.query.isActive === "true";
+
+  const [products, total] = await Promise.all([
+    Product.find({ ...searchFilter, ...filter }).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+    Product.countDocuments({ ...searchFilter, ...filter }),
+  ]);
+
+  const totalPages = Math.ceil(total / limit);
+
+  return res.status(200).json({
+    success: true,
+    message: "Products retrieved successfully",
+    data: products,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+    },
+  });
+});
+
+/**
  * GET /api/admin/orders/all
  * Get all orders (with pagination & filters)
  */
 export const getAllOrders = asyncHandler(async (req: Request, res: Response) => {
   const page = Math.max(1, parseInt(req.query.page as string) || 1);
   const limit = Math.min(50, Math.max(1, parseInt(req.query.limit as string) || 20));
+  const query = req.query.query ? String(req.query.query).trim() : "";
   const skip = (page - 1) * limit;
+
+  const searchFilter = query
+    ? {
+        $or: [
+          { name: { $regex: query, $options: "i" } },
+          { description: { $regex: query, $options: "i" } },  
+        ],
+      }
+    : {};
 
   const filter: any = {};
   if (req.query.status) filter.status = req.query.status;
   if (req.query.paymentStatus) filter.paymentStatus = req.query.paymentStatus;
 
   const [orders, total] = await Promise.all([
-    Order.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
-    Order.countDocuments(filter),
+    Order.find({ ...searchFilter, ...filter }).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+    Order.countDocuments({ ...searchFilter, ...filter }),
   ]);
 
   const totalPages = Math.ceil(total / limit);
@@ -331,6 +385,26 @@ export const createUser = asyncHandler(async (req: Request, res: Response) => {
  * Retrieve all users with customer/seller profiles and order counts
  */
 export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
+  const page = Math.max(1, parseInt(req.query.page as string) || 1);
+  const limit = Math.min(50, Math.max(1, parseInt(req.query.limit as string) || 20));
+  const query = req.query.query ? String(req.query.query).trim() : "";
+  const skip = (page - 1) * limit;
+
+  const searchMatch = query
+    ? {
+        $match: {
+          $or: [
+            { name: { $regex: query, $options: "i" } },
+            { email: { $regex: query, $options: "i" } },
+            { "customerProfile.fullName": { $regex: query, $options: "i" } },
+            { "customerProfile.phoneNumber": { $regex: query, $options: "i" } },
+            { "sellerProfile.name": { $regex: query, $options: "i" } },
+            { "sellerProfile.contactPhone": { $regex: query, $options: "i" } },
+          ],
+        },
+      }
+    : { $match: {} };
+
   const pipeline = [
     {
       $lookup: {
@@ -356,6 +430,7 @@ export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
         as: "userOrders",
       },
     },
+    searchMatch,
     {
       $project: {
         _id: 1,
@@ -363,13 +438,14 @@ export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
         role: 1,
         isActive: 1,
         createdAt: 1,
+        name: 1,
         fullName: {
           $ifNull: [
             { $arrayElemAt: ["$customerProfile.fullName", 0] },
             {
               $ifNull: [
                 { $arrayElemAt: ["$sellerProfile.name", 0] },
-                "$email",
+                "$name",
               ],
             },
           ],
@@ -380,8 +456,30 @@ export const getAllUsers = asyncHandler(async (req: Request, res: Response) => {
     {
       $sort: { createdAt: -1 },
     },
+    {
+      $facet: {
+        users: [{ $skip: skip }, { $limit: limit }],
+        total: [{ $count: "count" }],
+      },
+    },
   ];
 
-  const users = await User.aggregate(pipeline as any);
-  res.json({ success: true, data: users });
+  const [result] = await User.aggregate(pipeline as any);
+  const users = result?.users || [];
+  const total = result?.total?.[0]?.count || 0;
+  const totalPages = Math.ceil(total / limit);
+
+  return res.status(200).json({
+    success: true,
+    message: "Users retrieved successfully",
+    data: users,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+    },
+  });
 });

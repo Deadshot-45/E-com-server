@@ -6,6 +6,7 @@ import {
   getAllOrders,
   createUser,
   getAllUsers,
+  getAllProducts,
 } from "../controllers/admin.controller.js";
 
 const router = Router();
@@ -17,6 +18,7 @@ router.post("/login", adminLogin);
 router.use(protect, restrictTo("admin"));
 
 router.get("/dashboard/overview", getDashboardOverview);
+router.get("/products/all", getAllProducts);
 router.get("/orders/all", getAllOrders);
 router.get("/users/all", getAllUsers);
 router.post("/users", createUser);
